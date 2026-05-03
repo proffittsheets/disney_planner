@@ -45,6 +45,7 @@ fourseasons:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect 
 
 var hotelDetails={
   wilderness:{
+    img:'hotel-wilderness.webp',
     color:'#6457A6',name:'Wilderness Lodge',
     tagline:'Pacific Northwest lodge · Boat to MK · Waterfall pool · Cozy and immersive',
     overview:"Wilderness Lodge is themed after National Park lodges of the American Pacific Northwest. The lobby features a massive 82-foot stone fireplace and two totem poles, and a geyser outside erupts on a schedule. It sits on Bay Lake and a boat runs directly to Magic Kingdom.",
@@ -68,6 +69,7 @@ var hotelDetails={
     tips:['The lobby is worth visiting even if you are not staying here — one of the most beautiful resort interiors at WDW','Request a room near the lobby building for the easiest boat access','The geyser erupts every 90 minutes — time your departure to catch it','Old Faithful Club is considered one of the best value Club Level options at WDW'],
   },
   aklodge:{
+    img:'hotel-aklodge.webp',
     color:'#C49200',name:'Animal Kingdom Lodge',
     tagline:'Best kid wow factor at WDW · Savanna views · African wildlife · Exceptional dining',
     overview:"Animal Kingdom Lodge sits on a private savanna home to over 30 species of African wildlife. Rooms with savanna views look directly onto the animals from your balcony at any hour. The lobby features hand-carved African furniture, bead chandeliers, and rotating art from African nations. Widely considered the most immersive resort at Walt Disney World.",
@@ -91,6 +93,7 @@ var hotelDetails={
     tips:['Book a savanna view room — it is the entire point of staying here','Animals are most active at dawn and dusk — set an early alarm','The Starlight Safari is your date night option in the planner — the whole evening at AKL without leaving the resort is magical','The lobby at night with the bead chandelier lit is one of the most beautiful spaces at WDW'],
   },
   beachclub:{
+    img:'hotel-beachclub.webp',
     color:'#1ABFA4',name:'Beach Club Resort',
     tagline:'Walk to EPCOT · Stormalong Bay pool · Best location for EPCOT + HS',
     overview:"Beach Club Resort is a New England coastal hotel on Crescent Lake between EPCOT and Hollywood Studios. You can walk to both parks in under 10 minutes. Famous for Stormalong Bay — a 3-acre pool with a waterslide through a shipwreck, lazy river, and sand bottom. The consensus top pick for mixed-age groups visiting EPCOT.",
@@ -113,6 +116,7 @@ var hotelDetails={
     tips:['The location is genuinely unmatched for EPCOT and HS days','Stormalong Bay requires a resort key card — stays manageable even when other Disney pools are packed','The EPCOT International Gateway (back entrance) is a 5-min walk — slip in and out without the front entrance crowds','Cape May Cafe character breakfast is right in the hotel — great morning before an EPCOT day'],
   },
   contemporary:{
+    img:'hotel-contemporary.webp',
     color:'#1ABFA4',name:'Contemporary Resort',
     tagline:'Walk to Magic Kingdom · Monorail through the lobby · California Grill',
     overview:"The Contemporary Resort is one of Walt Disney World's two original hotels, opening in 1971. The monorail passes directly through the A-frame tower at the fourth floor. A 10-minute walk from Magic Kingdom. The 15th-floor California Grill has the most famous fireworks view at WDW. Tower rooms have floor-to-ceiling windows with city-like views.",
@@ -135,6 +139,7 @@ var hotelDetails={
     tips:['Watch the monorail pass through the lobby — still magical decades later','California Grill observation deck is open to all guests during fireworks — call ahead for a wristband even without a dining reservation','Tower rooms have better views; Garden Wing rooms are quieter and more affordable','Closest hotel to Magic Kingdom of any deluxe resort — no transport stress on MK days'],
   },
   polynesian:{
+    img:'hotel-polynesian.webp',
     color:'#EF767A',name:'Polynesian Village Resort',
     tagline:"Tropical theming · Monorail to MK · Beach fireworks · Trader Sam's",
     overview:"The Polynesian Village Resort is a South Pacific-themed resort on the monorail loop on Seven Seas Lagoon with a view of Cinderella Castle. The Great Ceremonial House lobby is filled with tropical plants, fountains, and tiki torches. The beach at night with the MK fireworks in the distance is one of the most memorable experiences at WDW.",
@@ -157,6 +162,7 @@ var hotelDetails={
     tips:["Request a theme park view room — watching fireworks from your balcony while your daughter sleeps inside is one of the great WDW parent experiences","Note the fireworks view from Ohana is currently partially obstructed (maintenance) — the beach and balconies still work fine","Trader Sams Grog Grotto is a must for the adults — arrive right at opening to get a table","The Polynesian has the best overall vibe of any monorail resort for families with young children"],
   },
   grandfloridian:{
+    img:'hotel-grandfloridian.webp',
     color:'#6457A6',name:'Grand Floridian Resort & Spa',
     tagline:"Disney's flagship · Michelin-starred dining · Walk to MK · Victoria & Albert's",
     overview:"The Grand Floridian is Walt Disney World's flagship resort — a Victorian-era hotel with red peaked roofs, white gingerbread facades, and a five-story atrium lobby with live piano and orchestra. A walking bridge connects directly to Magic Kingdom. Home to Victoria & Albert's, the only Michelin-starred Disney-owned restaurant in the world.",
@@ -180,6 +186,7 @@ var hotelDetails={
     tips:['The Royal Palm Club Level is considered by many the best resort experience at WDW — breakfast, snacks, and evening appetizers + cocktails with Castle views','Victoria and Alberts requires months of advance booking — reserve it the day your planning starts','The lobby orchestra plays at set times — check the schedule and position yourself in the atrium','The new walking bridge to MK means leaving 15 minutes before park open and walking straight in'],
   },
   swan:{
+    img:'hotel-swan.webp',
     color:'#7D7ABC',name:'Swan & Dolphin',
     tagline:'Same EPCOT walk as Beach Club · Half the price · Marriott points · No Disney perks',
     overview:"The Swan and Dolphin are two connected hotels by architect Michael Graves, sitting on Crescent Lake with the same walkable access to EPCOT and Hollywood Studios as the Disney-owned EPCOT resorts — at roughly half the price. Guests earn Marriott Bonvoy points. The tradeoff: no Extended Evening Hours, no direct MDE room charging.",

@@ -162,8 +162,11 @@ function buildParkPage(p){
       }).join('')
       +'</div>';
   }
+  var parkHeader=p.img
+    ?'<div class="img-head"><img src="images/'+p.img+'" alt="'+p.name+'" class="img-head-photo"><div class="img-head-overlay" style="background:linear-gradient(transparent 30%,'+p.hbg+'dd)"><h2>'+p.name+'</h2><p>'+p.tag+'</p></div></div>'
+    :'<div class="pk-head" style="background:'+p.hbg+';color:'+p.htxt+'"><h2>'+p.name+'</h2><p>'+p.tag+'</p></div>';
   return'<button class="pk-back" onclick="closePark()">&#8592; Back to planner</button>'
-    +'<div class="pk-head" style="background:'+p.hbg+';color:'+p.htxt+'"><h2>'+p.name+'</h2><p>'+p.tag+'</p></div>'
+    +parkHeader
     +'<div class="age-note">'+p.age+'</div>'
     +(p.maps?'<div class="dv"></div>'
       +'<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:.5rem">'
@@ -287,8 +290,11 @@ function buildHotelPage(key){
   var tipsHtml=d.tips.map(function(t){return'<li>'+t+'</li>';}).join('');
   var connectBadge=d.connecting==='best'?'<span class="hr-badge hb-m" style="margin-left:6px">Best bet for connecting</span>':'';
   var villaHtml=d.villas?'<div class="dv"></div><div class="sect">DVC villas option</div><div style="font-size:10px;color:var(--ti);font-weight:500;margin-bottom:3px">'+d.villas+'</div><div style="font-size:11px;color:var(--t2);line-height:1.5">'+d.villaNote+'</div>':'';
+  var hotelHeader=d.img
+    ?'<div class="img-head"><img src="images/'+d.img+'" alt="'+d.name+'" class="img-head-photo"><div class="img-head-overlay" style="background:linear-gradient(transparent 30%,'+d.color+'dd)"><h2>'+d.name+'</h2><p>'+d.tagline+'</p></div></div>'
+    :'<div class="pk-head" style="background:'+d.color+';color:#fff"><h2>'+d.name+'</h2><p>'+d.tagline+'</p></div>';
   return'<button class="pk-back" onclick="closeHotel()">&#8592; Back to planner</button>'
-    +'<div class="pk-head" style="background:'+d.color+';color:#fff"><h2>'+d.name+'</h2><p>'+d.tagline+'</p></div>'
+    +hotelHeader
     +'<div class="age-note" style="background:var(--bg2);color:var(--t2)">'+d.overview+'</div>'
     +'<div class="sect">Connecting rooms'+connectBadge+'</div>'
     +'<div style="font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:.5rem">'+d.connectingNote+'</div>'

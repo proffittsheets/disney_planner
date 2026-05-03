@@ -1,5 +1,5 @@
 var parks=[
-  {id:'mk',maps:{official:'https://mickeyvisit.com/disney-world-magic-kingdom-map/',pdf:'https://disneyworld.disney.go.com/media/wdw_nextgen/CoreCatalog/WaltDisneyWorld/en_us/PDF/magic-kingdom-park-map.pdf',gmaps:'https://maps.google.com/maps?q=Magic+Kingdom+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'Magic Kingdom',
+  {id:'mk',img:'park-mk.webp',maps:{official:'https://mickeyvisit.com/disney-world-magic-kingdom-map/',pdf:'https://disneyworld.disney.go.com/media/wdw_nextgen/CoreCatalog/WaltDisneyWorld/en_us/PDF/magic-kingdom-park-map.pdf',gmaps:'https://maps.google.com/maps?q=Magic+Kingdom+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'Magic Kingdom',
    tag:'Best park for almost-4 · Princesses · Classic gentle rides · Villains Land coming ~2031',
    hbg:'#7D7ABC',htxt:'#ffffff',
    pills:['10 rides she can do','Princess castle','Bibbidi Bobbidi Boutique'],
@@ -47,7 +47,7 @@ var parks=[
      {n:'Main Street Confectionery',nt:'Candy apples, fudge, chocolate-dipped treats · Great end-of-night stop · Watch the fudge being made through the window'},
    ]
   },
-  {id:'ep',maps:{official:'https://mickeyvisit.com/disney-world-epcot-map/',pdf:'https://mickeyvisit.com/disney-world-epcot-map/',gmaps:'https://maps.google.com/maps?q=EPCOT+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'EPCOT',
+  {id:'ep',img:'park-ep.webp',maps:{official:'https://mickeyvisit.com/disney-world-epcot-map/',pdf:'https://mickeyvisit.com/disney-world-epcot-map/',gmaps:'https://maps.google.com/maps?q=EPCOT+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'EPCOT',
    tag:'Frozen · Remy · World Showcase · Best food at Disney',
    hbg:'#1ABFA4',htxt:'#ffffff',
    pills:['Frozen Ever After','World Showcase food','Elsa & Anna meet'],
@@ -91,7 +91,7 @@ var parks=[
      {n:'Mouse Gear',nt:"Largest EPCOT shop · EPCOT-exclusive merch you can't get elsewhere"},
    ]
   },
-  {id:'hs',maps:{official:'https://mickeyvisit.com/disney-world-hollywood-studios-map/',pdf:'https://mickeyvisit.com/disney-world-hollywood-studios-map/',gmaps:'https://maps.google.com/maps?q=Disney+Hollywood+Studios+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'Hollywood Studios',
+  {id:'hs',img:'park-hs.webp',maps:{official:'https://mickeyvisit.com/disney-world-hollywood-studios-map/',pdf:'https://mickeyvisit.com/disney-world-hollywood-studios-map/',gmaps:'https://maps.google.com/maps?q=Disney+Hollywood+Studios+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'Hollywood Studios',
    tag:'Star Wars · Villains show · Toy Story · Fantasmic! · Monstropolis coming',
    hbg:'#EF767A',htxt:'#ffffff',
    pills:["Galaxy's Edge","Villains: Unfairly Ever After","Savi's Workshop"],
@@ -131,7 +131,7 @@ var parks=[
      {n:'Disney Junior merchandise',nt:"Near Mickey & Minnie's · Current kids' TV characters she may know"},
    ]
   },
-  {id:'ak',maps:{official:'https://mickeyvisit.com/disney-world-animal-kingdom-map/',pdf:'https://mickeyvisit.com/disney-world-animal-kingdom-map/',gmaps:'https://maps.google.com/maps?q=Disney+Animal+Kingdom+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'Animal Kingdom',
+  {id:'ak',img:'park-ak.webp',maps:{official:'https://mickeyvisit.com/disney-world-animal-kingdom-map/',pdf:'https://mickeyvisit.com/disney-world-animal-kingdom-map/',gmaps:'https://maps.google.com/maps?q=Disney+Animal+Kingdom+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'Animal Kingdom',
    tag:'Real safari · Pandora · Tropical Americas opens 2027 — new Indiana Jones + Encanto rides',
    hbg:'#6457A6',htxt:'#ffffff',
    pills:['Safari (no height req)',"Na'vi River Journey",'Pandora at night'],
