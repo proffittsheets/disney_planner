@@ -1,0 +1,250 @@
+var hotels={
+  deluxe:[
+    {key:'wilderness',eeh:true,   name:'Wilderness Lodge',     off:2500,peak:3400,trans:['tbo','tbu'],tl:['Boat→MK','Bus'],note:'Boat to MK · Cozy lodge · Waterfall pool',url:'https://disneyworld.disney.go.com/resorts/wilderness-lodge-resort/',
+     club:{name:'Old Faithful Club',offExtra:120,peakExtra:150,perks:'Continental breakfast, afternoon snacks, evening appetizers + beer/wine, dedicated concierge · Best value Club Level at WDW'}},
+    {key:'aklodge',eeh:true,      name:'Animal Kingdom Lodge', off:2800,peak:3800,trans:['tbu'],      tl:['Bus only'],     note:'Savanna views · Best kid wow · Jiko dining',url:'https://disneyworld.disney.go.com/resorts/animal-kingdom-lodge/',
+     club:{name:'Kilimanjaro Club',offExtra:160,peakExtra:200,perks:'Savanna-view lounge · Full hot breakfast, afternoon snacks, evening appetizers + cocktails, cordials · One of the most atmospheric Club Level lounges at WDW'}},
+    {key:'beachclub',eeh:true,    name:'Beach Club',           off:3100,peak:4200,trans:['tw2','tw2','tsk','tbo'],tl:['Walk→EPCOT','Walk→HS','Skyliner','Boat'],note:'Stormalong Bay pool · Walk to EPCOT',url:'https://disneyworld.disney.go.com/resorts/beach-club-resort/',
+     club:{name:'Regatta Club',offExtra:130,peakExtra:165,perks:'Continental breakfast, afternoon snacks, evening appetizers + cocktails, desserts · Shared with Yacht Club · Same EPCOT proximity advantage'}},
+    {key:'contemporary',eeh:true, name:'Contemporary',         off:3700,peak:5100,trans:['tw2','tm'], tl:['Walk→MK','Monorail'],note:'Walk to MK · Monorail lobby · California Grill',url:'https://disneyworld.disney.go.com/resorts/contemporary-resort/',
+     club:{name:'Contemporary Club',offExtra:140,peakExtra:175,perks:'Hot breakfast, afternoon snacks, evening appetizers + beer/wine, cordials · Views over the marina toward MK · Quieter lounge than most'}},
+    {key:'polynesian',eeh:true,   name:'Polynesian Village',   off:4100,peak:5600,trans:['tm','tbo','tbu'],tl:['Monorail','Boat→MK','Bus'],note:'Tropical theming · Trader Sam\'s · Beach fireworks',url:'https://disneyworld.disney.go.com/resorts/polynesian-village-resort/',
+     club:{name:'King Kamehameha Club',offExtra:150,peakExtra:190,perks:'Full hot breakfast, afternoon snacks, evening appetizers + tropical cocktails, cordials · Lagoon views · Most festive Club Level atmosphere at WDW'}},
+    {key:'grandfloridian',eeh:true,name:'Grand Floridian',     off:4500,peak:6200,trans:['tw2','tm','tbo'],tl:['Walk→MK','Monorail','Boat'],note:'Disney flagship luxury · Victoria &amp; Albert\'s',url:'https://disneyworld.disney.go.com/resorts/grand-floridian-resort-and-spa/',
+     club:{name:'Royal Palm Club',offExtra:280,peakExtra:350,perks:'The most celebrated Club Level at WDW · Full hot breakfast, afternoon tea, evening appetizers + cocktails, after-dinner cordials + desserts · Castle views · Dedicated concierge books dining + special experiences'}},
+  ],
+  assoc:[
+    {key:'swan',         name:'Swan & Dolphin',       off:1600,peak:2200,trans:['tw2','tw2','tbo','tbu'],tl:['Walk→EPCOT','Walk→HS','Boat','Bus'],note:'Same EPCOT walk as Beach Club · ~½ price · Marriott pts',assoc:true,url:'https://www.swandolphin.com/',
+     club:{name:'Swan Reserve Club Access',offExtra:90,peakExtra:110,perks:'Marriott club lounge via Swan Reserve · Continental breakfast, afternoon snacks, evening appetizers + drinks · More business lounge than Disney-themed experience'}},
+    {key:'waldorf',      name:'Waldorf Astoria',      off:2750,peak:3700,trans:['tsh','tbu'],tl:['Shuttle','Disney buses'],note:'482-acre grounds · EPCOT fireworks from balcony',assoc:true,url:'https://www.waldorfastoriaorlando.com/',
+     club:{name:'Waldorf Astoria Club',offExtra:160,peakExtra:200,perks:'Premier floor lounge · Continental breakfast, afternoon snacks, evening cocktails + hors d\'oeuvres · Highly personalized concierge service'}},
+    {key:'fourseasons',  name:'Four Seasons Orlando', off:4800,peak:6500,trans:['tsh'],     tl:['Private shuttle'],note:'AAA Five Diamond · Lazy river + spa · Character breakfast',assoc:true,url:'https://www.fourseasons.com/orlando/',
+     club:{name:'Club Floor',offExtra:200,peakExtra:250,perks:'Four Seasons Club floor · Full breakfast, all-day snacks, evening cocktails + hors d\'oeuvres, after-dinner desserts · Most luxurious lounge near WDW'}},
+  ]
+};
+
+var hotelSvgs={
+wilderness:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#6457A6"/><polygon points="140,10 126,26 154,26" fill="white"/><polygon points="140,18 123,34 157,34" fill="white"/><polygon points="140,26 120,44 160,44" fill="white"/><rect x="137" y="44" width="6" height="9" rx="1" fill="white"/></svg>',
+
+aklodge:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#C49200"/><line x1="140" y1="48" x2="140" y2="24" stroke="white" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="140" cy="20" rx="24" ry="9" fill="white"/><line x1="108" y1="48" x2="108" y2="32" stroke="white" stroke-width="2" stroke-linecap="round"/><ellipse cx="108" cy="29" rx="14" ry="6" fill="white" opacity="0.7"/><line x1="172" y1="48" x2="172" y2="34" stroke="white" stroke-width="2" stroke-linecap="round"/><ellipse cx="172" cy="31" rx="14" ry="6" fill="white" opacity="0.7"/></svg>',
+
+beachclub:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#7D7ABC"/><circle cx="140" cy="17" r="6" fill="none" stroke="white" stroke-width="2.5"/><line x1="140" y1="23" x2="140" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="29" x2="153" y2="29" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M125,43 Q125,52 140,52 Q155,52 155,43" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="125" cy="43" r="3" fill="white"/><circle cx="155" cy="43" r="3" fill="white"/></svg>',
+
+contemporary:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#1ABFA4"/><polygon points="140,8 108,52 172,52" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/><line x1="116" y1="36" x2="164" y2="36" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="100" y1="36" x2="180" y2="36" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5,4"/></svg>',
+
+polynesian:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#EF767A"/><path d="M140,52 Q136,38 138,24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M138,24 Q123,16 116,8" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q133,12 134,4" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q146,13 152,6" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q149,20 157,16" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q126,22 119,19" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>',
+
+grandfloridian:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#6457A6"/><path d="M118,46 L118,28 L128,36 L140,14 L152,36 L162,28 L162,46 Z" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118" cy="28" r="3.5" fill="white"/><circle cx="140" cy="14" r="3.5" fill="white"/><circle cx="162" cy="28" r="3.5" fill="white"/><line x1="116" y1="46" x2="164" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>',
+
+swan:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#7D7ABC"/><path d="M60,22 Q73,14 86,22 Q99,30 112,22 Q125,14 138,22 Q151,30 164,22 Q177,14 190,22 Q203,30 216,22" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M60,36 Q73,28 86,36 Q99,44 112,36 Q125,28 138,36 Q151,44 164,36 Q177,28 190,36 Q203,44 216,36" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/></svg>',
+
+waldorf:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#C49200"/><circle cx="128" cy="24" r="13" fill="none" stroke="white" stroke-width="2.5"/><circle cx="128" cy="24" r="5" fill="white"/><line x1="137" y1="33" x2="160" y2="50" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="150" y1="44" x2="155" y2="39" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="155" y1="47" x2="160" y2="42" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+
+fourseasons:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#EF767A"/><circle cx="140" cy="30" r="12" fill="white"/><line x1="140" y1="11" x2="140" y2="7" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="140" y1="49" x2="140" y2="53" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="121" y1="30" x2="117" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="159" y1="30" x2="163" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="17" x2="124" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="153" y1="17" x2="156" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="43" x2="124" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="153" y1="43" x2="156" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>'
+};
+
+var hotelDetails={
+  wilderness:{
+    color:'#6457A6',name:'Wilderness Lodge',
+    tagline:'Pacific Northwest lodge · Boat to MK · Waterfall pool · Cozy and immersive',
+    overview:"Wilderness Lodge is themed after National Park lodges of the American Pacific Northwest. The lobby features a massive 82-foot stone fireplace and two totem poles, and a geyser outside erupts on a schedule. It sits on Bay Lake and a boat runs directly to Magic Kingdom.",
+    connecting:'standard',
+    connectingNote:'Connecting rooms available and frequently requested at Wilderness Lodge. Call (407) 939-1936 after booking to link reservations. A single building with logical room numbering helps; requests are more often fulfilled here than at sprawling multi-building resorts.',
+    villas:'Boulder Ridge Villas & Copper Creek Villas',
+    villaNote:'Two DVC villa buildings attached — Boulder Ridge (older, cosy) and Copper Creek (newer). 1BR, 2BR, and Cascade Cabin options. A 1BR villa gives grandma a private bedroom, full kitchen, and washer/dryer.',
+    rooms:[
+      'Standard — Resort View  |  sleeps 4  |  Dec 2025 ~$590–$760/nt  |  2029 est. ~$775–$1,000/nt',
+      'Water View  |  sleeps 4  |  Dec 2025 ~$670–$840/nt  |  2029 est. ~$880–$1,100/nt',
+      'Fireworks View  |  sleeps 4  |  Dec 2025 ~$730–$900/nt  |  2029 est. ~$960–$1,180/nt',
+      'Club Level — Old Faithful Club  |  sleeps 4  |  Dec 2025 ~$720–$920/nt  |  2029 est. ~$945–$1,205/nt',
+      'Deluxe Room — Club Level  |  sleeps 6  |  Dec 2025 ~$990–$1,200/nt  |  2029 est. ~$1,300–$1,575/nt',
+    ],
+    suites:[
+      {n:'Copper Creek Cascade Cabin',sleeps:'Up to 12',dec25:'$2,400–$3,200/nt',dec29:'~$3,150–$4,200/nt',note:'Standalone lakefront cabin with private hot tub, fire pit, full kitchen, and dock. Two bedrooms + loft + two full bathrooms. The most unique accommodation at Wilderness Lodge — feels like a private Disney vacation home.'},
+      {n:'Copper Creek 2-Bedroom Villa',sleeps:'Up to 8',dec25:'$1,450–$1,850/nt',dec29:'~$1,900–$2,425/nt',note:'Full kitchen, washer/dryer, master bedroom + queen sleeper sofa + second bedroom. Good option for 6–8 people wanting one connected space.'},
+    ],
+    pool:'Feature Pool with zero-entry, waterslide, and geyser · Hidden Spring Pool also on site',
+    transport:'Boat to Magic Kingdom · Bus to all other parks and Disney Springs',
+    tips:['The lobby is worth visiting even if you are not staying here — one of the most beautiful resort interiors at WDW','Request a room near the lobby building for the easiest boat access','The geyser erupts every 90 minutes — time your departure to catch it','Old Faithful Club is considered one of the best value Club Level options at WDW'],
+  },
+  aklodge:{
+    color:'#C49200',name:'Animal Kingdom Lodge',
+    tagline:'Best kid wow factor at WDW · Savanna views · African wildlife · Exceptional dining',
+    overview:"Animal Kingdom Lodge sits on a private savanna home to over 30 species of African wildlife. Rooms with savanna views look directly onto the animals from your balcony at any hour. The lobby features hand-carved African furniture, bead chandeliers, and rotating art from African nations. Widely considered the most immersive resort at Walt Disney World.",
+    connecting:'best',
+    connectingNote:'One of the better hotels for connecting rooms because savanna-view rooms come in natural pairs along the same corridor. Call (407) 939-1936 and specify savanna view connecting rooms. This request is well-understood by cast members here.',
+    villas:'Animal Kingdom Lodge Villas (Kidani Village)',
+    villaNote:'Kidani Village is the DVC villa building, a short walk from the main lodge. It has its own savanna, pool, and Sanaa restaurant. A 1BR villa gives grandma a private bedroom, full kitchen, and savanna views.',
+    rooms:[
+      'Standard — Value (no balcony)  |  sleeps 4  |  Dec 2025 ~$490–$640/nt  |  2029 est. ~$640–$840/nt',
+      'Standard — Savanna View  |  sleeps 4  |  Dec 2025 ~$620–$800/nt  |  2029 est. ~$815–$1,050/nt',
+      'Kilimanjaro Club — Standard  |  sleeps 4  |  Dec 2025 ~$770–$980/nt  |  2029 est. ~$1,010–$1,285/nt',
+      'Kilimanjaro Club — Savanna View  |  sleeps 4  |  Dec 2025 ~$900–$1,100/nt  |  2029 est. ~$1,180–$1,440/nt',
+    ],
+    suites:[
+      {n:'Kilimanjaro Club 1-Bedroom Suite',sleeps:'Up to 6',dec25:'$1,300–$1,700/nt',dec29:'~$1,700–$2,230/nt',note:'Separate bedroom + living area + Club Level access + savanna view. Great for a smaller extended family group.'},
+      {n:'Kidani Village 2-Bedroom Villa',sleeps:'Up to 9',dec25:'$1,550–$2,000/nt',dec29:'~$2,030–$2,620/nt',note:'Full kitchen, washer/dryer, 2 bathrooms, separate living area, own savanna at Kidani. The best large-group option at AKL. Sleeps 9 comfortably.'},
+      {n:'Royal Asante Presidential Suite',sleeps:'Up to 8',dec25:'$3,500–$5,000+/nt',dec29:'~$4,600–$6,550+/nt',note:'Panoramic savanna views, private balcony, full Club Level access and dedicated concierge. The flagship suite at AKL. Book months in advance.'},
+    ],
+    pool:'Zero-entry Uzima Pool with waterslide · Kidani Samawati Springs pool with 67-foot waterslide',
+    transport:'Bus only to all parks · No monorail or boat',
+    tips:['Book a savanna view room — it is the entire point of staying here','Animals are most active at dawn and dusk — set an early alarm','The Starlight Safari is your date night option in the planner — the whole evening at AKL without leaving the resort is magical','The lobby at night with the bead chandelier lit is one of the most beautiful spaces at WDW'],
+  },
+  beachclub:{
+    color:'#1ABFA4',name:'Beach Club Resort',
+    tagline:'Walk to EPCOT · Stormalong Bay pool · Best location for EPCOT + HS',
+    overview:"Beach Club Resort is a New England coastal hotel on Crescent Lake between EPCOT and Hollywood Studios. You can walk to both parks in under 10 minutes. Famous for Stormalong Bay — a 3-acre pool with a waterslide through a shipwreck, lazy river, and sand bottom. The consensus top pick for mixed-age groups visiting EPCOT.",
+    connecting:'best',
+    connectingNote:'Beach Club is frequently recommended for multigenerational trips. Cast members are very familiar with connecting room requests here. Call (407) 939-1936 to link reservations. The single main building layout makes fulfilling requests more reliable.',
+    villas:'Beach Club Villas',
+    villaNote:'Beach Club Villas are attached and share all amenities including Stormalong Bay. A 1BR gives grandma a private bedroom, full kitchen, and washer/dryer right next to the pool.',
+    rooms:[
+      'Standard — Garden View  |  sleeps 4  |  Dec 2025 ~$660–$840/nt  |  2029 est. ~$865–$1,100/nt',
+      'Standard — Water View  |  sleeps 4  |  Dec 2025 ~$740–$920/nt  |  2029 est. ~$970–$1,205/nt',
+      'Regatta Club Level  |  sleeps 4  |  Dec 2025 ~$800–$1,000/nt  |  2029 est. ~$1,050–$1,310/nt',
+    ],
+    suites:[
+      {n:'1-Bedroom Suite',sleeps:'Up to 5',dec25:'$1,200–$1,550/nt',dec29:'~$1,570–$2,030/nt',note:'Separate bedroom + living room + sleeper sofa. Good for a family of 5–6.'},
+      {n:'Beach Club Villas 2-Bedroom',sleeps:'Up to 8',dec25:'$1,580–$2,050/nt',dec29:'~$2,070–$2,685/nt',note:'Full kitchen, washer/dryer, 2 bathrooms, 2 bedrooms. Same Stormalong Bay access. Best large-group option at the EPCOT resort area.'},
+      {n:'Beach Club Villas 3-Bedroom Grand Villa',sleeps:'Up to 12',dec25:'$3,100–$4,000/nt',dec29:'~$4,060–$5,240/nt',note:'3 full bedrooms, full kitchen, large living area, washer/dryer. Sleeps 12. Rarely available — book at the earliest possible moment.'},
+    ],
+    pool:'Stormalong Bay — 3-acre complex with shipwreck waterslide, lazy river, sand-bottom wading pool · Considered the best pool at WDW',
+    transport:'Walk to EPCOT (~10 min) · Walk to Hollywood Studios (~15 min) · Boat to EPCOT and HS · Skyliner nearby · Bus to MK and AK',
+    tips:['The location is genuinely unmatched for EPCOT and HS days','Stormalong Bay requires a resort key card — stays manageable even when other Disney pools are packed','The EPCOT International Gateway (back entrance) is a 5-min walk — slip in and out without the front entrance crowds','Cape May Cafe character breakfast is right in the hotel — great morning before an EPCOT day'],
+  },
+  contemporary:{
+    color:'#1ABFA4',name:'Contemporary Resort',
+    tagline:'Walk to Magic Kingdom · Monorail through the lobby · California Grill',
+    overview:"The Contemporary Resort is one of Walt Disney World's two original hotels, opening in 1971. The monorail passes directly through the A-frame tower at the fourth floor. A 10-minute walk from Magic Kingdom. The 15th-floor California Grill has the most famous fireworks view at WDW. Tower rooms have floor-to-ceiling windows with city-like views.",
+    connecting:'standard',
+    connectingNote:'Connecting rooms available at the Contemporary. The tower layout helps. Call (407) 939-1936 to link reservations. Garden Wing rooms (the separate lower building) tend to have better connecting room availability than the tower.',
+    villas:'Bay Lake Tower (DVC)',
+    villaNote:'Bay Lake Tower is attached via a sky bridge and has its own rooftop lounge with one of the best MK fireworks views on property. 1BR, 2BR, and 3BR Grand Villa available.',
+    rooms:[
+      'Garden Wing Standard  |  sleeps 4  |  Dec 2025 ~$600–$760/nt  |  2029 est. ~$785–$995/nt',
+      'Tower Standard — MK/Bay Lake View  |  sleeps 4  |  Dec 2025 ~$760–$960/nt  |  2029 est. ~$995–$1,260/nt',
+      'Contemporary Club Level  |  sleeps 4  |  Dec 2025 ~$900–$1,120/nt  |  2029 est. ~$1,180–$1,470/nt',
+    ],
+    suites:[
+      {n:'Bay Lake Tower 1-Bedroom Villa',sleeps:'Up to 5',dec25:'$1,380–$1,700/nt',dec29:'~$1,810–$2,230/nt',note:'Sky bridge from Contemporary to BLT. Full kitchen, washer/dryer, rooftop lounge with fireworks views.'},
+      {n:'Bay Lake Tower 2-Bedroom Villa',sleeps:'Up to 9',dec25:'$2,100–$2,700/nt',dec29:'~$2,750–$3,540/nt',note:'Two full bedrooms + bunk room, full kitchen, 2 bathrooms, washer/dryer. Rooftop lounge access. One of the better large-group options near Magic Kingdom.'},
+      {n:'Bay Lake Tower 3-Bedroom Grand Villa',sleeps:'Up to 12',dec25:'$3,800–$4,900/nt',dec29:'~$4,980–$6,420/nt',note:'3 bedrooms, full kitchen, 3 bathrooms. Monorail + easy MK walk. Very limited availability — book the moment the reservation window opens.'},
+    ],
+    pool:'Fantasia Pool with waterslide · Bay Cove Pool (quieter, near Garden Wing)',
+    transport:'Walk to Magic Kingdom (~10 min) · Monorail to MK, TTC, Polynesian, Grand Floridian, and (via transfer) EPCOT · Bus to Hollywood Studios and Animal Kingdom',
+    tips:['Watch the monorail pass through the lobby — still magical decades later','California Grill observation deck is open to all guests during fireworks — call ahead for a wristband even without a dining reservation','Tower rooms have better views; Garden Wing rooms are quieter and more affordable','Closest hotel to Magic Kingdom of any deluxe resort — no transport stress on MK days'],
+  },
+  polynesian:{
+    color:'#EF767A',name:'Polynesian Village Resort',
+    tagline:"Tropical theming · Monorail to MK · Beach fireworks · Trader Sam's",
+    overview:"The Polynesian Village Resort is a South Pacific-themed resort on the monorail loop on Seven Seas Lagoon with a view of Cinderella Castle. The Great Ceremonial House lobby is filled with tropical plants, fountains, and tiki torches. The beach at night with the MK fireworks in the distance is one of the most memorable experiences at WDW.",
+    connecting:'best',
+    connectingNote:"The Polynesian is a good bet for connecting rooms but rooms are spread across multiple longhouse buildings. Call (407) 939-1936 and specifically request connecting rooms in the same building — this specification matters because you cannot get connecting rooms across buildings.",
+    villas:'Polynesian Villas & Bungalows (DVC)',
+    villaNote:'Studio and 1BR units in the main resort area. The over-water Bungalows (floating on Seven Seas Lagoon) are among the most extraordinary accommodations at WDW. Studio villas are a practical option if a second room is what you need.',
+    rooms:[
+      'Standard Room  |  sleeps 4  |  Dec 2025 ~$740–$940/nt  |  2029 est. ~$970–$1,230/nt',
+      'Lagoon / Pool View  |  sleeps 4  |  Dec 2025 ~$860–$1,080/nt  |  2029 est. ~$1,130–$1,415/nt',
+      'Theme Park / Fireworks View  |  sleeps 4  |  Dec 2025 ~$980–$1,220/nt  |  2029 est. ~$1,285–$1,600/nt',
+      'King Kamehameha Club Level  |  sleeps 4  |  Dec 2025 ~$920–$1,150/nt  |  2029 est. ~$1,205–$1,507/nt',
+    ],
+    suites:[
+      {n:'1-Bedroom Suite',sleeps:'Up to 5',dec25:'$1,500–$1,900/nt',dec29:'~$1,965–$2,489/nt',note:'Separate bedroom + living area with sofa bed. Lagoon views available. Good for a family of 5.'},
+      {n:'Over-Water Bungalow',sleeps:'Up to 8',dec25:'$3,300–$4,500/nt',dec29:'~$4,323–$5,895/nt',note:'Two bedrooms, plunge pool, direct lagoon water access, unobstructed MK fireworks view from the deck. One of the most extraordinary accommodations in Florida. Books months or years in advance — if you want this, start planning now.'},
+    ],
+    pool:'Lava Pool with volcano waterslide · Oasis Pool (quieter) · Beach on Seven Seas Lagoon',
+    transport:"Monorail to MK, TTC, Contemporary, Grand Floridian, and (via transfer) EPCOT · Boat to MK · Bus to Hollywood Studios and Animal Kingdom",
+    tips:["Request a theme park view room — watching fireworks from your balcony while your daughter sleeps inside is one of the great WDW parent experiences","Note the fireworks view from Ohana is currently partially obstructed (maintenance) — the beach and balconies still work fine","Trader Sams Grog Grotto is a must for the adults — arrive right at opening to get a table","The Polynesian has the best overall vibe of any monorail resort for families with young children"],
+  },
+  grandfloridian:{
+    color:'#6457A6',name:'Grand Floridian Resort & Spa',
+    tagline:"Disney's flagship · Michelin-starred dining · Walk to MK · Victoria & Albert's",
+    overview:"The Grand Floridian is Walt Disney World's flagship resort — a Victorian-era hotel with red peaked roofs, white gingerbread facades, and a five-story atrium lobby with live piano and orchestra. A walking bridge connects directly to Magic Kingdom. Home to Victoria & Albert's, the only Michelin-starred Disney-owned restaurant in the world.",
+    connecting:'best',
+    connectingNote:"Grand Floridian connecting rooms are available in both the main building and lodge buildings (Conch Key, Boca Chica, etc.). The main building has the most reliable inventory. Call (407) 939-1936 and specify main building connecting rooms.",
+    villas:'Grand Floridian Villas (DVC)',
+    villaNote:'The Grand Floridian Villas are in the main building, sharing all amenities. A 1BR villa includes Jacuzzi tub and some of the most beautiful rooms at WDW. Also the only way to get a washer/dryer at the Grand Floridian.',
+    rooms:[
+      'Resort View  |  sleeps 5  |  Dec 2025 ~$830–$1,060/nt  |  2029 est. ~$1,087–$1,389/nt',
+      'Water View — Seven Seas Lagoon  |  sleeps 5  |  Dec 2025 ~$960–$1,210/nt  |  2029 est. ~$1,258–$1,585/nt',
+      'Theme Park View  |  sleeps 5  |  Dec 2025 ~$1,080–$1,350/nt  |  2029 est. ~$1,415–$1,769/nt',
+      'Royal Palm Club Level  |  sleeps 5  |  Dec 2025 ~$1,100–$1,400/nt  |  2029 est. ~$1,441–$1,834/nt',
+    ],
+    suites:[
+      {n:'1-Bedroom Suite (Club Level)',sleeps:'Up to 6',dec25:'$1,400–$1,800/nt',dec29:'~$1,834–$2,358/nt',note:'King bedroom + living room with queen sleeper sofa + full Club Level access. Lagoon or courtyard views. Good for 5–6 guests in one connected space.'},
+      {n:'2-Bedroom Suite (Club Level)',sleeps:'Up to 8',dec25:'$2,200–$2,900/nt',dec29:'~$2,882–$3,799/nt',note:'King bedroom + 2-queen bedroom + queen sleeper sofa + full Club Level access. The most practical large-group option at Grand Floridian. Sleeps 8 adults comfortably.'},
+      {n:'Walt Disney Suite / Roy Disney Suite',sleeps:'Up to 6 (private apartment feel)',dec25:'$4,000–$6,500+/nt',dec29:'~$5,240–$8,515+/nt',note:"1,700 sq ft on the 4th/5th floors of the main building, accessed via gold elevators. Panoramic views of MK and Seven Seas Lagoon. Walt's Suite has his original desk and memorabilia. Not bookable online — call VIP services."},
+    ],
+    pool:'Beach Pool with zero-entry and waterslide · Courtyard Pool also available',
+    transport:"Walk to Magic Kingdom (~5 min via the new walking bridge) · Monorail to MK, TTC, Polynesian, Contemporary, and (via transfer) EPCOT · Boat to MK · Bus to Hollywood Studios and Animal Kingdom",
+    tips:['The Royal Palm Club Level is considered by many the best resort experience at WDW — breakfast, snacks, and evening appetizers + cocktails with Castle views','Victoria and Alberts requires months of advance booking — reserve it the day your planning starts','The lobby orchestra plays at set times — check the schedule and position yourself in the atrium','The new walking bridge to MK means leaving 15 minutes before park open and walking straight in'],
+  },
+  swan:{
+    color:'#7D7ABC',name:'Swan & Dolphin',
+    tagline:'Same EPCOT walk as Beach Club · Half the price · Marriott points · No Disney perks',
+    overview:"The Swan and Dolphin are two connected hotels by architect Michael Graves, sitting on Crescent Lake with the same walkable access to EPCOT and Hollywood Studios as the Disney-owned EPCOT resorts — at roughly half the price. Guests earn Marriott Bonvoy points. The tradeoff: no Extended Evening Hours, no direct MDE room charging.",
+    connecting:'best',
+    connectingNote:'Swan & Dolphin connecting rooms are available and the Marriott booking system handles these requests reliably. Call the hotel directly or use Marriott reservation tools. Specify which building (Swan or Dolphin) you prefer.',
+    villas:null,villaNote:null,
+    rooms:[
+      'Standard — Swan  |  sleeps 4  |  Dec 2025 ~$360–$490/nt  |  2029 est. ~$472–$642/nt',
+      'Standard — Dolphin  |  sleeps 4  |  Dec 2025 ~$350–$470/nt  |  2029 est. ~$459–$616/nt',
+      'Alcove Room — Swan  |  sleeps 5  |  Dec 2025 ~$400–$540/nt  |  2029 est. ~$524–$708/nt',
+      'Swan Reserve Tower Room  |  sleeps 4  |  Dec 2025 ~$430–$570/nt  |  2029 est. ~$563–$747/nt',
+      'Swan Reserve Club Access  |  sleeps 4  |  Dec 2025 ~$500–$650/nt  |  2029 est. ~$655–$852/nt',
+    ],
+    suites:[
+      {n:'Junior Suite — Swan',sleeps:'Up to 4',dec25:'$500–$680/nt',dec29:'~$655–$891/nt',note:'Enlarged room with separate sitting area. Good step up from standard without full suite pricing.'},
+      {n:'1-Bedroom Suite — Swan or Dolphin',sleeps:'Up to 6',dec25:'$750–$1,050/nt',dec29:'~$983–$1,376/nt',note:'Separate living room + bedroom. Use Marriott Bonvoy points to reduce cost significantly. Good large-group option at EPCOT-area pricing.'},
+      {n:'Grand Suite — Dolphin',sleeps:'Up to 8',dec25:'$1,200–$1,700/nt',dec29:'~$1,572–$2,227/nt',note:'2 bedrooms + living area. Still significantly cheaper than equivalent Disney-owned suite options with the same EPCOT walk-on access.'},
+    ],
+    pool:'Grotto Pool with waterslide · Multiple pools across the complex · Access to all Swan, Dolphin, and Swan Reserve pools',
+    transport:'Walk to EPCOT International Gateway (~5 min) · Walk to Hollywood Studios (~15 min) · Boat to EPCOT and HS · Bus to MK and AK (Disney buses)',
+    tips:['You get Disney bus access and early park entry just like Disney-owned hotels','No Extended Evening Hours is the main thing you give up vs Beach Club next door','Book on Marriott.com and use Bonvoy points — a major advantage over Disney resorts','The Swan Reserve is the newest and most luxurious building'],
+  },
+  waldorf:{
+    color:'#C49200',name:'Waldorf Astoria Orlando',
+    tagline:'Forbes 4-Star · 482-acre grounds · EPCOT fireworks views · Shuttle to parks',
+    overview:"The Waldorf Astoria Orlando sits within Walt Disney World property on 482 acres of nature preserve. As an official Disney hotel, guests get 30-minute early park entry. Recently completed a full property-wide renovation. Bull & Bear is one of the best steakhouses in the Orlando area.",
+    connecting:'standard',
+    connectingNote:'Connecting rooms available — call the hotel directly at (407) 597-5500. Hilton Honors points give you a way to book two rooms at reduced cost.',
+    villas:null,villaNote:null,
+    rooms:[
+      'Deluxe Room  |  sleeps 4  |  Dec 2025 ~$450–$600/nt  |  2029 est. ~$590–$786/nt',
+      'Fireworks View Room  |  sleeps 4  |  Dec 2025 ~$530–$700/nt  |  2029 est. ~$695–$917/nt',
+      'Waldorf Astoria Club Floor  |  sleeps 4  |  Dec 2025 ~$610–$800/nt  |  2029 est. ~$799–$1,048/nt',
+    ],
+    suites:[
+      {n:'Parlor Suite',sleeps:'Up to 4',dec25:'$900–$1,200/nt',dec29:'~$1,179–$1,572/nt',note:'Separate living area + bedroom. The Waldorf standard — elegant and well-appointed.'},
+      {n:'1-Bedroom Suite',sleeps:'Up to 6',dec25:'$1,100–$1,500/nt',dec29:'~$1,441–$1,965/nt',note:'Full suite with separate bedroom and living room. Good for a couple plus guests in one elegant unit.'},
+      {n:'Presidential Suite',sleeps:'Up to 8',dec25:'$2,500–$4,000+/nt',dec29:'~$3,275–$5,240+/nt',note:'Grand living and dining area, master bedroom, panoramic views. Call directly to discuss availability — not always listed online.'},
+    ],
+    pool:'Two resort pools + lazy river + waterslide · Access to adjacent Signia by Hilton pools',
+    transport:'Luxury motorcoach shuttle to all four WDW parks and Disney Springs · No monorail or boat',
+    tips:['Book a fireworks-view room and watch EPCOT Luminous from your balcony — one of the most underrated experiences near WDW','Hilton Honors points can make a night here surprisingly affordable','No Extended Evening Hours is the main Disney perk you miss vs Disney-owned hotels','The motorcoach is comfortable but adds 15–20 mins vs walking from Beach Club'],
+  },
+  fourseasons:{
+    color:'#EF767A',name:'Four Seasons Orlando',
+    tagline:'AAA Five Diamond · Michelin-starred Capa · Lazy river · Best luxury near WDW',
+    overview:"The Four Seasons Orlando is the highest-rated hotel in the Orlando area — AAA Five Diamond, Forbes Four-Star hotel and Capa restaurant, and home to the only non-Disney Michelin-starred restaurant at WDW. The pool complex with lazy river and waterslides is exceptional, and the Kids for All Seasons programme is extensive.",
+    connecting:'standard',
+    connectingNote:"Connecting rooms and adjoining suites available — call the Four Seasons directly at (407) 313-7777. As a luxury property accustomed to VIP and family requests, this is well-handled.",
+    villas:null,villaNote:null,
+    rooms:[
+      'Superior Room  |  sleeps 4  |  Dec 2025 ~$700–$920/nt  |  2029 est. ~$917–$1,205/nt',
+      'Deluxe Room  |  sleeps 4  |  Dec 2025 ~$800–$1,050/nt  |  2029 est. ~$1,048–$1,376/nt',
+      'Club Floor Room  |  sleeps 4  |  Dec 2025 ~$950–$1,200/nt  |  2029 est. ~$1,245–$1,572/nt',
+    ],
+    suites:[
+      {n:'Junior Suite',sleeps:'Up to 4',dec25:'$1,100–$1,500/nt',dec29:'~$1,441–$1,965/nt',note:'Separate sitting area. Good step-up from standard rooms.'},
+      {n:'1-Bedroom Suite',sleeps:'Up to 6',dec25:'$1,600–$2,200/nt',dec29:'~$2,096–$2,882/nt',note:'Full separate bedroom + living room. Most Four Seasons suites at this tier include butler service.'},
+      {n:'2-Bedroom Suite / Bungalow',sleeps:'Up to 8',dec25:'$2,500–$3,800/nt',dec29:'~$3,275–$4,978/nt',note:'Full 2-bedroom with private patio or terrace. Some have plunge pools. Great for a large family group at the highest luxury tier near WDW.'},
+      {n:'Presidential Suite',sleeps:'Up to 10',dec25:'$5,000–$8,000+/nt',dec29:'~$6,550–$10,480+/nt',note:'The flagship. Disney fireworks visible from the terrace. Multiple bedrooms, butler service. Contact the hotel directly — not publicly bookable online.'},
+    ],
+    pool:'Explorer Island pool complex: main pool, lazy river, waterslides, private cabanas, kids sandbox area · One of the best hotel pool setups in Florida',
+    transport:'Private Disney transportation to all four parks · No Disney buses · Adds ~20 mins vs on-site hotels',
+    tips:["Kids for All Seasons programme is genuinely exceptional — supervised activities and character appearances within the hotel","Capa on the 17th floor is Michelin-starred with fireworks views — the adults dinner of the trip","Book a cabana at Explorer Island for a full pool day while the kids programme keeps children entertained","The most authentically luxury feel of any WDW-area hotel"],
+  },
+};
+
+

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disney World 2029 — Trip Planner</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page active" id="pg-main">
+<div class="wrap">
+<h1>Disney World 2029 — Trip Planner</h1>
+<p class="sub">2 adults · 1 child (almost 4) · 1 grandparent · 4 park days · ATL→MCO · <span id="m-infl-note">Prices at 2029 baseline (+31% from 2026)</span></p>
+<div class="tr">
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <div style="font-size:12px;color:var(--t2)">Select a hotel and date night to update the budget</div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <span style="font-size:11px;color:var(--t2)">Nights:</span>
+      <button class="ngt-btn" onclick="changeNights(-1)">−</button>
+      <span id="nights-val" style="font-size:13px;font-weight:500;color:var(--t);min-width:18px;text-align:center">5</span>
+      <button class="ngt-btn" onclick="changeNights(1)">+</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <span style="font-size:11px;color:var(--t2)">Inflation:</span>
+      <input type="range" min="1" max="10" step="0.5" value="5" style="width:90px;accent-color:var(--bi);cursor:pointer;vertical-align:middle" oninput="setInflRate(this.value)">
+      <span id="infl-rate-lbl" style="font-size:13px;font-weight:500;color:var(--t);min-width:28px">5%</span><span style="font-size:10px;color:var(--t3)">/yr</span>
+    </div>
+  </div>
+  <div style="display:flex;gap:5px">
+    <button class="tog on" onclick="setSeason('off',this)">Off-peak</button>
+    <button class="tog" onclick="setSeason('peak',this)">Peak season</button>
+  </div>
+</div>
+<div class="mg">
+  <div class="met"><div class="ml">estimated total</div><div class="mv" id="m-total"></div></div>
+  <div class="met"><div class="ml">per person</div><div class="mv" id="m-pp"></div></div>
+  <div class="met"><div class="ml" id="m-hotel-lbl">hotel (5 nights)</div><div class="mv" id="m-hotel"></div></div>
+  <div class="met"><div class="ml">special events</div><div class="mv" id="m-special"></div></div>
+</div>
+<div class="card" style="margin-bottom:1rem;border-left:3px solid #1ABFA4">
+  <div style="font-size:11px;font-weight:500;color:var(--t);margin-bottom:.4rem">Disney reservations contact</div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px">
+    <div><div style="font-size:10px;color:var(--t3)">Phone (hotel reservations)</div><div style="font-size:12px;font-weight:500;color:var(--t)">(407) 939-1936</div></div>
+    <div><div style="font-size:10px;color:var(--t3)">General Walt Disney World</div><div style="font-size:12px;font-weight:500;color:var(--t)">(407) 939-5277</div></div>
+    <div><div style="font-size:10px;color:var(--t3)">Dining reservations</div><div style="font-size:12px;font-weight:500;color:var(--t)">(407) 939-3463</div></div>
+  </div>
+  <div style="font-size:10px;color:var(--t3);margin-top:.5rem">To request connecting rooms, book both rooms first then call (407) 939-1936 to link the reservations · Not guaranteed but noted · Ask again at check-in</div>
+</div>
+
+<div class="sl" style="padding-top:.75rem">Booking timeline</div>
+<div style="font-size:10px;color:var(--t3);margin-bottom:.5rem">Enter your check-in date to get your exact booking dates calculated automatically</div>
+<div class="card" id="booking-card" style="padding:0">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:.75rem 1rem;cursor:pointer" onclick="toggleBookingTimeline()">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+      <div>
+        <div style="font-size:10px;color:var(--t3);margin-bottom:3px">Check-in date</div>
+        <input type="date" id="trip-date-input" style="font-size:12px;padding:5px 8px;border:.5px solid var(--bmd);border-radius:var(--rm);background:var(--bg);color:var(--t);font-family:var(--f)" onclick="event.stopPropagation()" onchange="setTripDate(this.value)">
+      </div>
+      <div id="trip-date-summary" style="font-size:11px;color:var(--t2)"></div>
+    </div>
+    <span id="booking-caret" style="font-size:13px;color:var(--t3);transition:transform .2s;display:inline-block">&#9660;</span>
+  </div>
+  <div id="booking-timeline-body" style="display:none;padding:0 1rem .75rem">
+    <div id="booking-timeline"><div style="font-size:11px;color:var(--t3)">Enter your check-in date above to see your personalised booking dates</div></div>
+  </div>
+</div>
+<div class="sl">Disney deluxe resorts — on property, Disney-owned</div>
+<div class="ga" id="gd"></div>
+<div class="sl" style="margin-top:.4rem">Disney-associated hotels — officially partnered, not Disney-owned</div>
+<div class="ga" id="ga" style="margin-bottom:1rem"></div>
+<div class="card">
+  <div style="font-size:11px;color:var(--t2);margin-bottom:7px">cost breakdown</div>
+  <div style="width:100%;border-radius:3px;overflow:hidden;display:flex;margin-bottom:8px" id="bar"></div>
+  <div class="lgr">
+    <span><span class="ld" style="background:#7D7ABC"></span>Flights</span>
+    <span><span class="ld" style="background:#6457A6"></span>Hotel</span>
+    <span><span class="ld" style="background:#1ABFA4"></span>Park</span>
+    <span><span class="ld" style="background:#EF767A"></span>Dining</span>
+    <span><span class="ld" style="background:#D4A800"></span>Special</span>
+    <span><span class="ld" style="background:#B4B2A9"></span>Transport</span>
+    <span><span class="ld" style="background:#888780"></span>Misc</span>
+  </div>
+  <div id="lis"></div>
+</div>
+<div class="sl" style="padding-top:.75rem">Park day &amp; night plans</div>
+<div style="font-size:10px;color:var(--t3);margin-bottom:.5rem">Your little one will be almost 4 years old (~36–38" tall). Click a park to open its full plan.</div>
+<div class="pk-nav-grid" id="pk-nav"></div>
+<div class="sl" style="padding-top:.75rem">Resort restaurants</div>
+<div style="font-size:10px;color:var(--t3);margin-bottom:.5rem">Notable dining at the hotels in your planner · Prices estimated for family of 4 unless noted · 2029 projected</div>
+<div id="rr-grid"></div>
+</div>
+</div>
+
+<div class="page" id="pg-hotel-wilderness"><div class="wrap" id="content-hotel-wilderness"></div></div>
+<div class="page" id="pg-hotel-aklodge"><div class="wrap" id="content-hotel-aklodge"></div></div>
+<div class="page" id="pg-hotel-beachclub"><div class="wrap" id="content-hotel-beachclub"></div></div>
+<div class="page" id="pg-hotel-contemporary"><div class="wrap" id="content-hotel-contemporary"></div></div>
+<div class="page" id="pg-hotel-polynesian"><div class="wrap" id="content-hotel-polynesian"></div></div>
+<div class="page" id="pg-hotel-grandfloridian"><div class="wrap" id="content-hotel-grandfloridian"></div></div>
+<div class="page" id="pg-hotel-swan"><div class="wrap" id="content-hotel-swan"></div></div>
+<div class="page" id="pg-hotel-waldorf"><div class="wrap" id="content-hotel-waldorf"></div></div>
+<div class="page" id="pg-hotel-fourseasons"><div class="wrap" id="content-hotel-fourseasons"></div></div>
+
+<div class="page" id="pg-mk"><div class="wrap" id="content-mk"></div></div>
+<div class="page" id="pg-ep"><div class="wrap" id="content-ep"></div></div>
+<div class="page" id="pg-hs"><div class="wrap" id="content-hs"></div></div>
+<div class="page" id="pg-ak"><div class="wrap" id="content-ak"></div></div>
+
+<script src="js/hotels.js"></script>
+<script src="js/parks.js"></script>
+<script src="js/budget.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
