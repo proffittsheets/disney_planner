@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disney World 2029 — Trip Planner</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg2:#f5f5f3;--bg3:#eeede9;
+  --bgi:#EDE8F8;--bgs:#CDF9F0;--bgw:#FFF9D0;--bgd:#FDE8E9;
+  --t:#1a1a18;--t2:#5f5e5a;--t3:#888780;
+  --ti:#3A2F7A;--ts:#0A6055;--tw:#6B5500;--td:#8A2A2E;
+  --bm:rgba(26,26,24,0.15);--bmd:rgba(26,26,24,0.3);
+  --bi:#6457A6;--bsuc:#0CBFA4;
+  --rm:8px;--rl:12px;
+  --f:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#1e1e1c;--bg2:#2a2a28;--bg3:#232321;
+  --bgi:#221850;--bgs:#083830;--bgw:#2A2200;--bgd:#3C1418;
+  --t:#f0efeb;--t2:#b4b2a9;--t3:#888780;
+  --ti:#A898E8;--ts:#23F0C7;--tw:#FFE347;--td:#EF767A;
+  --bm:rgba(240,239,235,0.15);--bmd:rgba(240,239,235,0.3);
+  --bi:#8A7ED4;--bsuc:#23F0C7;
+}}
+body{font-family:var(--f);background:var(--bg3);color:var(--t);min-height:100vh}
+.page{display:none;padding:1.25rem 1rem}.page.active{display:block}
+.wrap{max-width:880px;margin:0 auto}
+h1{font-size:20px;font-weight:500;margin-bottom:3px}
+.sub{font-size:13px;color:var(--t2);margin-bottom:1.25rem}
+.card{background:var(--bg);border:.5px solid var(--bm);border-radius:var(--rl);padding:1rem 1.1rem;margin-bottom:8px}
+.sl{font-size:10px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;padding:.55rem 0 .3rem}
+.tog{padding:5px 14px;border:.5px solid var(--bmd);border-radius:var(--rm);background:transparent;color:var(--t2);font-size:12px;cursor:pointer;font-family:var(--f)}
+.tog.on{background:var(--bgi);color:var(--ti);border-color:var(--bi);font-weight:500}
+.met{background:var(--bg2);border-radius:var(--rm);padding:.75rem 1rem}
+.ml{font-size:11px;color:var(--t2)}.mv{font-size:26px;font-weight:500;color:var(--t)}
+.hc{background:var(--bg);border:.5px solid var(--bm);border-radius:var(--rl);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;gap:6px}
+.hc:hover{border-color:var(--bmd)}.hc.sel{border:2px solid var(--bi);background:var(--bgi)}
+.hsvg{width:100%;display:block;line-height:0;border-radius:var(--rl) var(--rl) 0 0;overflow:hidden}
+.hsvg svg{width:100%;height:60px;display:block}
+.hbody{padding:.65rem .75rem;display:flex;flex-direction:column;gap:5px}
+.hc.sel .hn,.hc.sel .hp,.hc.sel .hp span,.hc.sel .hnt{color:var(--ti)}
+.hn{font-size:12px;font-weight:500;color:var(--t)}.hp{font-size:10px;color:var(--t3)}.hp span{font-weight:500;color:var(--t)}
+.hnt{font-size:9px;color:var(--t3);line-height:1.4}
+.atag{font-size:9px;padding:1px 5px;border-radius:8px;background:var(--bg2);color:var(--t3);align-self:flex-start}
+.tbr{display:flex;flex-wrap:wrap;gap:2px}
+.tb{font-size:9px;padding:1px 5px;border-radius:8px;font-weight:500}
+.tw2{background:#CDF9F0;color:#0A6055}.tm{background:#EDE8F8;color:#3A2F7A}
+.tbo{background:#CDF9F0;color:#0A5E52}.tbu{background:#FFF9D0;color:#6B5500}
+.tsk{background:#E8E6F8;color:#4A4490}.tsh{background:#FDE8E9;color:#8A2A2E}
+.bs{height:20px;display:inline-block;transition:width .35s}
+.ld{width:9px;height:9px;border-radius:2px;display:inline-block;flex-shrink:0;margin-top:2px}
+.li{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:.5px solid var(--bm)}
+.li:last-child{border-bottom:none}
+.lnt{font-size:10px;color:var(--t3);margin-top:1px;line-height:1.5}
+.lh{font-size:10px;color:var(--ti);margin-top:2px;font-weight:500}
+.lv{font-size:13px;font-weight:500;color:var(--t);white-space:nowrap;margin-left:10px}
+.lv.fr{color:var(--ts)}
+.bdg{font-size:9px;padding:1px 5px;border-radius:8px;white-space:nowrap;margin-left:4px}
+.bsp{background:var(--bgw);color:var(--tw)}.bad{background:var(--bgd);color:var(--td)}.bfr{background:var(--bgs);color:var(--ts)}
+.ob{padding:4px 10px;border:.5px solid var(--bmd);border-radius:var(--rm);background:transparent;color:var(--t2);font-size:11px;cursor:pointer;font-family:var(--f)}
+.ob.on{background:var(--bgs);color:var(--ts);border-color:var(--bsuc);font-weight:500}
+.slb{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;font-weight:500;width:100%;margin-bottom:2px}
+.lgr{display:flex;flex-wrap:wrap;gap:8px;font-size:10px;color:var(--t2);margin-bottom:12px}
+.lgr span{display:flex;align-items:center;gap:3px}
+.dv{height:.5px;background:var(--bm);margin:.4rem 0}
+.ga{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:7px;margin-bottom:.5rem}
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:1rem}
+.tr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:1rem}
+.pk-nav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:10px;margin-top:.5rem}
+.pk-nav{border-radius:var(--rl);overflow:hidden;border:.5px solid var(--bm);cursor:pointer;transition:transform .12s}
+.pk-nav:hover{transform:translateY(-2px)}
+.pk-nav-head{padding:1rem 1rem .8rem;display:flex;flex-direction:column;gap:4px}
+.pk-nav-name{font-size:15px;font-weight:500}.pk-nav-tag{font-size:10px;opacity:.8;line-height:1.4}
+.pk-nav-foot{background:var(--bg);padding:.65rem 1rem;display:flex;align-items:center;justify-content:space-between;border-top:.5px solid rgba(0,0,0,.07)}
+.pk-nav-foot span{font-size:11px;color:var(--t2)}
+.pk-pill{font-size:9px;padding:1px 6px;border-radius:8px;background:rgba(0,0,0,.12);color:inherit;margin-right:3px}
+.pk-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ti);cursor:pointer;padding:.5rem 0;font-weight:500;background:none;border:none;font-family:var(--f)}
+.pk-back:hover{text-decoration:underline}
+.pk-head{border-radius:var(--rl);padding:1.1rem 1.25rem;margin-bottom:1rem}
+.pk-head h2{font-size:22px;font-weight:500;margin-bottom:4px}.pk-head p{font-size:12px;opacity:.8}
+.age-note{font-size:11px;background:var(--bgi);color:var(--ti);border-radius:var(--rm);padding:.5rem .75rem;margin-bottom:.75rem;line-height:1.5}
+.coming-note{font-size:11px;background:var(--bgw);color:var(--tw);border-radius:var(--rm);padding:.5rem .75rem;margin-bottom:.75rem;line-height:1.5}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.75rem}
+@media(max-width:520px){.two-col{grid-template-columns:1fr}}
+.box{background:var(--bg2);border-radius:var(--rm);padding:.75rem .85rem}
+.box h4{font-size:10px;font-weight:500;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
+.box ul{list-style:none;padding:0}
+.box ul li{font-size:11px;color:var(--t2);padding:2px 0 2px 12px;position:relative;line-height:1.5}
+.box ul li::before{content:'>';position:absolute;left:0;color:var(--t3)}
+.ri-item{font-size:11px;color:var(--t);padding:5px 0;border-bottom:.5px solid var(--bm);line-height:1.4}
+.ri-item:last-child{border-bottom:none}
+.ri-sub{font-size:10px;color:var(--t3)}
+.ri-yes{font-size:9px;padding:1px 5px;border-radius:8px;background:#EAF3DE;color:#27500A;margin-left:4px;white-space:nowrap;vertical-align:middle}
+.sn-item{padding:5px 0;border-bottom:.5px solid var(--bm);font-size:11px}
+.sn-item:last-child{border-bottom:none}
+.sn-name{font-weight:500;color:var(--t)}.sn-where{font-size:10px;color:var(--ti)}.sn-nt{font-size:10px;color:var(--t3)}
+.sn-price{font-size:10px;color:var(--tw);font-weight:500;margin-left:4px}
+.rt-item{padding:5px 0;border-bottom:.5px solid var(--bm);font-size:11px}
+.rt-item:last-child{border-bottom:none}
+.rt-type{font-size:9px;padding:1px 5px;border-radius:8px;margin-left:4px}
+.rqs{background:var(--bgw);color:var(--tw)}.rts{background:var(--bgi);color:var(--ti)}
+.rt-price{font-size:10px;color:var(--tw);font-weight:500;margin-left:6px}
+.sh-item{padding:5px 0;border-bottom:.5px solid var(--bm);font-size:11px;line-height:1.4}
+.sh-item:last-child{border-bottom:none}
+.sh-name{font-weight:500;color:var(--t)}.sh-nt{font-size:10px;color:var(--t3)}
+.sect{font-size:11px;font-weight:500;color:var(--t);margin:.85rem 0 .3rem}
+.sh-hdr{font-size:10px;font-weight:500;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin:.5rem 0 .3rem;padding-top:.4rem;border-top:.5px solid var(--bm)}
+.sh-hdr:first-child{border-top:none;margin-top:0}
+.hr-hotel{font-size:10px;font-weight:500;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin:.6rem 0 .3rem;padding-top:.5rem;border-top:.5px solid var(--bm)}
+.hr-hotel:first-child{border-top:none;padding-top:0;margin-top:0}
+.hr-item{padding:5px 0;border-bottom:.5px solid var(--bm);font-size:11px}
+.hr-item:last-child{border-bottom:none}
+.hr-price{font-size:10px;color:var(--tw);font-weight:500;margin-left:6px}
+.hr-badge{font-size:9px;padding:1px 5px;border-radius:8px;margin-left:4px;font-weight:500;white-space:nowrap}
+.hb-m{background:#F5F0CC;color:#5C4A00}
+.hb-mr{background:#F0EEE8;color:#5A5040}
+.hb-sp{background:var(--bgi);color:var(--ti)}
+.hr-special{font-size:10px;color:var(--ti);margin-top:3px;line-height:1.45}
+.hr-warn{font-size:10px;color:var(--td);margin-top:3px;line-height:1.45}
+.ngt-btn{width:26px;height:26px;border:.5px solid var(--bmd);border-radius:var(--rm);background:transparent;color:var(--t);font-size:15px;cursor:pointer;font-family:var(--f);display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.ngt-btn:hover{background:var(--bg2)}
+.fest-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem}
+@media(max-width:520px){.fest-grid{grid-template-columns:1fr}}
+.fest-card{background:var(--bg2);border-radius:var(--rm);padding:.65rem .75rem;border-left:3px solid transparent}
+.fest-name{font-size:11px;font-weight:500;color:var(--t)}
+.fest-months{font-size:10px;color:var(--t3);margin-bottom:3px}
+.fest-nt{font-size:10px;color:var(--t2);line-height:1.45}
+</style>
+</head>
+<body>
+
+<div class="page active" id="pg-main">
+<div class="wrap">
+<h1>Disney World 2029 — Trip Planner</h1>
+<p class="sub">2 adults · 1 child (almost 4) · 1 grandparent · 4 park days · ATL→MCO · <span id="m-infl-note">Prices at 2029 baseline (+31% from 2026)</span></p>
+<div class="tr">
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <div style="font-size:12px;color:var(--t2)">Select a hotel and date night to update the budget</div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <span style="font-size:11px;color:var(--t2)">Nights:</span>
+      <button class="ngt-btn" onclick="changeNights(-1)">−</button>
+      <span id="nights-val" style="font-size:13px;font-weight:500;color:var(--t);min-width:18px;text-align:center">5</span>
+      <button class="ngt-btn" onclick="changeNights(1)">+</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <span style="font-size:11px;color:var(--t2)">Inflation:</span>
+      <input type="range" min="1" max="10" step="0.5" value="5" style="width:90px;accent-color:var(--bi);cursor:pointer;vertical-align:middle" oninput="setInflRate(this.value)">
+      <span id="infl-rate-lbl" style="font-size:13px;font-weight:500;color:var(--t);min-width:28px">5%</span><span style="font-size:10px;color:var(--t3)">/yr</span>
+    </div>
+  </div>
+  <div style="display:flex;gap:5px">
+    <button class="tog on" onclick="setSeason('off',this)">Off-peak</button>
+    <button class="tog" onclick="setSeason('peak',this)">Peak season</button>
+  </div>
+</div>
+<div class="mg">
+  <div class="met"><div class="ml">estimated total</div><div class="mv" id="m-total"></div></div>
+  <div class="met"><div class="ml">per person</div><div class="mv" id="m-pp"></div></div>
+  <div class="met"><div class="ml" id="m-hotel-lbl">hotel (5 nights)</div><div class="mv" id="m-hotel"></div></div>
+  <div class="met"><div class="ml">special events</div><div class="mv" id="m-special"></div></div>
+</div>
+<div class="card" style="margin-bottom:1rem;border-left:3px solid #1ABFA4">
+  <div style="font-size:11px;font-weight:500;color:var(--t);margin-bottom:.4rem">Disney reservations contact</div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px">
+    <div><div style="font-size:10px;color:var(--t3)">Phone (hotel reservations)</div><div style="font-size:12px;font-weight:500;color:var(--t)">(407) 939-1936</div></div>
+    <div><div style="font-size:10px;color:var(--t3)">General Walt Disney World</div><div style="font-size:12px;font-weight:500;color:var(--t)">(407) 939-5277</div></div>
+    <div><div style="font-size:10px;color:var(--t3)">Dining reservations</div><div style="font-size:12px;font-weight:500;color:var(--t)">(407) 939-3463</div></div>
+  </div>
+  <div style="font-size:10px;color:var(--t3);margin-top:.5rem">To request connecting rooms, book both rooms first then call (407) 939-1936 to link the reservations · Not guaranteed but noted · Ask again at check-in</div>
+</div>
+
+<div class="sl" style="padding-top:.75rem">Booking timeline</div>
+<div style="font-size:10px;color:var(--t3);margin-bottom:.5rem">Enter your check-in date to get your exact booking dates calculated automatically</div>
+<div class="card" id="booking-card" style="padding:0">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:.75rem 1rem;cursor:pointer" onclick="toggleBookingTimeline()">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+      <div>
+        <div style="font-size:10px;color:var(--t3);margin-bottom:3px">Check-in date</div>
+        <input type="date" id="trip-date-input" style="font-size:12px;padding:5px 8px;border:.5px solid var(--bmd);border-radius:var(--rm);background:var(--bg);color:var(--t);font-family:var(--f)" onclick="event.stopPropagation()" onchange="setTripDate(this.value)">
+      </div>
+      <div id="trip-date-summary" style="font-size:11px;color:var(--t2)"></div>
+    </div>
+    <span id="booking-caret" style="font-size:13px;color:var(--t3);transition:transform .2s;display:inline-block">&#9660;</span>
+  </div>
+  <div id="booking-timeline-body" style="display:none;padding:0 1rem .75rem">
+    <div id="booking-timeline"><div style="font-size:11px;color:var(--t3)">Enter your check-in date above to see your personalised booking dates</div></div>
+  </div>
+</div>
+<div class="sl">Disney deluxe resorts — on property, Disney-owned</div>
+<div class="ga" id="gd"></div>
+<div class="sl" style="margin-top:.4rem">Disney-associated hotels — officially partnered, not Disney-owned</div>
+<div class="ga" id="ga" style="margin-bottom:1rem"></div>
+<div class="card">
+  <div style="font-size:11px;color:var(--t2);margin-bottom:7px">cost breakdown</div>
+  <div style="width:100%;border-radius:3px;overflow:hidden;display:flex;margin-bottom:8px" id="bar"></div>
+  <div class="lgr">
+    <span><span class="ld" style="background:#7D7ABC"></span>Flights</span>
+    <span><span class="ld" style="background:#6457A6"></span>Hotel</span>
+    <span><span class="ld" style="background:#1ABFA4"></span>Park</span>
+    <span><span class="ld" style="background:#EF767A"></span>Dining</span>
+    <span><span class="ld" style="background:#D4A800"></span>Special</span>
+    <span><span class="ld" style="background:#B4B2A9"></span>Transport</span>
+    <span><span class="ld" style="background:#888780"></span>Misc</span>
+  </div>
+  <div id="lis"></div>
+</div>
+<div class="sl" style="padding-top:.75rem">Park day &amp; night plans</div>
+<div style="font-size:10px;color:var(--t3);margin-bottom:.5rem">Your little one will be almost 4 years old (~36–38" tall). Click a park to open its full plan.</div>
+<div class="pk-nav-grid" id="pk-nav"></div>
+<div class="sl" style="padding-top:.75rem">Resort restaurants</div>
+<div style="font-size:10px;color:var(--t3);margin-bottom:.5rem">Notable dining at the hotels in your planner · Prices estimated for family of 4 unless noted · 2029 projected</div>
+<div id="rr-grid"></div>
+</div>
+</div>
+
+<div class="page" id="pg-hotel-wilderness"><div class="wrap" id="content-hotel-wilderness"></div></div>
+<div class="page" id="pg-hotel-aklodge"><div class="wrap" id="content-hotel-aklodge"></div></div>
+<div class="page" id="pg-hotel-beachclub"><div class="wrap" id="content-hotel-beachclub"></div></div>
+<div class="page" id="pg-hotel-contemporary"><div class="wrap" id="content-hotel-contemporary"></div></div>
+<div class="page" id="pg-hotel-polynesian"><div class="wrap" id="content-hotel-polynesian"></div></div>
+<div class="page" id="pg-hotel-grandfloridian"><div class="wrap" id="content-hotel-grandfloridian"></div></div>
+<div class="page" id="pg-hotel-swan"><div class="wrap" id="content-hotel-swan"></div></div>
+<div class="page" id="pg-hotel-waldorf"><div class="wrap" id="content-hotel-waldorf"></div></div>
+<div class="page" id="pg-hotel-fourseasons"><div class="wrap" id="content-hotel-fourseasons"></div></div>
+
+<div class="page" id="pg-mk"><div class="wrap" id="content-mk"></div></div>
+<div class="page" id="pg-ep"><div class="wrap" id="content-ep"></div></div>
+<div class="page" id="pg-hs"><div class="wrap" id="content-hs"></div></div>
+<div class="page" id="pg-ak"><div class="wrap" id="content-ak"></div></div>
+
+<script>
+var hotels={
+  deluxe:[
+    {key:'wilderness',eeh:true,   name:'Wilderness Lodge',     off:2500,peak:3400,trans:['tbo','tbu'],tl:['Boat→MK','Bus'],note:'Boat to MK · Cozy lodge · Waterfall pool',url:'https://disneyworld.disney.go.com/resorts/wilderness-lodge-resort/',
+     club:{name:'Old Faithful Club',offExtra:120,peakExtra:150,perks:'Continental breakfast, afternoon snacks, evening appetizers + beer/wine, dedicated concierge · Best value Club Level at WDW'}},
+    {key:'aklodge',eeh:true,      name:'Animal Kingdom Lodge', off:2800,peak:3800,trans:['tbu'],      tl:['Bus only'],     note:'Savanna views · Best kid wow · Jiko dining',url:'https://disneyworld.disney.go.com/resorts/animal-kingdom-lodge/',
+     club:{name:'Kilimanjaro Club',offExtra:160,peakExtra:200,perks:'Savanna-view lounge · Full hot breakfast, afternoon snacks, evening appetizers + cocktails, cordials · One of the most atmospheric Club Level lounges at WDW'}},
+    {key:'beachclub',eeh:true,    name:'Beach Club',           off:3100,peak:4200,trans:['tw2','tw2','tsk','tbo'],tl:['Walk→EPCOT','Walk→HS','Skyliner','Boat'],note:'Stormalong Bay pool · Walk to EPCOT',url:'https://disneyworld.disney.go.com/resorts/beach-club-resort/',
+     club:{name:'Regatta Club',offExtra:130,peakExtra:165,perks:'Continental breakfast, afternoon snacks, evening appetizers + cocktails, desserts · Shared with Yacht Club · Same EPCOT proximity advantage'}},
+    {key:'contemporary',eeh:true, name:'Contemporary',         off:3700,peak:5100,trans:['tw2','tm'], tl:['Walk→MK','Monorail'],note:'Walk to MK · Monorail lobby · California Grill',url:'https://disneyworld.disney.go.com/resorts/contemporary-resort/',
+     club:{name:'Contemporary Club',offExtra:140,peakExtra:175,perks:'Hot breakfast, afternoon snacks, evening appetizers + beer/wine, cordials · Views over the marina toward MK · Quieter lounge than most'}},
+    {key:'polynesian',eeh:true,   name:'Polynesian Village',   off:4100,peak:5600,trans:['tm','tbo','tbu'],tl:['Monorail','Boat→MK','Bus'],note:'Tropical theming · Trader Sam\'s · Beach fireworks',url:'https://disneyworld.disney.go.com/resorts/polynesian-village-resort/',
+     club:{name:'King Kamehameha Club',offExtra:150,peakExtra:190,perks:'Full hot breakfast, afternoon snacks, evening appetizers + tropical cocktails, cordials · Lagoon views · Most festive Club Level atmosphere at WDW'}},
+    {key:'grandfloridian',eeh:true,name:'Grand Floridian',     off:4500,peak:6200,trans:['tw2','tm','tbo'],tl:['Walk→MK','Monorail','Boat'],note:'Disney flagship luxury · Victoria &amp; Albert\'s',url:'https://disneyworld.disney.go.com/resorts/grand-floridian-resort-and-spa/',
+     club:{name:'Royal Palm Club',offExtra:280,peakExtra:350,perks:'The most celebrated Club Level at WDW · Full hot breakfast, afternoon tea, evening appetizers + cocktails, after-dinner cordials + desserts · Castle views · Dedicated concierge books dining + special experiences'}},
+  ],
+  assoc:[
+    {key:'swan',         name:'Swan & Dolphin',       off:1600,peak:2200,trans:['tw2','tw2','tbo','tbu'],tl:['Walk→EPCOT','Walk→HS','Boat','Bus'],note:'Same EPCOT walk as Beach Club · ~½ price · Marriott pts',assoc:true,url:'https://www.swandolphin.com/',
+     club:{name:'Swan Reserve Club Access',offExtra:90,peakExtra:110,perks:'Marriott club lounge via Swan Reserve · Continental breakfast, afternoon snacks, evening appetizers + drinks · More business lounge than Disney-themed experience'}},
+    {key:'waldorf',      name:'Waldorf Astoria',      off:2750,peak:3700,trans:['tsh','tbu'],tl:['Shuttle','Disney buses'],note:'482-acre grounds · EPCOT fireworks from balcony',assoc:true,url:'https://www.waldorfastoriaorlando.com/',
+     club:{name:'Waldorf Astoria Club',offExtra:160,peakExtra:200,perks:'Premier floor lounge · Continental breakfast, afternoon snacks, evening cocktails + hors d\'oeuvres · Highly personalized concierge service'}},
+    {key:'fourseasons',  name:'Four Seasons Orlando', off:4800,peak:6500,trans:['tsh'],     tl:['Private shuttle'],note:'AAA Five Diamond · Lazy river + spa · Character breakfast',assoc:true,url:'https://www.fourseasons.com/orlando/',
+     club:{name:'Club Floor',offExtra:200,peakExtra:250,perks:'Four Seasons Club floor · Full breakfast, all-day snacks, evening cocktails + hors d\'oeuvres, after-dinner desserts · Most luxurious lounge near WDW'}},
+  ]
+};
+var fireworksDNs={
+  none:{l:'None',off:0,peak:0,note:'No fireworks experience selected',hotel:''},
+  pontoon:{l:'Private Pontoon Cruise',off:550,peak:600,
+    note:'Private boat for up to 10 guests · Captain provided · Snacks and soft drinks included · Watch Happily Ever After from Seven Seas Lagoon · Can be decorated for special occasions · Book via My Disney Experience or (407) 939-7529 · 60-day booking window',
+    hotel:'Departs from: Contemporary (Boat Nook), Polynesian (Seven Seas Marina), Grand Floridian (Captain\'s Shipyard), Wilderness Lodge (Teton), Fort Wilderness · EPCOT version also available'},
+  dessert:{l:'MK Fireworks Dessert Party',off:220,peak:260,
+    note:'Tomorrowland Terrace · Unlimited dessert buffet + beer/wine for adults · Reserved viewing area at Plaza Garden · Post-Party recommended — claim your spot early, watch fireworks, eat desserts while Main Street clears · Pre-Party and Seats & Sweets (seated, slightly off-center) also available · ~$99/adult + $59/child projected to 2029',
+    hotel:'In-park experience — works from any hotel · Best from nearby monorail resorts for easy exit after'},
+  ferrytale:{l:'Ferrytale Fireworks Dessert Cruise',off:295,peak:330,
+    note:'Watch Happily Ever After from the iconic Magic Kingdom ferryboat on Seven Seas Lagoon · Desserts, drinks, glow-in-the-dark Hidden Mickey scavenger hunt, Mickey Vision fireworks lenses · Select Wednesday and Saturday evenings only · Check-in at Ticket and Transportation Center · ~$130/adult projected to 2029',
+    hotel:'Departs from the TTC ferry dock — easy from any monorail resort (Polynesian, Contemporary, Grand Floridian) or the TTC parking lot'},
+  celebration:{l:'Celebration at the Top',off:230,peak:260,
+    note:'California Grill 15th floor · Small plates, sushi, desserts, cocktails + wine · Step onto the private outdoor viewing deck for MK fireworks · Adults-focused · Smart casual dress code · Not offered every night — check Disney website · Different from the California Grill dinner reservation',
+    hotel:'Best from: Contemporary (elevator up — zero logistics) · Polynesian and Grand Floridian easy via monorail'},
+  geo82:{l:'GEO-82 EPCOT Fireworks',off:385,peak:385,
+    note:'Adults 21+ only · Inside Spaceship Earth at EPCOT · Gourmet tasting tower, 3 cocktails included · Fireworks over World Showcase Lagoon · Very limited capacity — book at exactly 60 days or you will miss it',
+    hotel:'Best from: Beach Club or Swan & Dolphin (5-min walk into EPCOT International Gateway — no transport at all)'},
+  cagrill:{l:'California Grill Dinner',off:420,peak:420,
+    note:'Contemporary 15th floor · 3-course prix fixe + wine pairing · MK fireworks visible from your table or the private outdoor terrace · A full dinner rather than the Celebration at the Top cocktail event · Book at 60 days',
+    hotel:'Best from: Contemporary (elevator up — zero logistics) · Polynesian and Grand Floridian easy via monorail'},
+  mnsshp:{l:"Mickey's Not-So-Scary Halloween Party",off:420,peak:420,
+    note:'Magic Kingdom · Aug–Oct select nights · 7pm–midnight · Includes: Disney\'s Not-So-Spooky Spectacular fireworks hosted by Jack Skellington, Boo-to-You Halloween Parade (headless horseman!), Hocus Pocus Villain Spelltacular stage show, trick-or-treating, exclusive character meets in Halloween costumes · ~$200/adult projected to 2029 · Dates sell out — book as soon as released, some dates sell out before Halloween',
+    hotel:'Replaces a park day · Enter from 4pm with party ticket — no separate park admission needed · Great for the whole group including grandma and your daughter · Trick-or-treating is a highlight for almost-4'},
+  mvmcp:{l:"Mickey's Very Merry Christmas Party",off:430,peak:430,
+    note:'Magic Kingdom · Nov–Dec 21 select nights · 7pm–midnight · Includes: Minnie\'s Wonderful Christmastime Fireworks, Mickey\'s Once Upon a Christmastime Parade, Mickey\'s Most Merriest Celebration castle show, free hot cocoa and cookies throughout the park, festive overlays on Space Mountain and more · ~$205/adult projected to 2029 · Sells out — every date sold out in 2025',
+    hotel:'Replaces a park day · Enter from 4pm · The most magical time of year at Magic Kingdom · Free hot cocoa and cookies are everywhere · Your daughter will love the Christmas parade · Snow falls on Main Street'},
+};
+var eveningDNs={
+  none:{l:'None',off:0,peak:0,note:'No evening experience selected',hotel:''},
+  pandora:{l:'Pandora at night',off:0,peak:0,free:true,
+    note:"Arrive at dusk · Rum Blossoms from Pongu Pongu · Na'vi River Journey (glowing boat) · Flight of Passage via LL Single Pass · Wander bioluminescent paths under floating mountains · Included with park ticket — no extra cost",
+    hotel:'Best from: Animal Kingdom Lodge (most immersive — end the night at Jiko or Victoria Falls Lounge)'},
+  starlight:{l:'Starlight Safari',off:195,peak:195,
+    note:'Animal Kingdom Lodge · 1-hour open-air nighttime safari through the resort savanna · Night vision goggles provided · 30+ species including zebras, giraffes, flamingos, and wildebeest · Runs at 8:30pm and 10pm nightly · Available to all guests · Book via My Disney Experience app',
+    hotel:'Best from: Animal Kingdom Lodge (walk from your room to Kidani Village porte-cochère) · Pair with Jiko or Sanaa dinner for a full evening at AKL without leaving the resort · Works from any hotel via Uber/Lyft'},
+  afterhours:{l:'Disney After Hours',off:420,peak:420,
+    note:'Separate-ticket event · 10pm–1am (enter from 7pm) · Very limited capacity — near-empty parks · Major rides with minimal or no waits · Included popcorn, ice cream novelties, and bottled beverages throughout · Available at MK ($175–199/ticket in 2026), Hollywood Studios ($155–189), and EPCOT ($155–179) · Select nights only — check Disney website for 2029 dates · ~$200/adult projected to 2029',
+    hotel:'Works from any hotel · Best used as an adult night at MK (TRON, Seven Dwarfs Mine Train, Space Mountain back-to-back with no waits) or HS (Rise of the Resistance, Slinky Dog Dash, Galaxy\'s Edge at night) while little one sleeps'},
+};
+var fi=[
+  {bk:'flights',  label:'Flights',                  note:'ATL→MCO, 4 passengers, round trip',        color:'#7D7ABC',off:1050,peak:1350,isFly:true},
+  {bk:'transport',label:'Airport transport',        note:'Mears Connect, round trip × 4 people',     color:'#B4B2A9',off:140, peak:140,isFly:true},
+  {bk:'transport',label:'Gas — Marietta to Orlando, return',note:'~440 miles each way × 2 = ~880 miles · est. 25 mpg · ~$3.30/gal projected 2029',color:'#7D7ABC',off:120,peak:120,isDrive:true},
+  {bk:'transport',label:'Florida Turnpike tolls, return',note:'Georgia state line to Orlando and back · SunPass/E-ZPass rates',color:'#B4B2A9',off:40, peak:40,isDrive:true},
+  {bk:'park',     label:'Park tickets',             note:'4-day base tickets × 4 people',            color:'#1ABFA4',off:2050,peak:2350},
+  {bk:'park',     label:'Lightning Lane Multi Pass',note:'4 park days × 4 people',                   color:'#1ABFA4',off:500, peak:650,sub:true},
+  {bk:'dining',   label:'General dining',           note:'5 days · quick service + table service',   color:'#EF767A',off:1200,peak:1500},
+  {bk:'dining',   label:"Cinderella's Royal Table", note:'3 adults + 1 child · incl. tax & gratuity',color:'#EF767A',off:300, peak:320,special:true},
+
+  {bk:'special',  label:'Bibbidi Bobbidi Boutique', note:'Kingdom Package · 1 child · princess gown, crown, wand, hair',color:'#D4A800',off:260,peak:260,special:true},
+  {bk:'special',  label:'Caring for Giants',        note:'Animal Kingdom · 60-min elephant experience · all 4 guests',color:'#D4A800',off:170,peak:170,special:true},
+  {bk:'misc',     label:'Travel insurance',          note:'Trip protection · covers cancellation, medical, trip interruption · ~4–5% of total trip cost · Essential for a $9k–12k trip with a toddler',color:'#888780',off:400,peak:500},
+  {bk:'misc',     label:'Memory Maker / PhotoPass',  note:'Unlimited digital downloads of all Disney photographer shots · Ride photos included · Covers your whole party for the entire trip · Worth every cent with an almost-4-year-old at her first trip',color:'#888780',off:230,peak:230,isMemMaker:true},
+  {bk:'misc',     label:'Stroller rental',           note:'Kingdom Strollers (third-party) · ~$65/day · Delivered to your hotel before arrival · Much better than Disney in-park rentals ($35/day, lost when you leave a park) · 4 park days',color:'#888780',off:260,peak:260,isStroller:true},
+  {bk:'misc',     label:'Souvenirs',                 note:'Budgeted generously!',                     color:'#888780',off:1650,peak:2400},
+  {bk:'misc',     label:'In-room babysitting',      note:"Kid's Nite Out · 1 evening · ~5 hrs",      color:'#888780',off:220, peak:220},
+  {bk:'misc',     label:'MagicBand+',               note:'4 bands × ~$45 avg · Lights up + vibrates during Happily Ever After, Luminous, Fantasmic! + show interactions · Optional — free Key to the World card works for park entry, Lightning Lane & room key',color:'#888780',off:210,peak:210,isBand:true},
+];
+
+var parks=[
+  {id:'mk',maps:{official:'https://mickeyvisit.com/disney-world-magic-kingdom-map/',pdf:'https://disneyworld.disney.go.com/media/wdw_nextgen/CoreCatalog/WaltDisneyWorld/en_us/PDF/magic-kingdom-park-map.pdf',gmaps:'https://maps.google.com/maps?q=Magic+Kingdom+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'Magic Kingdom',
+   tag:'Best park for almost-4 · Princesses · Classic gentle rides · Villains Land coming ~2031',
+   hbg:'#7D7ABC',htxt:'#ffffff',
+   pills:['10 rides she can do','Princess castle','Bibbidi Bobbidi Boutique'],
+   age:'Magic Kingdom is the best park for this age. The vast majority of rides have no height requirement and were designed for kids 2–5. Plan a full day and return in the evening for the fireworks.',
+   coming:'Villains Land is under active construction "beyond Big Thunder Mountain" and will be Magic Kingdom\'s biggest ever expansion — two major rides, dining, and shopping inspired by Disney Animation villains including Maleficent, Ursula, Hades, and Dr. Facilier. It is expected to open around 2030–2031, so it will likely not be open for your 2029 trip — but construction will be visible and the excitement is real. Also coming nearby: Piston Peak, a new Cars-themed land. Magic Kingdom is in the middle of its most dramatic transformation since opening.',
+   day:['Rope drop → Fantasyland first: Peter Pan, Dumbo, Winnie the Pooh, Small World (lines triple by 9:30am)','Mid-morning: Buzz Lightyear Space Ranger Spin, Tomorrowland Speedway (she rides with you)','Afternoon: Pirates of the Caribbean, Jungle Cruise, Haunted Mansion (assess her reaction to darkness)','Early evening: dinner reservation → position on Main Street for Happily Ever After fireworks'],
+   night:['Happily Ever After fireworks + Cinderella Castle projections — the best show at all of WDW','Disney Starlight: Dream the Night Away — the new nighttime parade that opened 2025 · Runs twice nightly on Main Street','Main Street glows with lanterns after the show — stroll slowly toward the exit'],
+   rAll:[
+     {n:"Peter Pan's Flight",nt:"No height req · Must-do for little girls — flying over London at night · She will ask to go again"},
+     {n:'Dumbo the Flying Elephant',nt:'No height req · Classic · She controls how high to fly · Perfect for this age'},
+     {n:'Many Adventures of Winnie the Pooh',nt:'No height req · Sweet and gentle · Excellent for almost-4'},
+     {n:'"it\'s a small world"',nt:'No height req · Calm bright boat through singing dolls — toddler heaven'},
+     {n:"Buzz Lightyear's Space Ranger Spin",nt:'No height req · Laser-shooting interactive ride · You can help her aim · Newly enhanced 2026'},
+     {n:'Pirates of the Caribbean',nt:'No height req · Gentle boat ride · Mildly dark caves at the start'},
+     {n:'Jungle Cruise',nt:'No height req · Silly jokes and fake animals · Grandma will love it too'},
+     {n:'Walt Disney World Railroad',nt:'No height req · Train circles the whole park · Great rest for tired legs'},
+     {n:'Tomorrowland Speedway',nt:'32" to ride with adult · She gets to help steer'},
+     {n:'Carousel of Progress',nt:'No height req · Sit-down show · Great air-conditioned rest break'},
+   ],
+   snacks:[
+     {n:"LeFou's Brew",w:"Gaston's Tavern",p:'$~6',nt:"Frozen apple juice + passion fruit boba — kid and adult favourite · She'll love the boba balls"},
+     {n:'Warm Cinnamon Roll',w:"Gaston's Tavern",p:'$~9',nt:'Giant and gooey · One feeds the whole family · Get it at rope drop'},
+     {n:'Dole Whip',w:'Aloha Isle',p:'$~6',nt:'Frozen pineapple soft serve · A Disney legend · She will want one every day'},
+     {n:'Cheeseburger Spring Rolls',w:'Near Adventureland cart',p:'$~10',nt:'Cult-favourite savoury snack for the adults'},
+     {n:'Mickey Premium Ice Cream Bar',w:'Carts everywhere',p:'$~7',nt:'The classic · Do it at least once · Great photo moment'},
+   ],
+   rests:[
+     {n:'Be Our Guest',t:'ts',p:'~$120–$160',nt:"Beauty & the Beast castle dining · Dinner most magical · Book the moment your 60-day window opens"},
+     {n:'The Crystal Palace',t:'ts',p:'~$140–$180',nt:'Winnie the Pooh + Piglet + Eeyore + Tigger · Buffet so she can choose · Perfect for almost-4'},
+     {n:'Columbia Harbour House',t:'qs',p:'~$60–$70',nt:'Best QS in MK · Clam chowder, lobster roll · Cozy indoor seating'},
+   ],
+   shops:[
+     {section:'For your little girl'},
+     {n:'Bibbidi Bobbidi Boutique',nt:'Already planned! Inside the castle · At almost 4 this will be the highlight of her whole trip'},
+     {n:"Sir Mickey's",nt:'Near the castle · Best character merch — tiaras, wands, princess dresses'},
+     {n:'Castle Couture',nt:'Right in Fantasyland · Disney Princess-themed clothing, accessories, and gifts · Closer to the castle than Sir Mickey\'s · Great for a quick princess haul'},
+     {n:"Tiana's Bayou General",nt:"Exit shop from Tiana's Bayou Adventure · Tiana-themed treats, apparel, and souvenirs · New merch tied to the 2023 ride update"},
+     {n:'Fantasyland boutiques',nt:'Multiple small shops around the castle with costumes, accessories, and plush'},
+     {section:'For adults'},
+     {n:'The Beak and Barrel',nt:"Adventureland · Magic Kingdom's first-ever bar, opened August 2025 · Pirates of the Caribbean-themed lounge · Cocktails, mocktails, small bites · Interactive character Rummy patrols the bar · 45-min sittings, reservations essential · Book at your 60-day window — fills fast"},
+     {n:'Memento Mori',nt:'Liberty Square · Haunted Mansion-themed merchandise · Apparel, home goods, collectibles from the Haunted Mansion Authentic program · A genuinely great adult shop — items are limited and sell out'},
+     {n:'Tomorrowland Launch Depot',nt:'TRON Identity Program ($89) — customize your own TRON action figure with your choice of style and voice · Also carries TRON apparel, Star Wars, Grogu plush, Space Mountain merch'},
+     {n:'Prairie Outpost & Supply',nt:'Frontierland · Reopened June 2025 · Chapel Hats partner store — wide-brimmed hats, classic fedoras, and custom headwear · Great souvenir that actually gets worn after the trip'},
+     {n:'The Emporium',nt:'Main Street · Largest shop in MK · Classic merch, pin trading, exclusive MK items · Good for ears, Loungefly bags, and last-minute gifts'},
+     {n:'Main Street Confectionery',nt:'Candy apples, fudge, chocolate-dipped treats · Great end-of-night stop · Watch the fudge being made through the window'},
+   ]
+  },
+  {id:'ep',maps:{official:'https://mickeyvisit.com/disney-world-epcot-map/',pdf:'https://mickeyvisit.com/disney-world-epcot-map/',gmaps:'https://maps.google.com/maps?q=EPCOT+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'EPCOT',
+   tag:'Frozen · Remy · World Showcase · Best food at Disney',
+   hbg:'#1ABFA4',htxt:'#ffffff',
+   pills:['Frozen Ever After','World Showcase food','Elsa & Anna meet'],
+   age:"EPCOT has fewer toddler-specific rides than Magic Kingdom but Frozen Ever After and Remy alone justify a full day. Treat the World Showcase as an afternoon food adventure — at almost 4 she will happily wander and taste things.",
+   coming:null,
+   festivals:[
+     {name:'Festival of the Arts',months:'Early Jan — mid-Feb',color:'#7D7ABC',nt:'Visual, culinary, and performing arts throughout the park · Food studios inspired by famous artworks · Broadway-style performances on the America Gardens Theatre stage · One of the least-crowded times to visit EPCOT'},
+     {name:'Flower & Garden Festival',months:'Early Mar — early Jun',color:'#1ABFA4',nt:'Disney character topiaries throughout World Showcase · Outdoor Kitchen food booths with spring-inspired menus · Butterfly gardens and hummingbird habitats · Arguably the most beautiful EPCOT looks all year'},
+     {name:'Food & Wine Festival',months:'Late Aug — mid-Nov',color:'#EF767A',nt:"The most popular EPCOT festival · 30+ food booths around World Showcase serving global dishes · Live music most evenings on the America Gardens stage · Book the park early if your trip falls in this window — it's the busiest EPCOT gets"},
+     {name:'Festival of the Holidays',months:'Mid-Nov — early Jan',color:'#D4A800',nt:"Holiday traditions from countries around World Showcase · Candlelight Processional with celebrity narrators · Cookies & Cocoa with Santa · EPCOT's most atmospheric time of year — the whole park feels transformed"},
+   ],
+   day:['Rope drop → Frozen Ever After immediately (lines hit 60+ mins by 9am — sprint here first)',"Remy's Ratatouille Adventure → Spaceship Earth → The Seas with Nemo & Friends",'Mid-morning: adults use Lightning Lane for Guardians + Soarin\' while she explores with the other adult','Afternoon: World Showcase stroll — try food from 3–4 countries · Find Elsa and Anna in Norway pavilion'],
+   night:['World Showcase illuminated at night — the most beautiful strolling experience at all of WDW','Luminous: The Symphony of Us fireworks at 9pm over World Showcase Lagoon','Late-night crepe from France pavilion · EPCOT festival booths transform the park if your timing aligns'],
+   rAll:[
+     {n:'Frozen Ever After',nt:"No height req · She will completely lose her mind · Full Elsa & Anna immersion · Ride twice if possible"},
+     {n:"Remy's Ratatouille Adventure",nt:"No height req · Trackless ride through Gusteau's kitchen · Very sweet, not scary"},
+     {n:'Spaceship Earth',nt:'No height req · Slow gentle history journey · Great for grandma · Good rest ride'},
+     {n:'The Seas with Nemo & Friends',nt:"No height req · Clamshell ride through a real aquarium · She'll recognise Nemo and Dory"},
+     {n:'Journey Into Imagination with Figment',nt:'No height req · Fun and slightly unpredictable · Some kids love Figment, some are nervous'},
+     {n:'Living with the Land',nt:"No height req · Peaceful boat through Disney's real greenhouses · Very calm rest option"},
+   ],
+   snacks:[
+     {n:'School Bread',w:'Kringla Bakeri og Kafé, Norway',p:'$~6',nt:'Cardamom bun + vanilla custard + coconut · A Disney legend'},
+     {n:'Macaron ice cream sandwich',w:"L'Artisan des Glaces, France",p:'$~9',nt:'Two macarons + ice cream · Beautiful and delicious'},
+     {n:'Baguette',w:'Les Halles, France',p:'$~4',nt:'Half-baguette · Best value snack in all of Disney'},
+     {n:'Caramel apple slice',w:'Karamell-Küche, Germany',p:'$~6',nt:'Fresh apple + caramel · Great for sharing with little hands'},
+   ],
+   rests:[
+     {n:'Akershus Royal Banquet Hall',t:'ts',p:'~$160–$200',nt:'Princess character dining in Norway · Meets multiple princesses · Book early'},
+     {n:'Coral Reef Restaurant',t:'ts',p:'~$120–$160',nt:"Dining inside the aquarium · Fish swim past the window · She'll press her nose to the glass the whole meal"},
+     {n:'Sunshine Seasons',t:'qs',p:'~$55–$65',nt:'In The Land pavilion · Freshest, healthiest QS at WDW · Good grandma-friendly options'},
+   ],
+   shops:[
+     {section:'For your little girl'},
+     {n:'Norway Pavilion',nt:'Frozen merch everywhere · Meet Elsa + Anna here · Best shop in EPCOT for small girls'},
+     {n:'France Pavilion',nt:"Remy plush after the ride · She'll want a little Remy to take home"},
+     {n:'UK Pavilion',nt:'Alice in Wonderland, Winnie the Pooh · Charming kids items'},
+     {section:'For adults'},
+     {n:'Karamell-Küche',nt:'Germany · Caramel apple slices, caramel corn, pretzel rods — everything caramel'},
+     {n:'La Maison du Vin',nt:"France · French wines and gourmet pantry items · Good gifts to bring home"},
+     {n:'Mouse Gear',nt:"Largest EPCOT shop · EPCOT-exclusive merch you can't get elsewhere"},
+   ]
+  },
+  {id:'hs',maps:{official:'https://mickeyvisit.com/disney-world-hollywood-studios-map/',pdf:'https://mickeyvisit.com/disney-world-hollywood-studios-map/',gmaps:'https://maps.google.com/maps?q=Disney+Hollywood+Studios+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'Hollywood Studios',
+   tag:'Star Wars · Villains show · Toy Story · Fantasmic! · Monstropolis coming',
+   hbg:'#EF767A',htxt:'#ffffff',
+   pills:["Galaxy's Edge","Villains: Unfairly Ever After","Savi's Workshop"],
+   age:"Hollywood Studios has only two no-height-requirement rides, but Galaxy's Edge is one of the most immersive environments ever built — even at almost 4 she will be transfixed by the Millennium Falcon, stormtroopers on patrol, and the alien landscape. The villain show (Cruella! Maleficent! Captain Hook!) is great for the whole family. Plan a half-to-full day.",
+   coming:"Monstropolis is under construction at Hollywood Studios — a Monsters, Inc. themed land with a suspended roller coaster, the first of its kind at Disney. No confirmed opening date yet but it could be open by 2029. Worth watching.",
+   day:["Rope drop → Mickey & Minnie's Runaway Railway immediately (most popular, fills very fast)",'Toy Story Land: Toy Story Mania then Alien Swirling Saucers (32" — measure her before the trip)','Mid-morning: Disney Villains: Unfairly Ever After — the villain stage show with Cruella, Captain Hook, and Maleficent · Great for the whole family · She will love the costumes',"Afternoon: Galaxy's Edge for the rest of the day · Oga's Cantina for the adults · Docking Bay 7 for dinner",'Evening: Fantasmic! — book a dining package or queue very early'],
+   night:["Fantasmic! — Mickey's dream sequence with fire, fountains, and characters · One of the best shows at WDW",'Galaxy\'s Edge glows completely at night — the Millennium Falcon lit up against a dark sky is jaw-dropping · Stormtroopers patrol after dark','Stay for the last hour — crowds thin and Galaxy\'s Edge feels almost private'],
+   rAll:[
+     {n:"Mickey & Minnie's Runaway Railway",nt:"No height req · Trackless, funny, visually incredible · Top priority at rope drop"},
+     {n:'Toy Story Mania!',nt:"No height req · Carnival game shooting ride · She'll love competing with the family"},
+     {n:'Alien Swirling Saucers',nt:'32" — borderline, measure her before the trip · Fun spinning ride with Little Green Men if she clears it'},
+     {n:'Disney Villains: Unfairly Ever After',nt:"Show · No height req · Cruella De Vil, Captain Hook, and Maleficent tell their side of the story · Opened May 2025 · Great for the whole family · She will love the dramatic costumes"},
+     {n:'The Little Mermaid — A Musical Adventure',nt:"Show · No height req · Full reimagined Little Mermaid stage show · Opened May 2025 · She will be enchanted"},
+   ],
+   snacks:[
+     {n:'Ronto Wrap',w:"Ronto Roasters, Galaxy's Edge",p:'$~15',nt:"Roasted pork + pork sausage in warm pita · One of the best QS items at WDW · An iconic Galaxy's Edge food"},
+     {n:'Blue Milk',w:"Black Spire Outpost, Galaxy's Edge",p:'$~8',nt:"Frozen plant-based blue milk from the original trilogy · A must-try · Also available in green"},
+     {n:'Carrot Cake Cookie',w:'Trolley Car Café (Starbucks)',p:'$~6',nt:'Two spiced cake cookies + cream cheese frosting · A Disney Food Blog legend'},
+     {n:"Jack-Jack's Cookie Num Nums",w:'Pixar Place',p:'$~4',nt:"Snickerdoodle cookies · She'll recognise Jack-Jack from The Incredibles"},
+     {n:"Outpost Mix Popcorn",w:"Galaxy's Edge carts",p:'$~5',nt:"Seasoned popcorn in collectible themed buckets · Great walk-around snack"},
+   ],
+   rests:[
+     {n:"Oga's Cantina",t:'ts',p:'~$60–$90 (drinks/apps)',nt:"Galaxy's Edge · The most unique bar at WDW · Alien DJ R-3X spins music · Standing room · 45-min table limit · Reservations essential · Adults will love this · Not a full meal"},
+     {n:'Docking Bay 7 Food and Cargo',t:'qs',p:'~$65–$80',nt:"Galaxy's Edge · Best QS in Hollywood Studios · All dishes themed to Batuu · Smoked Kaadu Ribs, Braised Shaak, Fried Endorian Tip-Yip"},
+     {n:"50's Prime Time Café",t:'ts',p:'~$100–$140',nt:"Servers act like your mom — hilarious and very family-friendly · Kids love the retro TV screens · One of the most fun dining experiences at WDW"},
+     {n:"Woody's Lunch Box",t:'qs',p:'~$50–$60',nt:"Best QS in Toy Story Land · Grilled cheese, s'mores french toast · Quick and great for a hungry family"},
+   ],
+   shops:[
+     {section:"Galaxy's Edge — Star Wars"},
+     {n:"Savi's Workshop",nt:"Build a custom lightsaber · $269.99 · Choose your hilt and kyber crystal · One of the most immersive experiences at any theme park · ~20 minutes · Reserve well in advance — books up fast"},
+     {n:"Droid Depot",nt:"Build your own BB-unit or R-unit droid · ~$119.99 · It rolls alongside you and interacts with panels throughout Galaxy's Edge · Great for the whole family"},
+     {n:"Dok-Ondar's Den of Antiquities",nt:"Best Star Wars shop at WDW · Ancient Sith and Jedi artifacts, Holocrons, rare lightsabers, collector-grade items · A serious shop for serious fans"},
+     {n:"Black Spire Outpost market stalls",nt:"Multiple market stalls throughout Galaxy's Edge · Star Wars clothing, pins, accessories, droids, and Batuu-themed gear · The whole land feels like a real alien market"},
+     {n:"Resistance Supply / First Order Cargo",nt:"Two rival faction shops facing each other · Pick a side · Resistance and First Order apparel, helmets, and accessories"},
+     {section:'For your little girl'},
+     {n:'Toy Story Land merch',nt:"Woody, Jessie, Buzz plush and clothing · She'll want everything in the land"},
+     {n:'Disney Junior merchandise',nt:"Near Mickey & Minnie's · Current kids' TV characters she may know"},
+   ]
+  },
+  {id:'ak',maps:{official:'https://mickeyvisit.com/disney-world-animal-kingdom-map/',pdf:'https://mickeyvisit.com/disney-world-animal-kingdom-map/',gmaps:'https://maps.google.com/maps?q=Disney+Animal+Kingdom+Walt+Disney+World+Orlando+FL&output=embed&z=16'},name:'Animal Kingdom',
+   tag:'Real safari · Pandora · Tropical Americas opens 2027 — new Indiana Jones + Encanto rides',
+   hbg:'#6457A6',htxt:'#ffffff',
+   pills:['Safari (no height req)',"Na'vi River Journey",'Pandora at night'],
+   age:"Animal Kingdom is excellent for almost-4. Real animals need no age minimum. Na'vi River Journey is gentle and gorgeous. Festival of the Lion King is a full Broadway show she will be captivated by. Go on the safari first — animals are most active in the morning.",
+   coming:"Tropical Americas (Pueblo Esperanza) opens in 2027 — it WILL be open for your 2029 trip! This brand-new land replaces DinoLand U.S.A. and includes: a new Indiana Jones attraction (rethemed from the old DINOSAUR ride), a new Encanto-themed ride, a large central fountain, a major new quick-service restaurant, and a carousel featuring Disney animals. By 2029 this will likely be one of the most-talked-about new areas in any Disney park. Factor it into your Animal Kingdom day plan.",
+   day:["Rope drop → Kilimanjaro Safaris immediately — animals most active in the morning · You'll get the best sightings","Na'vi River Journey (gentle, no height req, short wait right after rope drop)",'Mid-morning: Festival of the Lion King show — arrive 30 mins early · Do not miss this','Afternoon: Avatar Flight of Passage via Lightning Lane Single Pass · Finding Nemo show · Explore Tropical Americas (new 2027 land)','Wander Pandora as the light changes in late afternoon'],
+   night:['Pandora bioluminescence — the land glows blue, purple, and teal after dark · Most magical after 8pm (your couples\' date night)','Tree of Life illuminated with animal projections — stand still and watch the shapes move','Animal Kingdom closes earlier than other parks — plan your evening timing carefully'],
+   rAll:[
+     {n:'Kilimanjaro Safaris',nt:'No height req · Real giraffes, elephants, lions, rhinos · At almost 4 this is pure wonder · Morning is essential'},
+     {n:"Na'vi River Journey",nt:'No height req · Gentle glowing boat through Pandora · She will be completely enchanted'},
+     {n:'Festival of the Lion King',nt:'Show · No height req · Full Broadway-quality production · Grandma and little one equally love this'},
+     {n:'Finding Nemo: The Big Blue...and Beyond!',nt:'Show · No height req · Aquarium setting · Very accessible · Good afternoon rest option'},
+     {n:'Tropical Americas rides (opening 2027)',nt:'New Indiana Jones attraction + new Encanto ride · Both expected to have family-friendly height requirements · Will be open for your 2029 trip · Details TBC'},
+   ],
+   snacks:[
+     {n:'Night Blossom',w:'Pongu Pongu, Pandora',p:'$~7',nt:"Frozen limeade + passion fruit boba · She'll love the colours and boba balls · Rum Blossom for adults"},
+     {n:'Blueberry Cream Cheese Mousse',w:"Satu'li Canteen",p:'$~6',nt:'Served in an alien pod shape · Instagram-worthy and genuinely delicious'},
+     {n:'Churros',w:'Nomad Lounge',p:'$~10',nt:'Best churros at WDW · Two dipping sauces · Pair with a cocktail for the adults'},
+     {n:'Pongu Lumpia',w:'Pongu Pongu',p:'$~4',nt:'Warm pineapple cream cheese spring roll · Unique to Pandora'},
+   ],
+   rests:[
+     {n:"Satu'li Canteen",t:'qs',p:'~$60–$75',nt:'Best quick service at Disney World · Customisable grain bowls · Beautiful Pandora theming'},
+     {n:'Tusker House',t:'ts',p:'~$140–$180',nt:'Donald Duck + Mickey in safari gear · African buffet · Buffet great for picky almost-4-year-olds'},
+     {n:'Tiffins',t:'ts',p:'~$160–$220',nt:'Signature of Animal Kingdom · Sophisticated and quiet · Best adult dining in AK · Nomad Lounge next door needs no reservation'},
+   ],
+   shops:[
+     {section:'For your little girl'},
+     {n:'Windtraders — Pandora',nt:'Interactive banshee shoulder puppet (~$75) · Moves, flaps wings, responds to touch · The toy of this trip · At almost 4 she will be obsessed'},
+     {n:"Colors of Mo'ara — Pandora",nt:"Na'vi face painting · She'll feel like she's really on Pandora · Great photos"},
+     {n:'Discovery Trading Company',nt:'Best general merch in AK · Animal plush · Great for a stuffed giraffe after the safari'},
+     {section:'For adults'},
+     {n:'Mombasa Marketplace — Africa',nt:'Beautiful African artwork, carvings, and jewellery · Genuinely good quality · Best adult shop at AK'},
+     {n:'Windtraders — Pandora',nt:'Avatar merchandise, glow-in-dark items, science kits'},
+   ]
+  }
+];
+
+var sel='beachclub',activeFireworks='pontoon',activeEvening='pandora',season='off',nights=5,wantBands=true,clubLevel=false,wantMemMaker=true,wantStroller=false,tripDate=null,travelMode='fly',tripMult=1.0,inflYears=3,inflRate=0.05,timelineEverOpened=false;
+function gi(id){return document.getElementById(id)}
+function fmt(n){if(n===0)return'Free';return'$'+Math.round(n).toLocaleString()}
+function p(n){return Math.round(n*tripMult);}
+function allH(){return hotels.deluxe.concat(hotels.assoc)}
+function getH(){return allH().filter(function(h){return h.key===sel})[0]}
+function buildItems(){
+  var h=getH(),items=fi.slice();
+  var fw=fireworksDNs[activeFireworks],ev=eveningDNs[activeEvening];
+  if(activeFireworks!=='none') items.push({bk:'special',label:fw.l,note:fw.note,hotelNote:fw.hotel,color:'#D4A800',off:fw.off,peak:fw.peak,special:true,adults:true,isFW:true,free:fw.free});
+  if(activeEvening!=='none') items.push({bk:'special',label:ev.l,note:ev.note,hotelNote:ev.hotel,color:'#EF767A',off:ev.off,peak:ev.peak,special:true,adults:true,isEV:true,free:ev.free});
+  var hRate=Math.round(p(h[season])/5);
+  var clubExtra=clubLevel&&h.club?Math.round(p(h.club[season==='off'?'offExtra':'peakExtra'])):0;
+  items.push({bk:'hotel',label:h.name+(clubLevel&&h.club?' — '+h.club.name:''),note:h.note+' · '+nights+' night'+(nights===1?'':'s')+(clubLevel&&h.club?' · '+h.club.perks:''),color:'#6457A6',off:(hRate+clubExtra)*nights,peak:(hRate+clubExtra)*nights,isHotel:true});
+  return items.filter(function(i){
+    if(i.isFly&&travelMode==='drive') return false;
+    if(i.isDrive&&travelMode==='fly') return false;
+    if(i.isMemMaker&&!wantMemMaker) return false;
+    if(i.isStroller&&!wantStroller) return false;
+    if(i.isBand&&!wantBands) return false;
+    return true;
+  });
+}
+function calcCats(){
+  var s=season,cats={flights:0,hotel:0,park:0,dining:0,special:0,transport:0,misc:0};
+  buildItems().forEach(function(i){cats[i.bk]+=p(i[s])});
+  return cats;
+}
+var hotelSvgs={
+wilderness:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#6457A6"/><polygon points="140,10 126,26 154,26" fill="white"/><polygon points="140,18 123,34 157,34" fill="white"/><polygon points="140,26 120,44 160,44" fill="white"/><rect x="137" y="44" width="6" height="9" rx="1" fill="white"/></svg>',
+
+aklodge:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#C49200"/><line x1="140" y1="48" x2="140" y2="24" stroke="white" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="140" cy="20" rx="24" ry="9" fill="white"/><line x1="108" y1="48" x2="108" y2="32" stroke="white" stroke-width="2" stroke-linecap="round"/><ellipse cx="108" cy="29" rx="14" ry="6" fill="white" opacity="0.7"/><line x1="172" y1="48" x2="172" y2="34" stroke="white" stroke-width="2" stroke-linecap="round"/><ellipse cx="172" cy="31" rx="14" ry="6" fill="white" opacity="0.7"/></svg>',
+
+beachclub:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#7D7ABC"/><circle cx="140" cy="17" r="6" fill="none" stroke="white" stroke-width="2.5"/><line x1="140" y1="23" x2="140" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="29" x2="153" y2="29" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M125,43 Q125,52 140,52 Q155,52 155,43" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="125" cy="43" r="3" fill="white"/><circle cx="155" cy="43" r="3" fill="white"/></svg>',
+
+contemporary:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#1ABFA4"/><polygon points="140,8 108,52 172,52" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/><line x1="116" y1="36" x2="164" y2="36" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="100" y1="36" x2="180" y2="36" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5,4"/></svg>',
+
+polynesian:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#EF767A"/><path d="M140,52 Q136,38 138,24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M138,24 Q123,16 116,8" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q133,12 134,4" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q146,13 152,6" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q149,20 157,16" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q126,22 119,19" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>',
+
+grandfloridian:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#6457A6"/><path d="M118,46 L118,28 L128,36 L140,14 L152,36 L162,28 L162,46 Z" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118" cy="28" r="3.5" fill="white"/><circle cx="140" cy="14" r="3.5" fill="white"/><circle cx="162" cy="28" r="3.5" fill="white"/><line x1="116" y1="46" x2="164" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>',
+
+swan:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#7D7ABC"/><path d="M60,22 Q73,14 86,22 Q99,30 112,22 Q125,14 138,22 Q151,30 164,22 Q177,14 190,22 Q203,30 216,22" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M60,36 Q73,28 86,36 Q99,44 112,36 Q125,28 138,36 Q151,44 164,36 Q177,28 190,36 Q203,44 216,36" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/></svg>',
+
+waldorf:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#C49200"/><circle cx="128" cy="24" r="13" fill="none" stroke="white" stroke-width="2.5"/><circle cx="128" cy="24" r="5" fill="white"/><line x1="137" y1="33" x2="160" y2="50" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="150" y1="44" x2="155" y2="39" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="155" y1="47" x2="160" y2="42" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+
+fourseasons:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#EF767A"/><circle cx="140" cy="30" r="12" fill="white"/><line x1="140" y1="11" x2="140" y2="7" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="140" y1="49" x2="140" y2="53" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="121" y1="30" x2="117" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="159" y1="30" x2="163" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="17" x2="124" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="153" y1="17" x2="156" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="43" x2="124" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="153" y1="43" x2="156" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>'
+};
+function renderHotels(){
+  ['deluxe','assoc'].forEach(function(type){
+    var key=type==='deluxe'?'gd':'ga';
+    gi(key).innerHTML=hotels[type].map(function(h){
+      var svg=hotelSvgs[h.key]?'<div class="hsvg">'+hotelSvgs[h.key]+'</div>':'';
+      var d=hotelDetails[h.key];
+      var connectBadge=d&&d.connecting==='best'?'<span style="font-size:9px;padding:1px 5px;border-radius:8px;background:#F5F0CC;color:#5C4A00;display:inline-block;margin-top:3px">Best bet — connecting rooms</span>':'';
+      var eehBadge=h.eeh?'<span style="font-size:9px;padding:1px 5px;border-radius:8px;background:var(--bgs);color:var(--ts);display:inline-block;margin-top:3px">Extended Evening Hours</span>':'<span style="font-size:9px;padding:1px 5px;border-radius:8px;background:var(--bg2);color:var(--t3);display:inline-block;margin-top:3px">No Extended Evening Hours</span>';
+      var isSelected=sel===h.key;
+      var clubToggle='';
+      if(isSelected&&h.club){
+        var extraPerNight=h.club[season==='off'?'offExtra':'peakExtra'];
+        clubToggle='<div style="margin-top:6px;padding-top:6px;border-top:.5px solid rgba(100,87,166,0.2)">'
+          +'<div style="font-size:9px;color:var(--ti);text-transform:uppercase;letter-spacing:.06em;font-weight:500;margin-bottom:4px">Room tier</div>'
+          +'<div style="display:flex;gap:4px">'
+          +'<button onclick="event.stopPropagation();setClub(false)" style="flex:1;padding:4px 0;font-size:10px;border-radius:6px;cursor:pointer;font-family:var(--f);font-weight:'+(clubLevel?'400':'600')+';background:'+(clubLevel?'transparent':'var(--bi)')+';color:'+(clubLevel?'var(--t2)':'#fff')+';border:'+(clubLevel?'.5px solid var(--bmd)':'none')+'">Standard</button>'
+          +'<button onclick="event.stopPropagation();setClub(true)" style="flex:1;padding:4px 0;font-size:10px;border-radius:6px;cursor:pointer;font-family:var(--f);font-weight:'+(clubLevel?'600':'400')+';background:'+(clubLevel?'var(--bi)':'transparent')+';color:'+(clubLevel?'#fff':'var(--t2)')+';border:'+(clubLevel?'none':'.5px solid var(--bmd)')+'">'+h.club.name+' <span style="opacity:.8">+$'+extraPerNight+'/nt</span></button>'
+          +'</div>'
+          +(clubLevel?'<div style="font-size:9px;color:var(--ti);margin-top:5px;line-height:1.4">'+h.club.perks+'</div>':'')
+          +'</div>';
+      }
+      return'<div class="hc '+(isSelected?'sel':'')+'" onclick="selH(\''+h.key+'\')">'
+        +svg
+        +'<div class="hbody">'
+        +'<div class="hn">'+h.name+'</div>'
+        +'<div class="hp">'+nights+' night'+(nights===1?'':'s')+' <span>$'+Math.round((p(h[season])/5+(isSelected&&clubLevel&&h.club?p(h.club[season==='off'?'offExtra':'peakExtra']):0))*nights).toLocaleString()+'</span></div>'
+        +'<div class="tbr">'+h.tl.map(function(l,i){return'<span class="tb '+h.trans[i]+'">'+l+'</span>'}).join('')+'</div>'
+        +'<div class="hnt">'+h.note+'</div>'
+        +connectBadge+eehBadge
+        +(h.assoc?'<span class="atag">Partner hotel</span>':'')
+        +clubToggle
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">'
+        +(h.url?'<a href="'+h.url+'" target="_blank" style="font-size:10px;color:var(--ti);text-decoration:none">View hotel ↗</a>':'<span></span>')
+        +'<button onclick="event.stopPropagation();openHotel(\''+h.key+'\')" style="font-size:10px;color:var(--ti);background:none;border:none;cursor:pointer;font-family:var(--f);padding:0">Details →</button>'
+        +'</div>'
+        +'</div></div>';
+    }).join('');
+  });
+}
+function renderBudget(){
+  var s=season,cats=calcCats(),total=Object.values(cats).reduce(function(a,b){return a+b},0);
+  var spTot=buildItems().filter(function(i){return i.special}).reduce(function(a,i){return a+i[s]},0);
+  gi('m-total').textContent='$'+Math.round(total).toLocaleString();
+  gi('m-pp').textContent='$'+Math.round(total/4).toLocaleString();
+  gi('m-hotel').textContent='$'+Math.round(cats.hotel).toLocaleString();
+  gi('m-hotel-lbl').textContent='hotel ('+nights+' night'+(nights===1?'':'s')+')';
+  var inflEl=gi('m-infl-note');
+  if(inflEl){var pct=Math.round((Math.pow(1+inflRate,inflYears)-1)*100);var basePct=Math.round((Math.pow(1+inflRate,3)-1)*100);inflEl.textContent=tripDate?'Prices adjusted for '+tripDate.getFullYear()+' (+'+pct+'% from 2026 · '+Math.round(inflRate*100)+'%/yr)':'2029 baseline (+'+basePct+'% from 2026 · '+Math.round(inflRate*100)+'%/yr)';};
+  gi('m-special').textContent='$'+Math.round(spTot).toLocaleString();
+  var colors={flights:'#7D7ABC',hotel:'#6457A6',park:'#1ABFA4',dining:'#EF767A',special:'#D4A800',transport:'#B4B2A9',misc:'#888780'};
+  gi('bar').innerHTML=Object.keys(cats).map(function(k){
+    return'<div class="bs" style="background:'+colors[k]+';width:'+(total>0?(cats[k]/total*100).toFixed(1):0)+'%"></div>';
+  }).join('');
+  var secs=[
+    {h:'Getting there',   items:buildItems().filter(function(i){return(i.bk==='flights'||i.bk==='transport')&&!i.isHotel&&!i.isDN}),isTravel:true},
+    {h:'Staying there',   items:buildItems().filter(function(i){return i.isHotel})},
+    {h:'The parks',       items:buildItems().filter(function(i){return i.bk==='park'})},
+    {h:'Food & dining',   items:buildItems().filter(function(i){return i.bk==='dining'})},
+    {h:'Special experiences',items:buildItems().filter(function(i){return i.special}),isDN:true},
+    {h:'Everything else', items:buildItems().filter(function(i){return i.bk==='misc'}),isMisc:true},
+  ];
+  gi('lis').innerHTML=secs.map(function(sec){
+    var picker='';
+    if(sec.isDN){
+      var fwBtns=Object.keys(fireworksDNs).map(function(k){var v=fireworksDNs[k];return'<button class="ob '+(activeFireworks===k?'on':'')+'" onclick="selFW(\''+k+'\')">'+v.l+'</button>';}).join('');
+      var evBtns=Object.keys(eveningDNs).map(function(k){var v=eveningDNs[k];return'<button class="ob '+(activeEvening===k?'on':'')+'" onclick="selEV(\''+k+'\')">'+v.l+(v.free?' (free)':'')+'</button>';}).join('');
+      picker='<div style="padding:6px 0 4px">'
+        +'<div style="margin-bottom:6px"><span class="slb">Fireworks experience — pick one:</span><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:3px">'+fwBtns+'</div></div>'
+        +'<div><span class="slb">Evening experience — pick one:</span><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:3px">'+evBtns+'</div></div>'
+        +'</div>';
+    }
+    if(sec.isTravel){
+      picker='<div style="padding:4px 0 4px"><div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:3px"><span class="slb">How are you getting there?</span>'
+        +'<button class="ob '+(travelMode==='fly'?'on':'')+'" id="btn-fly">Fly from Atlanta</button>'
+        +'<button class="ob '+(travelMode==='drive'?'on':'')+'" id="btn-drive">Drive from Marietta</button>'
+        +(travelMode==='drive'?'<span style="font-size:10px;color:var(--t3)">→6–7 hrs each way · I-75 S then Florida Turnpike · free parking at Disney resort · saves ~$1,000+ vs flying</span>':'<span style="font-size:10px;color:var(--t3)">ATL→MCO · ~2 hr flight · Mears Connect shuttle to resort</span>')
+        +'</div></div>';
+    }
+    if(sec.isMisc){
+      picker='<div style="padding:4px 0 2px">'
+        +'<div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:4px"><span class="slb">Memory Maker:</span><button class="ob '+(wantMemMaker?'on':'')+'" onclick="toggleMemMaker()">Include (~$230)</button><span style="font-size:10px;color:var(--t3)">Unlimited PhotoPass downloads for your whole stay · Ride photos included</span></div>'
+        +'<div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:4px"><span class="slb">Stroller rental:</span><button class="ob '+(wantStroller?'on':'')+'" onclick="toggleStroller()">Include (~$260)</button><span style="font-size:10px;color:var(--t3)">Kingdom Strollers · ~$65/day · delivered to hotel · 4 park days</span></div>'
+        +'<div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px"><span class="slb">MagicBand+:</span><button class="ob '+(wantBands?'on':'')+'" onclick="toggleBands()">Include (~$210)</button><span style="font-size:10px;color:var(--t3)">Lights up during Happily Ever After, Luminous &amp; Fantasmic!</span></div>'
+        +'</div>';
+    }
+    var rows=sec.items.map(function(item){
+      var bdgs=(item.special?'<span class="bdg bsp">Special</span>':'')+(item.adults?'<span class="bdg bad">Adults only</span>':'')+(item.free?'<span class="bdg bfr">Free</span>':'');
+      var htl=item.hotelNote?'<div class="lh" style="margin-left:15px">Hotel tip: '+item.hotelNote+'</div>':'';
+      return'<div class="li" style="'+(item.sub?'padding-left:14px':'')+'"><div style="flex:1"><div style="font-size:13px;color:var(--t);display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap"><span class="ld" style="background:'+item.color+'"></span><span>'+item.label+bdgs+'</span></div><div class="lnt" style="margin-left:15px">'+item.note+'</div>'+htl+'</div><div class="lv'+(item.free?' fr':'')+'">'+fmt(p(item[s]))+'</div></div>';
+    }).join('');
+    var sub=sec.items.length>1?'<div style="display:flex;justify-content:space-between;padding:5px 0 1px;font-size:11px;color:var(--t2)"><span>subtotal</span><span style="font-weight:500">$'+Math.round(sec.items.reduce(function(a,i){return a+p(i[s]);},0)).toLocaleString()+'</span></div>':'';
+    return'<div class="sl" style="padding-top:8px">'+sec.h+'</div>'+picker+rows+sub;
+  }).join('');
+}
+function renderParkNav(){
+  gi('pk-nav').innerHTML=parks.map(function(p){
+    var pills=p.pills.map(function(pl){return'<span class="pk-pill">'+pl+'</span>'}).join('');
+    return'<div class="pk-nav" onclick="openPark(\''+p.id+'\')">'
+      +'<div class="pk-nav-head" style="background:'+p.hbg+';color:'+p.htxt+'">'
+      +'<div class="pk-nav-name">'+p.name+'</div>'
+      +'<div class="pk-nav-tag">'+p.tag+'</div>'
+      +'<div style="margin-top:6px">'+pills+'</div>'
+      +'</div>'
+      +'<div class="pk-nav-foot"><span>Rides · Food · Shops · Day plan</span><span style="font-size:13px;color:var(--t3)">&#8594;</span></div>'
+      +'</div>';
+  }).join('');
+}
+function buildShops(shops){
+  return shops.map(function(s){
+    if(s.section) return'<div class="sh-hdr">'+s.section+'</div>';
+    return'<div class="sh-item"><div class="sh-name">'+s.n+'</div><div class="sh-nt">'+s.nt+'</div></div>';
+  }).join('');
+}
+function buildParkPage(p){
+  var rAll=p.rAll.map(function(r){return'<div class="ri-item"><span>'+r.n+'</span><div class="ri-sub">'+r.nt+'</div></div>'}).join('');
+  var snacks=p.snacks.map(function(s){return'<div class="sn-item"><div class="sn-name">'+s.n+'<span class="sn-price">'+s.p+'</span></div>'+(s.w?'<div class="sn-where">'+s.w+'</div>':'')+'<div class="sn-nt">'+s.nt+'</div></div>'}).join('');
+  var rests=p.rests.map(function(r){return'<div class="rt-item"><div><span style="font-weight:500">'+r.n+'</span><span class="rt-type '+(r.t==='qs'?'rqs':'rts')+'">'+(r.t==='qs'?'Quick service':'Table service')+'</span><span class="rt-price">'+r.p+' for 4</span></div><div class="sn-nt">'+r.nt+'</div></div>'}).join('');
+  var shopsHtml=buildShops(p.shops);
+  var dayLi=p.day.map(function(d){return'<li>'+d+'</li>'}).join('');
+  var nightLi=p.night.map(function(n){return'<li>'+n+'</li>'}).join('');
+  var comingHtml=p.coming?'<div class="coming-note"><strong>Coming attractions:</strong> '+p.coming+'</div>':'';
+  var festivalsHtml='';
+  if(p.festivals){
+    festivalsHtml='<div class="sect">Seasonal festivals</div>'
+      +'<div style="font-size:10px;color:var(--t3);margin-bottom:.5rem">EPCOT transforms completely during its four annual festivals — check your travel dates against this calendar</div>'
+      +'<div class="fest-grid">'
+      +p.festivals.map(function(f){
+        return'<div class="fest-card" style="border-left-color:'+f.color+'">'
+          +'<div class="fest-months">'+f.months+'</div>'
+          +'<div class="fest-name">'+f.name+'</div>'
+          +'<div class="fest-nt" style="margin-top:4px">'+f.nt+'</div>'
+          +'</div>';
+      }).join('')
+      +'</div>';
+  }
+  return'<button class="pk-back" onclick="closePark()">&#8592; Back to planner</button>'
+    +'<div class="pk-head" style="background:'+p.hbg+';color:'+p.htxt+'"><h2>'+p.name+'</h2><p>'+p.tag+'</p></div>'
+    +'<div class="age-note">'+p.age+'</div>'
+    +(p.maps?'<div class="dv"></div>'
+      +'<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:.5rem">'
+      +'<div style="font-size:11px;font-weight:500;color:var(--t)">Park map</div>'
+      +'<div style="display:flex;gap:8px">'
+      +'<a href="'+p.maps.official+'" target="_blank" style="font-size:10px;color:var(--ti);text-decoration:none;padding:3px 8px;border:.5px solid var(--bi);border-radius:var(--rm)">Map guide \u2197</a>'
+      +'<a href="'+p.maps.pdf+'" target="_blank" style="font-size:10px;color:var(--ti);text-decoration:none;padding:3px 8px;border:.5px solid var(--bi);border-radius:var(--rm)">PDF / print \u2197</a>'
+      +'</div></div>'
+      +'<div style="border-radius:var(--rm);overflow:hidden;border:.5px solid var(--bm);margin-bottom:.75rem">'
+      +'<iframe src="'+p.maps.gmaps+'" width="100%" height="260" style="border:0;display:block" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+      +'</div>'
+      :'')
+    +comingHtml
+    +festivalsHtml
+    +'<div class="sect">Day &amp; night plan</div>'
+    +'<div class="two-col"><div class="box"><h4>Day plan</h4><ul>'+dayLi+'</ul></div><div class="box"><h4>Night highlights</h4><ul>'+nightLi+'</ul></div></div>'
+    +'<div class="sect">Rides she can do</div>'
+    +'<div style="font-size:10px;color:var(--t3);margin-bottom:.4rem">All rides below have no height requirement — or 32" which she should clear at almost 4</div>'
+    +rAll
+    +'<div class="dv"></div>'
+    +'<div class="sect">Food</div>'
+    +'<div class="price-key">Prices are estimated for family of 4 (2 adults + 1 child + 1 grandparent) · 2029 prices projected from 2026</div>'
+    +'<div class="two-col"><div><div style="font-size:10px;font-weight:500;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem">Must-try snacks (per item)</div>'+snacks+'</div>'
+    +'<div><div style="font-size:10px;font-weight:500;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem">Restaurants (est. for 4)</div>'+rests+'</div></div>'
+    +'<div class="dv"></div>'
+    +'<div class="sect">Shops</div>'
+    +shopsHtml
+    +'<div style="height:2rem"></div>';
+}
+function openPark(id){
+  var p=parks.filter(function(x){return x.id===id})[0];
+  gi('content-'+id).innerHTML=buildParkPage(p);
+  document.querySelectorAll('.page').forEach(function(pg){pg.classList.remove('active')});
+  gi('pg-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function closePark(){
+  document.querySelectorAll('.page').forEach(function(pg){pg.classList.remove('active')});
+  gi('pg-main').classList.add('active');
+  window.scrollTo(0,0);
+}
+function toggleRR(i){
+  var body=gi('rr-body-'+i),arr=gi('rr-arr-'+i);
+  var open=body.style.display==='block';
+  body.style.display=open?'none':'block';
+  arr.style.transform=open?'':'rotate(180deg)';
+}
+function toggleBands(){wantBands=!wantBands;render();}
+function toggleMemMaker(){wantMemMaker=!wantMemMaker;render();}
+function setTravel(m){travelMode=m;render();}
+function setInflRate(v){inflRate=parseFloat(v)/100;var lbl=gi('infl-rate-lbl');if(lbl)lbl.textContent=v+'%';if(tripDate){tripMult=Math.pow(1+inflRate,inflYears)/Math.pow(1+inflRate,3);}render();}
+function toggleBookingTimeline(){
+  var b=gi('booking-timeline-body'),c=gi('booking-caret');
+  if(!b)return;
+  var open=b.style.display==='block';
+  b.style.display=open?'none':'block';
+  if(c)c.style.transform=open?'':'rotate(180deg)';
+}
+function toggleStroller(){wantStroller=!wantStroller;render();}
+function changeNights(d){
+  nights=Math.min(7,Math.max(1,nights+d));
+  gi('nights-val').textContent=nights;
+  render();
+}
+var resortRests=[
+  {area:'Magic Kingdom resorts',color:'#7D7ABC',hotels:[
+    {name:'Contemporary Resort',icon:'△',rests:[
+      {n:'California Grill',t:'ts',p:'~$200–$260 (2 adults)',nt:'15th floor · Signature prix fixe + wine pairing · MK fireworks from the terrace · Already in your date night options',special:'Fireworks views from the 15th-floor observation deck — guests step outside mid-meal during the show'},
+      {n:'Steakhouse 71',t:'ts',p:'~$140–$180',nt:"All-day American classics inspired by Walt's opening day · Breakfast is great value · More casual and family-friendly"},
+      {n:'The Wave',t:'ts',p:'~$120–$160',nt:'Health-forward menu with local ingredients · Quieter and underrated · Good relaxed dinner before an evening park visit'},
+    ]},
+    {name:'Polynesian Village Resort',icon:'🌴',rests:[
+      {n:"'Ohana",t:'ts',p:'~$160–$200',nt:"Family-style Hawaiian feast · Skewers, noodles, wings served to the table · Lilo & Stitch character breakfast · One of the most beloved restaurants at WDW · Book early",special:'Live Hawaiian music at dinner · Coconut races and hula dancing · Window tables overlook Seven Seas Lagoon',warn:"Fireworks views currently obstructed due to Polynesian exterior maintenance (began Jan 2026) — confirm current status before booking if views are the goal"},
+      {n:'Kona Café',t:'ts',p:'~$100–$130',nt:"Casual Pan-Asian · Famous Tonga Toast breakfast · Much easier to book than 'Ohana"},
+      {n:"Trader Sam's Grog Grotto",t:'ts',p:'~$60–$90 (drinks/apps)',nt:'Theatrical tiki bar · Adults only after 8pm · One of the most fun bars at WDW',special:'Cocktails trigger in-bar effects — thunder, rain, volcano eruptions, the ceiling floods depending on what you order · Each drink comes with a show'},
+    ]},
+    {name:'Grand Floridian Resort',icon:'👑',rests:[
+      {n:"Victoria & Albert's",t:'ts',p:'~$400–$600 (2 adults)',nt:"AAA Five Diamond since 2000 · Forbes Five-Star · 500+ wine collection · Seasonal tasting menu",michelin:true,special:"The only Disney-owned restaurant with a Michelin Star · Chef's Table available as the most exclusive experience at all of WDW · Reserve months in advance, not just 60 days"},
+      {n:'Citricos',t:'ts',p:'~$180–$230',nt:'Mediterranean-inspired · Castle view · Sophisticated and beautiful · Excellent wine list',michelinRec:true},
+      {n:"Narcoosee's",t:'ts',p:'~$180–$240',nt:'Waterfront on Seven Seas Lagoon · Seafood-forward',special:'MK fireworks views from the waterfront verandah · Electrical Water Pageant also visible · Request a window table'},
+      {n:'Grand Floridian Café',t:'ts',p:'~$120–$150',nt:'All-day casual dining in a bright Victorian room · Good breakfast or lunch · More accessible price point'},
+    ]},
+    {name:'Wilderness Lodge',icon:'🌲',rests:[
+      {n:'Story Book Dining at Artist Point',t:'ts',p:'~$160–$200',nt:'Snow White character dining · Evil Queen, Dopey, and Grumpy · Stunning Arts & Crafts room',special:"Evil Queen is uniquely theatrical and villainous in a way most character dining isn't · Your daughter will love this"},
+      {n:'Whispering Canyon Café',t:'ts',p:'~$100–$140',nt:'Rustic skillet meals',special:'Staff are notoriously rowdy and interactive — they play pranks, hold ketchup races, and involve the whole dining room · Kids absolutely love it'},
+      {n:'Geyser Point Bar & Grill',t:'qs',p:'~$80–$100',nt:'Outdoor waterfront bar overlooks Bay Lake · Casual burgers and cocktails · Great sunset spot'},
+    ]},
+  ]},
+  {area:'EPCOT & Hollywood Studios resorts',color:'#1ABFA4',hotels:[
+    {name:'Beach Club Resort',icon:'⚓',rests:[
+      {n:'Cape May Café',t:'ts',p:'~$140–$180',nt:'Casual and family-friendly · Best pre-EPCOT morning option',special:'Admiral Donald Duck character breakfast — Donald, Goofy, and Minnie in nautical gear · Fun, relaxed, and much easier to book than MK character dining'},
+      {n:'Beaches & Cream Soda Shop',t:'ts',p:'~$60–$80',nt:'Classic American soda fountain · No reservations',special:'Famous Kitchen Sink sundae — every flavour, every topping, the literal kitchen sink · Designed to feed 4 · An unmissable WDW tradition'},
+      {n:"Hurricane Hanna's",t:'qs',p:'~$50–$65',nt:'Poolside bar and grill · Casual burgers and drinks · Great for a lazy afternoon by Stormalong Bay'},
+    ]},
+    {name:'Swan & Dolphin',icon:'〰',rests:[
+      {n:"Todd English's bluezoo",t:'ts',p:'~$180–$240',nt:'Upscale seafood in a stunning nautical room · One of the best restaurants in the EPCOT resort area'},
+      {n:'Il Mulino New York Trattoria',t:'ts',p:'~$140–$180',nt:'Classic Italian · Handmade pasta and wood-fired dishes · Quieter than the parks restaurants'},
+      {n:'Garden Grove',t:'ts',p:'~$140–$180',nt:'Character dining in a beautiful glass conservatory',special:'Goofy, Pluto, and friends at breakfast · One of the most underrated character dining rooms at WDW · The conservatory setting is genuinely beautiful'},
+      {n:'Kimonos',t:'ts',p:'~$80–$110',nt:'Japanese restaurant + karaoke bar',special:'Private karaoke rooms available · Excellent sushi and sake · Great late-night adults option once the kids are asleep'},
+    ]},
+    {name:'Waldorf Astoria Orlando',icon:'🔑',rests:[
+      {n:'Bull & Bear',t:'ts',p:'~$200–$280',nt:'Award-winning steakhouse inspired by the original New York Waldorf · Best splurge dinner in the EPCOT resort area · Forbes Four-Star hotel and restaurant'},
+      {n:'Peacock Alley',t:'ts',p:'~$120–$160',nt:'All-day dining in the newly renovated lobby · More relaxed than Bull & Bear · Good for a family meal'},
+    ]},
+    {name:'Four Seasons Orlando',icon:'☀',rests:[
+      {n:'Ravello',t:'ts',p:'~$160–$210',nt:'Italian-inspired · Beautiful open kitchen',michelin:true,michelinRec:true,special:'Mickey, Minnie, Goofy + Pluto character breakfast · Michelin-recommended · One of the most upscale character dining experiences at WDW'},
+      {n:'Capa',t:'ts',p:'~$200–$270 (2 adults)',nt:'Spanish-influenced steakhouse · Tapas and hickory-grilled meats · Iberico pluma a standout',michelin:true,special:'Michelin-starred rooftop on the 17th floor · Unobstructed Disney fireworks views every night · The most impressive adults dinner setting at all of WDW'},
+      {n:'PB&G',t:'qs',p:'~$60–$75',nt:'Poolside bar and grill · Casual · Great after a morning at the Four Seasons lazy river'},
+    ]},
+  ]},
+  {area:'Animal Kingdom resort',color:'#6457A6',hotels:[
+    {name:'Animal Kingdom Lodge',icon:'🌳',rests:[
+      {n:'Jiko — The Cooking Place',t:'ts',p:'~$180–$240',nt:'African-inspired cuisine · One of the best resort restaurants at WDW',special:"One of the largest African wine collections outside the continent · Pairs perfectly with a Starlight Safari date night · Quiet and sophisticated"},
+      {n:'Sanaa',t:'ts',p:'~$100–$130',nt:'Kidani Village · Indian-inspired',special:'Savanna views — giraffes and zebras visible from your table · Famous bread service with 9 accompaniments · A special meal at a very reasonable price'},
+      {n:'Boma — Flavors of Africa',t:'ts',p:'~$130–$170',nt:'African buffet · 60+ dishes · One of the best buffets at WDW · Great for mixed-age groups',special:'Character breakfast with Donald Duck and friends in safari gear · Buffet is ideal for picky eaters'},
+      {n:'Victoria Falls Lounge',t:'ts',p:'~$50–$80 (drinks/apps)',nt:'Overlooking the savanna · Cocktails and small plates · No reservation needed',special:"One of the most atmospheric bars at WDW · Savanna views at night · Perfect adults nightcap after Starlight Safari"},
+    ]},
+  ]},
+];
+
+function renderResortRests(){
+  gi('rr-grid').innerHTML=resortRests.map(function(area,ai){
+    var hotelsHtml=area.hotels.map(function(h){
+      var restsHtml=h.rests.map(function(r){
+        var badges=(r.michelin&&!r.michelinRec?'<span class="hr-badge hb-m">&#9733; Michelin Star</span>':'')
+          +(r.michelin&&r.michelinRec?'<span class="hr-badge hb-m">&#9733; Michelin Star</span>':'')
+          +(!r.michelin&&r.michelinRec?'<span class="hr-badge hb-mr">Michelin Recommended</span>':'');
+        var specialHtml=r.special?'<div class="hr-special">&#10024; '+r.special+'</div>':'';
+        var warnHtml=r.warn?'<div class="hr-warn">&#9888; '+r.warn+'</div>':'';
+        return'<div class="hr-item">'
+          +'<div><span style="font-weight:500;font-size:11px">'+r.n+'</span>'
+          +'<span class="rt-type '+(r.t==='qs'?'rqs':'rts')+'">'+(r.t==='qs'?'Quick service':'Table service')+'</span>'
+          +'<span class="hr-price">'+r.p+'</span>'
+          +badges+'</div>'
+          +'<div class="sn-nt">'+r.nt+'</div>'
+          +specialHtml+warnHtml+'</div>';
+      }).join('');
+      return'<div style="margin-bottom:.75rem">'
+        +'<div class="hr-hotel">'+h.name+'</div>'
+        +restsHtml+'</div>';
+    }).join('');
+    return'<div class="card" style="border-top:3px solid '+area.color+';margin-bottom:8px;padding:0">'
+      +'<div onclick="toggleRR('+ai+')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:.75rem 1rem">'
+      +'<div style="font-size:11px;font-weight:500;color:var(--t)">'+area.area+'</div>'
+      +'<span id="rr-arr-'+ai+'" style="font-size:13px;color:var(--t3);transition:transform .2s;display:inline-block">&#9660;</span>'
+      +'</div>'
+      +'<div id="rr-body-'+ai+'" style="display:none;padding:0 1rem .75rem">'
+      +hotelsHtml+'</div></div>';
+  }).join('');
+}
+
+
+var hotelDetails={
+  wilderness:{
+    color:'#6457A6',name:'Wilderness Lodge',
+    tagline:'Pacific Northwest lodge · Boat to MK · Waterfall pool · Cozy and immersive',
+    overview:"Wilderness Lodge is themed after National Park lodges of the American Pacific Northwest. The lobby features a massive 82-foot stone fireplace and two totem poles, and a geyser outside erupts on a schedule. It sits on Bay Lake and a boat runs directly to Magic Kingdom.",
+    connecting:'standard',
+    connectingNote:'Connecting rooms available and frequently requested at Wilderness Lodge. Call (407) 939-1936 after booking to link reservations. A single building with logical room numbering helps; requests are more often fulfilled here than at sprawling multi-building resorts.',
+    villas:'Boulder Ridge Villas & Copper Creek Villas',
+    villaNote:'Two DVC villa buildings attached — Boulder Ridge (older, cosy) and Copper Creek (newer). 1BR, 2BR, and Cascade Cabin options. A 1BR villa gives grandma a private bedroom, full kitchen, and washer/dryer.',
+    rooms:[
+      'Standard — Resort View  |  sleeps 4  |  Dec 2025 ~$590–$760/nt  |  2029 est. ~$775–$1,000/nt',
+      'Water View  |  sleeps 4  |  Dec 2025 ~$670–$840/nt  |  2029 est. ~$880–$1,100/nt',
+      'Fireworks View  |  sleeps 4  |  Dec 2025 ~$730–$900/nt  |  2029 est. ~$960–$1,180/nt',
+      'Club Level — Old Faithful Club  |  sleeps 4  |  Dec 2025 ~$720–$920/nt  |  2029 est. ~$945–$1,205/nt',
+      'Deluxe Room — Club Level  |  sleeps 6  |  Dec 2025 ~$990–$1,200/nt  |  2029 est. ~$1,300–$1,575/nt',
+    ],
+    suites:[
+      {n:'Copper Creek Cascade Cabin',sleeps:'Up to 12',dec25:'$2,400–$3,200/nt',dec29:'~$3,150–$4,200/nt',note:'Standalone lakefront cabin with private hot tub, fire pit, full kitchen, and dock. Two bedrooms + loft + two full bathrooms. The most unique accommodation at Wilderness Lodge — feels like a private Disney vacation home.'},
+      {n:'Copper Creek 2-Bedroom Villa',sleeps:'Up to 8',dec25:'$1,450–$1,850/nt',dec29:'~$1,900–$2,425/nt',note:'Full kitchen, washer/dryer, master bedroom + queen sleeper sofa + second bedroom. Good option for 6–8 people wanting one connected space.'},
+    ],
+    pool:'Feature Pool with zero-entry, waterslide, and geyser · Hidden Spring Pool also on site',
+    transport:'Boat to Magic Kingdom · Bus to all other parks and Disney Springs',
+    tips:['The lobby is worth visiting even if you are not staying here — one of the most beautiful resort interiors at WDW','Request a room near the lobby building for the easiest boat access','The geyser erupts every 90 minutes — time your departure to catch it','Old Faithful Club is considered one of the best value Club Level options at WDW'],
+  },
+  aklodge:{
+    color:'#C49200',name:'Animal Kingdom Lodge',
+    tagline:'Best kid wow factor at WDW · Savanna views · African wildlife · Exceptional dining',
+    overview:"Animal Kingdom Lodge sits on a private savanna home to over 30 species of African wildlife. Rooms with savanna views look directly onto the animals from your balcony at any hour. The lobby features hand-carved African furniture, bead chandeliers, and rotating art from African nations. Widely considered the most immersive resort at Walt Disney World.",
+    connecting:'best',
+    connectingNote:'One of the better hotels for connecting rooms because savanna-view rooms come in natural pairs along the same corridor. Call (407) 939-1936 and specify savanna view connecting rooms. This request is well-understood by cast members here.',
+    villas:'Animal Kingdom Lodge Villas (Kidani Village)',
+    villaNote:'Kidani Village is the DVC villa building, a short walk from the main lodge. It has its own savanna, pool, and Sanaa restaurant. A 1BR villa gives grandma a private bedroom, full kitchen, and savanna views.',
+    rooms:[
+      'Standard — Value (no balcony)  |  sleeps 4  |  Dec 2025 ~$490–$640/nt  |  2029 est. ~$640–$840/nt',
+      'Standard — Savanna View  |  sleeps 4  |  Dec 2025 ~$620–$800/nt  |  2029 est. ~$815–$1,050/nt',
+      'Kilimanjaro Club — Standard  |  sleeps 4  |  Dec 2025 ~$770–$980/nt  |  2029 est. ~$1,010–$1,285/nt',
+      'Kilimanjaro Club — Savanna View  |  sleeps 4  |  Dec 2025 ~$900–$1,100/nt  |  2029 est. ~$1,180–$1,440/nt',
+    ],
+    suites:[
+      {n:'Kilimanjaro Club 1-Bedroom Suite',sleeps:'Up to 6',dec25:'$1,300–$1,700/nt',dec29:'~$1,700–$2,230/nt',note:'Separate bedroom + living area + Club Level access + savanna view. Great for a smaller extended family group.'},
+      {n:'Kidani Village 2-Bedroom Villa',sleeps:'Up to 9',dec25:'$1,550–$2,000/nt',dec29:'~$2,030–$2,620/nt',note:'Full kitchen, washer/dryer, 2 bathrooms, separate living area, own savanna at Kidani. The best large-group option at AKL. Sleeps 9 comfortably.'},
+      {n:'Royal Asante Presidential Suite',sleeps:'Up to 8',dec25:'$3,500–$5,000+/nt',dec29:'~$4,600–$6,550+/nt',note:'Panoramic savanna views, private balcony, full Club Level access and dedicated concierge. The flagship suite at AKL. Book months in advance.'},
+    ],
+    pool:'Zero-entry Uzima Pool with waterslide · Kidani Samawati Springs pool with 67-foot waterslide',
+    transport:'Bus only to all parks · No monorail or boat',
+    tips:['Book a savanna view room — it is the entire point of staying here','Animals are most active at dawn and dusk — set an early alarm','The Starlight Safari is your date night option in the planner — the whole evening at AKL without leaving the resort is magical','The lobby at night with the bead chandelier lit is one of the most beautiful spaces at WDW'],
+  },
+  beachclub:{
+    color:'#1ABFA4',name:'Beach Club Resort',
+    tagline:'Walk to EPCOT · Stormalong Bay pool · Best location for EPCOT + HS',
+    overview:"Beach Club Resort is a New England coastal hotel on Crescent Lake between EPCOT and Hollywood Studios. You can walk to both parks in under 10 minutes. Famous for Stormalong Bay — a 3-acre pool with a waterslide through a shipwreck, lazy river, and sand bottom. The consensus top pick for mixed-age groups visiting EPCOT.",
+    connecting:'best',
+    connectingNote:'Beach Club is frequently recommended for multigenerational trips. Cast members are very familiar with connecting room requests here. Call (407) 939-1936 to link reservations. The single main building layout makes fulfilling requests more reliable.',
+    villas:'Beach Club Villas',
+    villaNote:'Beach Club Villas are attached and share all amenities including Stormalong Bay. A 1BR gives grandma a private bedroom, full kitchen, and washer/dryer right next to the pool.',
+    rooms:[
+      'Standard — Garden View  |  sleeps 4  |  Dec 2025 ~$660–$840/nt  |  2029 est. ~$865–$1,100/nt',
+      'Standard — Water View  |  sleeps 4  |  Dec 2025 ~$740–$920/nt  |  2029 est. ~$970–$1,205/nt',
+      'Regatta Club Level  |  sleeps 4  |  Dec 2025 ~$800–$1,000/nt  |  2029 est. ~$1,050–$1,310/nt',
+    ],
+    suites:[
+      {n:'1-Bedroom Suite',sleeps:'Up to 5',dec25:'$1,200–$1,550/nt',dec29:'~$1,570–$2,030/nt',note:'Separate bedroom + living room + sleeper sofa. Good for a family of 5–6.'},
+      {n:'Beach Club Villas 2-Bedroom',sleeps:'Up to 8',dec25:'$1,580–$2,050/nt',dec29:'~$2,070–$2,685/nt',note:'Full kitchen, washer/dryer, 2 bathrooms, 2 bedrooms. Same Stormalong Bay access. Best large-group option at the EPCOT resort area.'},
+      {n:'Beach Club Villas 3-Bedroom Grand Villa',sleeps:'Up to 12',dec25:'$3,100–$4,000/nt',dec29:'~$4,060–$5,240/nt',note:'3 full bedrooms, full kitchen, large living area, washer/dryer. Sleeps 12. Rarely available — book at the earliest possible moment.'},
+    ],
+    pool:'Stormalong Bay — 3-acre complex with shipwreck waterslide, lazy river, sand-bottom wading pool · Considered the best pool at WDW',
+    transport:'Walk to EPCOT (~10 min) · Walk to Hollywood Studios (~15 min) · Boat to EPCOT and HS · Skyliner nearby · Bus to MK and AK',
+    tips:['The location is genuinely unmatched for EPCOT and HS days','Stormalong Bay requires a resort key card — stays manageable even when other Disney pools are packed','The EPCOT International Gateway (back entrance) is a 5-min walk — slip in and out without the front entrance crowds','Cape May Cafe character breakfast is right in the hotel — great morning before an EPCOT day'],
+  },
+  contemporary:{
+    color:'#1ABFA4',name:'Contemporary Resort',
+    tagline:'Walk to Magic Kingdom · Monorail through the lobby · California Grill',
+    overview:"The Contemporary Resort is one of Walt Disney World's two original hotels, opening in 1971. The monorail passes directly through the A-frame tower at the fourth floor. A 10-minute walk from Magic Kingdom. The 15th-floor California Grill has the most famous fireworks view at WDW. Tower rooms have floor-to-ceiling windows with city-like views.",
+    connecting:'standard',
+    connectingNote:'Connecting rooms available at the Contemporary. The tower layout helps. Call (407) 939-1936 to link reservations. Garden Wing rooms (the separate lower building) tend to have better connecting room availability than the tower.',
+    villas:'Bay Lake Tower (DVC)',
+    villaNote:'Bay Lake Tower is attached via a sky bridge and has its own rooftop lounge with one of the best MK fireworks views on property. 1BR, 2BR, and 3BR Grand Villa available.',
+    rooms:[
+      'Garden Wing Standard  |  sleeps 4  |  Dec 2025 ~$600–$760/nt  |  2029 est. ~$785–$995/nt',
+      'Tower Standard — MK/Bay Lake View  |  sleeps 4  |  Dec 2025 ~$760–$960/nt  |  2029 est. ~$995–$1,260/nt',
+      'Contemporary Club Level  |  sleeps 4  |  Dec 2025 ~$900–$1,120/nt  |  2029 est. ~$1,180–$1,470/nt',
+    ],
+    suites:[
+      {n:'Bay Lake Tower 1-Bedroom Villa',sleeps:'Up to 5',dec25:'$1,380–$1,700/nt',dec29:'~$1,810–$2,230/nt',note:'Sky bridge from Contemporary to BLT. Full kitchen, washer/dryer, rooftop lounge with fireworks views.'},
+      {n:'Bay Lake Tower 2-Bedroom Villa',sleeps:'Up to 9',dec25:'$2,100–$2,700/nt',dec29:'~$2,750–$3,540/nt',note:'Two full bedrooms + bunk room, full kitchen, 2 bathrooms, washer/dryer. Rooftop lounge access. One of the better large-group options near Magic Kingdom.'},
+      {n:'Bay Lake Tower 3-Bedroom Grand Villa',sleeps:'Up to 12',dec25:'$3,800–$4,900/nt',dec29:'~$4,980–$6,420/nt',note:'3 bedrooms, full kitchen, 3 bathrooms. Monorail + easy MK walk. Very limited availability — book the moment the reservation window opens.'},
+    ],
+    pool:'Fantasia Pool with waterslide · Bay Cove Pool (quieter, near Garden Wing)',
+    transport:'Walk to Magic Kingdom (~10 min) · Monorail to MK, TTC, Polynesian, Grand Floridian, and (via transfer) EPCOT · Bus to Hollywood Studios and Animal Kingdom',
+    tips:['Watch the monorail pass through the lobby — still magical decades later','California Grill observation deck is open to all guests during fireworks — call ahead for a wristband even without a dining reservation','Tower rooms have better views; Garden Wing rooms are quieter and more affordable','Closest hotel to Magic Kingdom of any deluxe resort — no transport stress on MK days'],
+  },
+  polynesian:{
+    color:'#EF767A',name:'Polynesian Village Resort',
+    tagline:"Tropical theming · Monorail to MK · Beach fireworks · Trader Sam's",
+    overview:"The Polynesian Village Resort is a South Pacific-themed resort on the monorail loop on Seven Seas Lagoon with a view of Cinderella Castle. The Great Ceremonial House lobby is filled with tropical plants, fountains, and tiki torches. The beach at night with the MK fireworks in the distance is one of the most memorable experiences at WDW.",
+    connecting:'best',
+    connectingNote:"The Polynesian is a good bet for connecting rooms but rooms are spread across multiple longhouse buildings. Call (407) 939-1936 and specifically request connecting rooms in the same building — this specification matters because you cannot get connecting rooms across buildings.",
+    villas:'Polynesian Villas & Bungalows (DVC)',
+    villaNote:'Studio and 1BR units in the main resort area. The over-water Bungalows (floating on Seven Seas Lagoon) are among the most extraordinary accommodations at WDW. Studio villas are a practical option if a second room is what you need.',
+    rooms:[
+      'Standard Room  |  sleeps 4  |  Dec 2025 ~$740–$940/nt  |  2029 est. ~$970–$1,230/nt',
+      'Lagoon / Pool View  |  sleeps 4  |  Dec 2025 ~$860–$1,080/nt  |  2029 est. ~$1,130–$1,415/nt',
+      'Theme Park / Fireworks View  |  sleeps 4  |  Dec 2025 ~$980–$1,220/nt  |  2029 est. ~$1,285–$1,600/nt',
+      'King Kamehameha Club Level  |  sleeps 4  |  Dec 2025 ~$920–$1,150/nt  |  2029 est. ~$1,205–$1,507/nt',
+    ],
+    suites:[
+      {n:'1-Bedroom Suite',sleeps:'Up to 5',dec25:'$1,500–$1,900/nt',dec29:'~$1,965–$2,489/nt',note:'Separate bedroom + living area with sofa bed. Lagoon views available. Good for a family of 5.'},
+      {n:'Over-Water Bungalow',sleeps:'Up to 8',dec25:'$3,300–$4,500/nt',dec29:'~$4,323–$5,895/nt',note:'Two bedrooms, plunge pool, direct lagoon water access, unobstructed MK fireworks view from the deck. One of the most extraordinary accommodations in Florida. Books months or years in advance — if you want this, start planning now.'},
+    ],
+    pool:'Lava Pool with volcano waterslide · Oasis Pool (quieter) · Beach on Seven Seas Lagoon',
+    transport:"Monorail to MK, TTC, Contemporary, Grand Floridian, and (via transfer) EPCOT · Boat to MK · Bus to Hollywood Studios and Animal Kingdom",
+    tips:["Request a theme park view room — watching fireworks from your balcony while your daughter sleeps inside is one of the great WDW parent experiences","Note the fireworks view from Ohana is currently partially obstructed (maintenance) — the beach and balconies still work fine","Trader Sams Grog Grotto is a must for the adults — arrive right at opening to get a table","The Polynesian has the best overall vibe of any monorail resort for families with young children"],
+  },
+  grandfloridian:{
+    color:'#6457A6',name:'Grand Floridian Resort & Spa',
+    tagline:"Disney's flagship · Michelin-starred dining · Walk to MK · Victoria & Albert's",
+    overview:"The Grand Floridian is Walt Disney World's flagship resort — a Victorian-era hotel with red peaked roofs, white gingerbread facades, and a five-story atrium lobby with live piano and orchestra. A walking bridge connects directly to Magic Kingdom. Home to Victoria & Albert's, the only Michelin-starred Disney-owned restaurant in the world.",
+    connecting:'best',
+    connectingNote:"Grand Floridian connecting rooms are available in both the main building and lodge buildings (Conch Key, Boca Chica, etc.). The main building has the most reliable inventory. Call (407) 939-1936 and specify main building connecting rooms.",
+    villas:'Grand Floridian Villas (DVC)',
+    villaNote:'The Grand Floridian Villas are in the main building, sharing all amenities. A 1BR villa includes Jacuzzi tub and some of the most beautiful rooms at WDW. Also the only way to get a washer/dryer at the Grand Floridian.',
+    rooms:[
+      'Resort View  |  sleeps 5  |  Dec 2025 ~$830–$1,060/nt  |  2029 est. ~$1,087–$1,389/nt',
+      'Water View — Seven Seas Lagoon  |  sleeps 5  |  Dec 2025 ~$960–$1,210/nt  |  2029 est. ~$1,258–$1,585/nt',
+      'Theme Park View  |  sleeps 5  |  Dec 2025 ~$1,080–$1,350/nt  |  2029 est. ~$1,415–$1,769/nt',
+      'Royal Palm Club Level  |  sleeps 5  |  Dec 2025 ~$1,100–$1,400/nt  |  2029 est. ~$1,441–$1,834/nt',
+    ],
+    suites:[
+      {n:'1-Bedroom Suite (Club Level)',sleeps:'Up to 6',dec25:'$1,400–$1,800/nt',dec29:'~$1,834–$2,358/nt',note:'King bedroom + living room with queen sleeper sofa + full Club Level access. Lagoon or courtyard views. Good for 5–6 guests in one connected space.'},
+      {n:'2-Bedroom Suite (Club Level)',sleeps:'Up to 8',dec25:'$2,200–$2,900/nt',dec29:'~$2,882–$3,799/nt',note:'King bedroom + 2-queen bedroom + queen sleeper sofa + full Club Level access. The most practical large-group option at Grand Floridian. Sleeps 8 adults comfortably.'},
+      {n:'Walt Disney Suite / Roy Disney Suite',sleeps:'Up to 6 (private apartment feel)',dec25:'$4,000–$6,500+/nt',dec29:'~$5,240–$8,515+/nt',note:"1,700 sq ft on the 4th/5th floors of the main building, accessed via gold elevators. Panoramic views of MK and Seven Seas Lagoon. Walt's Suite has his original desk and memorabilia. Not bookable online — call VIP services."},
+    ],
+    pool:'Beach Pool with zero-entry and waterslide · Courtyard Pool also available',
+    transport:"Walk to Magic Kingdom (~5 min via the new walking bridge) · Monorail to MK, TTC, Polynesian, Contemporary, and (via transfer) EPCOT · Boat to MK · Bus to Hollywood Studios and Animal Kingdom",
+    tips:['The Royal Palm Club Level is considered by many the best resort experience at WDW — breakfast, snacks, and evening appetizers + cocktails with Castle views','Victoria and Alberts requires months of advance booking — reserve it the day your planning starts','The lobby orchestra plays at set times — check the schedule and position yourself in the atrium','The new walking bridge to MK means leaving 15 minutes before park open and walking straight in'],
+  },
+  swan:{
+    color:'#7D7ABC',name:'Swan & Dolphin',
+    tagline:'Same EPCOT walk as Beach Club · Half the price · Marriott points · No Disney perks',
+    overview:"The Swan and Dolphin are two connected hotels by architect Michael Graves, sitting on Crescent Lake with the same walkable access to EPCOT and Hollywood Studios as the Disney-owned EPCOT resorts — at roughly half the price. Guests earn Marriott Bonvoy points. The tradeoff: no Extended Evening Hours, no direct MDE room charging.",
+    connecting:'best',
+    connectingNote:'Swan & Dolphin connecting rooms are available and the Marriott booking system handles these requests reliably. Call the hotel directly or use Marriott reservation tools. Specify which building (Swan or Dolphin) you prefer.',
+    villas:null,villaNote:null,
+    rooms:[
+      'Standard — Swan  |  sleeps 4  |  Dec 2025 ~$360–$490/nt  |  2029 est. ~$472–$642/nt',
+      'Standard — Dolphin  |  sleeps 4  |  Dec 2025 ~$350–$470/nt  |  2029 est. ~$459–$616/nt',
+      'Alcove Room — Swan  |  sleeps 5  |  Dec 2025 ~$400–$540/nt  |  2029 est. ~$524–$708/nt',
+      'Swan Reserve Tower Room  |  sleeps 4  |  Dec 2025 ~$430–$570/nt  |  2029 est. ~$563–$747/nt',
+      'Swan Reserve Club Access  |  sleeps 4  |  Dec 2025 ~$500–$650/nt  |  2029 est. ~$655–$852/nt',
+    ],
+    suites:[
+      {n:'Junior Suite — Swan',sleeps:'Up to 4',dec25:'$500–$680/nt',dec29:'~$655–$891/nt',note:'Enlarged room with separate sitting area. Good step up from standard without full suite pricing.'},
+      {n:'1-Bedroom Suite — Swan or Dolphin',sleeps:'Up to 6',dec25:'$750–$1,050/nt',dec29:'~$983–$1,376/nt',note:'Separate living room + bedroom. Use Marriott Bonvoy points to reduce cost significantly. Good large-group option at EPCOT-area pricing.'},
+      {n:'Grand Suite — Dolphin',sleeps:'Up to 8',dec25:'$1,200–$1,700/nt',dec29:'~$1,572–$2,227/nt',note:'2 bedrooms + living area. Still significantly cheaper than equivalent Disney-owned suite options with the same EPCOT walk-on access.'},
+    ],
+    pool:'Grotto Pool with waterslide · Multiple pools across the complex · Access to all Swan, Dolphin, and Swan Reserve pools',
+    transport:'Walk to EPCOT International Gateway (~5 min) · Walk to Hollywood Studios (~15 min) · Boat to EPCOT and HS · Bus to MK and AK (Disney buses)',
+    tips:['You get Disney bus access and early park entry just like Disney-owned hotels','No Extended Evening Hours is the main thing you give up vs Beach Club next door','Book on Marriott.com and use Bonvoy points — a major advantage over Disney resorts','The Swan Reserve is the newest and most luxurious building'],
+  },
+  waldorf:{
+    color:'#C49200',name:'Waldorf Astoria Orlando',
+    tagline:'Forbes 4-Star · 482-acre grounds · EPCOT fireworks views · Shuttle to parks',
+    overview:"The Waldorf Astoria Orlando sits within Walt Disney World property on 482 acres of nature preserve. As an official Disney hotel, guests get 30-minute early park entry. Recently completed a full property-wide renovation. Bull & Bear is one of the best steakhouses in the Orlando area.",
+    connecting:'standard',
+    connectingNote:'Connecting rooms available — call the hotel directly at (407) 597-5500. Hilton Honors points give you a way to book two rooms at reduced cost.',
+    villas:null,villaNote:null,
+    rooms:[
+      'Deluxe Room  |  sleeps 4  |  Dec 2025 ~$450–$600/nt  |  2029 est. ~$590–$786/nt',
+      'Fireworks View Room  |  sleeps 4  |  Dec 2025 ~$530–$700/nt  |  2029 est. ~$695–$917/nt',
+      'Waldorf Astoria Club Floor  |  sleeps 4  |  Dec 2025 ~$610–$800/nt  |  2029 est. ~$799–$1,048/nt',
+    ],
+    suites:[
+      {n:'Parlor Suite',sleeps:'Up to 4',dec25:'$900–$1,200/nt',dec29:'~$1,179–$1,572/nt',note:'Separate living area + bedroom. The Waldorf standard — elegant and well-appointed.'},
+      {n:'1-Bedroom Suite',sleeps:'Up to 6',dec25:'$1,100–$1,500/nt',dec29:'~$1,441–$1,965/nt',note:'Full suite with separate bedroom and living room. Good for a couple plus guests in one elegant unit.'},
+      {n:'Presidential Suite',sleeps:'Up to 8',dec25:'$2,500–$4,000+/nt',dec29:'~$3,275–$5,240+/nt',note:'Grand living and dining area, master bedroom, panoramic views. Call directly to discuss availability — not always listed online.'},
+    ],
+    pool:'Two resort pools + lazy river + waterslide · Access to adjacent Signia by Hilton pools',
+    transport:'Luxury motorcoach shuttle to all four WDW parks and Disney Springs · No monorail or boat',
+    tips:['Book a fireworks-view room and watch EPCOT Luminous from your balcony — one of the most underrated experiences near WDW','Hilton Honors points can make a night here surprisingly affordable','No Extended Evening Hours is the main Disney perk you miss vs Disney-owned hotels','The motorcoach is comfortable but adds 15–20 mins vs walking from Beach Club'],
+  },
+  fourseasons:{
+    color:'#EF767A',name:'Four Seasons Orlando',
+    tagline:'AAA Five Diamond · Michelin-starred Capa · Lazy river · Best luxury near WDW',
+    overview:"The Four Seasons Orlando is the highest-rated hotel in the Orlando area — AAA Five Diamond, Forbes Four-Star hotel and Capa restaurant, and home to the only non-Disney Michelin-starred restaurant at WDW. The pool complex with lazy river and waterslides is exceptional, and the Kids for All Seasons programme is extensive.",
+    connecting:'standard',
+    connectingNote:"Connecting rooms and adjoining suites available — call the Four Seasons directly at (407) 313-7777. As a luxury property accustomed to VIP and family requests, this is well-handled.",
+    villas:null,villaNote:null,
+    rooms:[
+      'Superior Room  |  sleeps 4  |  Dec 2025 ~$700–$920/nt  |  2029 est. ~$917–$1,205/nt',
+      'Deluxe Room  |  sleeps 4  |  Dec 2025 ~$800–$1,050/nt  |  2029 est. ~$1,048–$1,376/nt',
+      'Club Floor Room  |  sleeps 4  |  Dec 2025 ~$950–$1,200/nt  |  2029 est. ~$1,245–$1,572/nt',
+    ],
+    suites:[
+      {n:'Junior Suite',sleeps:'Up to 4',dec25:'$1,100–$1,500/nt',dec29:'~$1,441–$1,965/nt',note:'Separate sitting area. Good step-up from standard rooms.'},
+      {n:'1-Bedroom Suite',sleeps:'Up to 6',dec25:'$1,600–$2,200/nt',dec29:'~$2,096–$2,882/nt',note:'Full separate bedroom + living room. Most Four Seasons suites at this tier include butler service.'},
+      {n:'2-Bedroom Suite / Bungalow',sleeps:'Up to 8',dec25:'$2,500–$3,800/nt',dec29:'~$3,275–$4,978/nt',note:'Full 2-bedroom with private patio or terrace. Some have plunge pools. Great for a large family group at the highest luxury tier near WDW.'},
+      {n:'Presidential Suite',sleeps:'Up to 10',dec25:'$5,000–$8,000+/nt',dec29:'~$6,550–$10,480+/nt',note:'The flagship. Disney fireworks visible from the terrace. Multiple bedrooms, butler service. Contact the hotel directly — not publicly bookable online.'},
+    ],
+    pool:'Explorer Island pool complex: main pool, lazy river, waterslides, private cabanas, kids sandbox area · One of the best hotel pool setups in Florida',
+    transport:'Private Disney transportation to all four parks · No Disney buses · Adds ~20 mins vs on-site hotels',
+    tips:["Kids for All Seasons programme is genuinely exceptional — supervised activities and character appearances within the hotel","Capa on the 17th floor is Michelin-starred with fireworks views — the adults dinner of the trip","Book a cabana at Explorer Island for a full pool day while the kids programme keeps children entertained","The most authentically luxury feel of any WDW-area hotel"],
+  },
+};
+
+
+function buildHotelPage(key){
+  var d=hotelDetails[key];
+  if(!d) return'<button class="pk-back" onclick="closeHotel()">&#8592; Back to planner</button><p>Details coming soon.</p>';
+  var roomsHtml=d.rooms.map(function(r){return'<div class="ri-item" style="font-size:10px;line-height:1.6;color:var(--t)">'+r+'</div>';}).join('');
+  var suitesHtml='';
+  if(d.suites&&d.suites.length){
+    suitesHtml='<div class="dv"></div><div class="sect">Suites &amp; large-group options</div>'
+      +'<div style="font-size:10px;color:var(--t3);margin-bottom:.5rem">For groups of 5\u201312 \u00b7 Dec 1\u201314 2025 rack rates \u00b7 2029 est. applies ~31% inflation (7%/yr \xd7 4 yrs)</div>'
+      +d.suites.map(function(s){
+        return'<div class="ri-item">'
+          +'<div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:5px">'
+          +'<span style="font-weight:500;font-size:11px;color:var(--t)">'+s.n+'</span>'
+          +'<span class="rt-type rts">Sleeps '+s.sleeps+'</span>'
+          +'</div>'
+          +'<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:2px">'
+          +'<span style="font-size:10px;color:var(--tw);font-weight:500">Dec 2025: '+s.dec25+'</span>'
+          +'<span style="font-size:10px;color:var(--t3)">2029 est: '+s.dec29+'</span>'
+          +'</div>'
+          +'<div class="ri-sub">'+s.note+'</div>'
+          +'</div>';
+      }).join('');
+  }
+  var tipsHtml=d.tips.map(function(t){return'<li>'+t+'</li>';}).join('');
+  var connectBadge=d.connecting==='best'?'<span class="hr-badge hb-m" style="margin-left:6px">Best bet for connecting</span>':'';
+  var villaHtml=d.villas?'<div class="dv"></div><div class="sect">DVC villas option</div><div style="font-size:10px;color:var(--ti);font-weight:500;margin-bottom:3px">'+d.villas+'</div><div style="font-size:11px;color:var(--t2);line-height:1.5">'+d.villaNote+'</div>':'';
+  return'<button class="pk-back" onclick="closeHotel()">&#8592; Back to planner</button>'
+    +'<div class="pk-head" style="background:'+d.color+';color:#fff"><h2>'+d.name+'</h2><p>'+d.tagline+'</p></div>'
+    +'<div class="age-note" style="background:var(--bg2);color:var(--t2)">'+d.overview+'</div>'
+    +'<div class="sect">Connecting rooms'+connectBadge+'</div>'
+    +'<div style="font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:.5rem">'+d.connectingNote+'</div>'
+    +(hotelDetails[Object.keys(hotelDetails).find(function(k){return hotelDetails[k]===d;})]&&hotels.deluxe.concat(hotels.assoc).find(function(h){return hotelDetails[h.key]===d;})&&hotels.deluxe.concat(hotels.assoc).find(function(h){return hotelDetails[h.key]===d;}).eeh?'<div style="font-size:10px;background:var(--bgs);color:var(--ts);border-radius:var(--rm);padding:.4rem .65rem;margin-bottom:.5rem">✓ This hotel includes Extended Evening Hours — 2 extra hours in select parks after close on specific nights, with dramatically reduced crowds. Exclusively for Disney-owned deluxe resort guests.</div>':'<div style="font-size:10px;background:var(--bg2);color:var(--t3);border-radius:var(--rm);padding:.4rem .65rem;margin-bottom:.5rem">✗ This hotel does not include Extended Evening Hours (a perk exclusive to Disney-owned deluxe resorts). Guests of Swan &amp; Dolphin, Waldorf, and Four Seasons miss this benefit.</div>')
+    +'<div style="font-size:10px;background:var(--bgi);color:var(--ti);border-radius:var(--rm);padding:.4rem .65rem;margin-bottom:.75rem">Disney hotel reservations: <strong>(407) 939-1936</strong> · Book both rooms first, then call to link and request connecting · Ask again at check-in</div>'
+    +villaHtml
+    +'<div class="dv"></div>'
+    +'<div class="two-col">'
+    +'<div><div class="sect" style="margin-top:0">Room types — Dec 2025 rates</div>'+'<div style="font-size:10px;color:var(--t3);margin-bottom:.3rem">Dec 1–14 rack rates (no discount) · 2029 est. at ~7%/yr inflation · rates vary by day and availability</div>'+roomsHtml+suitesHtml+'</div>'
+    +'<div><div class="sect" style="margin-top:0">Pool</div><div style="font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:.75rem">'+d.pool+'</div>'
+    +'<div class="sect">Getting to the parks</div><div style="font-size:11px;color:var(--t2);line-height:1.5">'+d.transport+'</div></div>'
+    +'</div>'
+    +'<div class="dv"></div>'
+    +'<div class="sect">Insider tips</div>'
+    +'<div class="box"><ul>'+tipsHtml+'</ul></div>'
+    +'<div style="height:2rem"></div>';
+}
+
+function openHotel(key){
+  var el=document.getElementById('content-hotel-'+key);
+  if(el) el.innerHTML=buildHotelPage(key);
+  document.querySelectorAll('.page').forEach(function(pg){pg.classList.remove('active')});
+  var pg=document.getElementById('pg-hotel-'+key);
+  if(pg) pg.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function closeHotel(){
+  document.querySelectorAll('.page').forEach(function(pg){pg.classList.remove('active')});
+  gi('pg-main').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function setTripDate(v){
+  tripDate=v?new Date(v+'T12:00:00'):null;
+  if(tripDate){
+    inflYears=Math.max(0,tripDate.getFullYear()-2026);
+    tripMult=Math.pow(1+inflRate,inflYears)/Math.pow(1+inflRate,3);
+  } else {inflYears=3;tripMult=1.0;}
+  render();
+}
+function addDays(d,n){var r=new Date(d);r.setDate(r.getDate()+n);return r;}
+function fmtDate(d){if(!d)return'';return d.toLocaleDateString('en-US',{weekday:'short',month:'long',day:'numeric',year:'numeric'});}
+function fmtShort(d){if(!d)return'';return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+function statusPill(date){
+  if(!date)return'<span style="font-size:9px;padding:1px 6px;border-radius:8px;background:var(--bg2);color:var(--t3)">Plan ahead</span>';
+  var t=new Date();t.setHours(0,0,0,0);
+  var d=new Date(date);d.setHours(0,0,0,0);
+  if(d<t)return'<span style="font-size:9px;padding:1px 6px;border-radius:8px;background:var(--bgs);color:var(--ts)">Window open now</span>';
+  var days=Math.round((d-t)/864e5);
+  if(days===0)return'<span style="font-size:9px;padding:1px 6px;border-radius:8px;background:var(--bgw);color:var(--tw)">Today!</span>';
+  return'<span style="font-size:9px;padding:1px 6px;border-radius:8px;background:var(--bg2);color:var(--t3)">'+days+' days away</span>';
+}
+function renderTimeline(){
+  var el=gi('booking-timeline'),su=gi('trip-date-summary');
+  if(!el)return;
+  if(!tripDate){el.innerHTML='<div style="font-size:11px;color:var(--t3)">Enter your check-in date above to see your personalised booking dates</div>';if(su)su.innerHTML='';return;}
+  var ci=tripDate;
+  var d60=addDays(ci,-60),d7=addDays(ci,-7),d30=addDays(ci,-30),d2=addDays(ci,-2);
+  var pkgYear=ci.getFullYear()-1;
+  var hasParty=activeFireworks==='mnsshp'||activeFireworks==='mvmcp';
+  var partyLabel=activeFireworks==='mnsshp'?"Mickey Not-So-Scary Halloween Party":activeFireworks==='mvmcp'?"Mickey Very Merry Christmas Party":'Seasonal party';
+  var lastNight=addDays(ci,nights-1);
+  if(su)su.innerHTML='<span style="font-weight:500;color:var(--ts)">'+fmtShort(ci)+'</span> check-in &nbsp;&bull;&nbsp; '+nights+' nights &nbsp;&bull;&nbsp; '+fmtShort(addDays(ci,nights))+' check-out';
+  if(!timelineEverOpened){timelineEverOpened=true;var tbody=gi('booking-timeline-body');var ca=gi('booking-caret');if(tbody){tbody.style.display='block';if(ca)ca.style.transform='rotate(180deg)';}}
+  var partyRow=hasParty?[partyLabel+' tickets go on sale','Party tickets release in May/June of the year before the event — months before your 60-day dining window. Some dates sell out within hours. Buy immediately when released.']:null;
+  var secs=[
+    {label:'Book now — Hotel reservation',color:'#6457A6',date:null,rows:[
+      ['Book your hotel immediately','Disney deluxe rooms sell up to 20 months in advance. Polynesian, Beach Club, and Grand Floridian fill fastest for December. 2029 dates expected to open around May/June 2028.'],
+      ['Call (407) 939-1936 after booking','Link two-room reservations and add your connecting room request as a note. Repeat at check-in.'],
+    ]},
+    {label:'~May/June '+pkgYear+' — Packages and party tickets',color:'#1ABFA4',date:new Date(pkgYear,4,1),rows:(partyRow?[['Vacation packages go on sale','Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.'],partyRow]:[['Vacation packages go on sale','Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.']])},
+    {label:'Your 60-day window — '+fmtDate(d60),color:'#EF767A',date:d60,rows:[
+      ['Set an alarm: 5:45 AM ET on '+fmtShort(d60),'Reservations technically open at 6:00 AM but have been seen going live a few minutes early. Have My Disney Experience open, party size entered, and restaurant pre-selected before 6:00 AM.'],
+      ['Resort guest advantage — book your entire stay','As a Disney resort guest you book all '+nights+' nights on this single date. Your last night ('+fmtShort(lastNight)+') is effectively available '+(nights+59)+' days in advance.'],
+      ['Book in this exact priority order','1. Cinderella Royal Table (sells in seconds) 2. Bibbidi Bobbidi Boutique 3. GEO-82 (extremely limited, adults 21+) 4. Be Our Guest dinner 5. Akershus / Crystal Palace 6. Ohana 7. All other table service 8. Beak and Barrel lounge 9. Ferrytale cruise 10. Starlight Safari 11. Caring for Giants'],
+      ["Victoria and Albert Chef Table — phone only","Call (407) 939-3862 between 10 AM and 4 PM ET. Cannot be booked online. Still opens at 60 days. Main dining room and Queen Victoria Room can be booked via MDE."],
+      ['California Grill and Celebration at the Top','Both book via MDE at 60 days. Book California Grill right after character dining priorities above.'],
+      ['Pontoon cruise, dessert parties, all special experiences','All book at 60 days via MDE or (407) 939-7529.'],
+    ]},
+    {label:'30 days out — '+fmtShort(d30),color:'#D4A800',date:d30,rows:[
+      ['Purchase Memory Maker','Can be bought any time before or during the trip but buying before arrival is slightly cheaper. Activates the moment you purchase.'],
+      ['Confirm stroller delivery','If using Kingdom Strollers, confirm delivery date and hotel. Stroller should arrive at bell services before check-in.'],
+      ['Measure your daughter','She needs 38 inches for Seven Dwarfs Mine Train, Big Thunder Mountain, and Slinky Dog Dash. Measure before you leave home.'],
+    ]},
+    {label:'Day 7 — Lightning Lane — '+fmtDate(d7),color:'#7D7ABC',date:d7,rows:[
+      ['7:00 AM — Buy Lightning Lane Multi Pass','Resort guests can purchase LLMP 7 days before each park day. Set an alarm for each park morning.'],
+      ['Complete online check-in','MDE app · Select arrival time window · Re-confirm connecting room request · Set up MagicMobile if not using MagicBands.'],
+    ]},
+    {label:'1 to 3 days out — '+fmtShort(d2),color:'#888780',date:d2,rows:[
+      ['Pack ponchos and layers','Orlando in early December is 60 to 70 degrees F with afternoon rain likely. Ponchos are $12 inside the parks and $2 on Amazon.'],
+      ['Download everything to MDE','Park tickets, Lightning Lane, dining reservations — screenshot all confirmations in case you lose cell signal.'],
+      ['Review your daily plan','Check park hours, parade and fireworks times, and any last-minute changes to your reservations.'],
+    ]},
+  ];
+  el.innerHTML=secs.map(function(sec){
+    var rows=sec.rows.map(function(r){
+      return'<div style="padding:5px 0;border-bottom:.5px solid var(--bm)">'
+        +'<div style="font-size:11px;font-weight:500;color:var(--t)">'+r[0]+'</div>'
+        +'<div style="font-size:10px;color:var(--t2);margin-top:2px;line-height:1.5">'+r[1]+'</div>'
+        +'</div>';
+    }).join('');
+    return'<div style="border-left:3px solid '+sec.color+';padding:.5rem .75rem;margin-bottom:.6rem;background:var(--bg2);border-radius:0 var(--rm) var(--rm) 0">'
+      +'<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:.35rem">'
+      +'<span style="font-size:11px;font-weight:500;color:var(--t)">'+sec.label+'</span>'
+      +statusPill(sec.date)
+      +'</div>'
+      +rows+'</div>';
+  }).join('');
+}
+
+function render(){renderHotels();renderBudget();renderParkNav();renderResortRests();renderTimeline();}
+function setClub(v){clubLevel=v;render();}
+function selH(k){sel=k;clubLevel=false;render();}
+function selFW(k){activeFireworks=k;render();}
+function selEV(k){activeEvening=k;render();}
+function setSeason(s,btn){
+  season=s;
+  document.querySelectorAll('.tog').forEach(function(b){b.classList.remove('on')});
+  btn.classList.add('on');
+  render();
+}
+render();
+document.addEventListener('click',function(e){
+  if(e.target&&e.target.id==='btn-fly'){setTravel('fly');}
+  if(e.target&&e.target.id==='btn-drive'){setTravel('drive');}
+});
+</script>
+</body>
+</html>
