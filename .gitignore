@@ -1,0 +1,17 @@
+# Terraform state - never commit
+*.tfstate
+*.tfstate.*
+
+# Backend config contains your state bucket name/region
+terraform/backend.hcl
+
+# Var values may contain personal config (bucket names, domain, etc.)
+terraform/*.tfvars
+
+# Terraform working directory
+**/.terraform/
+**/.terraform.lock.hcl
+**/crash.log
+
+# macOS
+.DS_Store

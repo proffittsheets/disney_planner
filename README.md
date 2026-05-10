@@ -22,11 +22,16 @@ js/
   budget.js       — budget line items, fireworks/evening options, resort restaurant data
   app.js          — state, all render functions, and event handling
 images/           — resized (max 1400px) local copies of all CC-licensed photos
+terraform/        — AWS infrastructure (S3 + CloudFront); see terraform/README.md
 ```
 
-## Running it
+## Running locally
 
 Open `index.html` directly in a browser — no build step or server required.
+
+## Hosting
+
+The site is hosted as a static site on AWS S3 behind CloudFront. Infrastructure is managed with Terraform. See [terraform/README.md](terraform/README.md) for setup and deployment instructions.
 
 ## Image credits
 
