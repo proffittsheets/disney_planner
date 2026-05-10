@@ -7,11 +7,11 @@ function getH(){return allH().filter(function(h){return h.key===sel})[0]}
 function buildItems(){
   var h=getH(),items=fi.slice();
   var fw=fireworksDNs[activeFireworks],ev=eveningDNs[activeEvening];
-  if(activeFireworks!=='none') items.push({bk:'special',label:fw.l,note:fw.note,hotelNote:fw.hotel,color:'#D4A800',off:fw.off,peak:fw.peak,special:true,adults:true,isFW:true,free:fw.free});
-  if(activeEvening!=='none') items.push({bk:'special',label:ev.l,note:ev.note,hotelNote:ev.hotel,color:'#EF767A',off:ev.off,peak:ev.peak,special:true,adults:true,isEV:true,free:ev.free});
+  if(activeFireworks!=='none') items.push({bk:'special',label:fw.l,note:fw.note,hotelNote:fw.hotel,color:'#E8B84B',off:fw.off,peak:fw.peak,special:true,adults:true,isFW:true,free:fw.free});
+  if(activeEvening!=='none') items.push({bk:'special',label:ev.l,note:ev.note,hotelNote:ev.hotel,color:'#00B4D8',off:ev.off,peak:ev.peak,special:true,adults:true,isEV:true,free:ev.free});
   var hRate=Math.round(p(h[season])/5);
   var clubExtra=clubLevel&&h.club?Math.round(p(h.club[season==='off'?'offExtra':'peakExtra'])):0;
-  items.push({bk:'hotel',label:h.name+(clubLevel&&h.club?' — '+h.club.name:''),note:h.note+' · '+nights+' night'+(nights===1?'':'s')+(clubLevel&&h.club?' · '+h.club.perks:''),color:'#6457A6',off:(hRate+clubExtra)*nights,peak:(hRate+clubExtra)*nights,isHotel:true});
+  items.push({bk:'hotel',label:h.name+(clubLevel&&h.club?' — '+h.club.name:''),note:h.note+' · '+nights+' night'+(nights===1?'':'s')+(clubLevel&&h.club?' · '+h.club.perks:''),color:'#023E8A',off:(hRate+clubExtra)*nights,peak:(hRate+clubExtra)*nights,isHotel:true});
   return items.filter(function(i){
     if(i.isFly&&travelMode==='drive') return false;
     if(i.isDrive&&travelMode==='fly') return false;
@@ -76,7 +76,7 @@ function renderBudget(){
   var inflEl=gi('m-infl-note');
   if(inflEl){var pct=Math.round((Math.pow(1+inflRate,inflYears)-1)*100);var basePct=Math.round((Math.pow(1+inflRate,3)-1)*100);inflEl.textContent=tripDate?'Prices adjusted for '+tripDate.getFullYear()+' (+'+pct+'% from 2026 · '+Math.round(inflRate*100)+'%/yr)':'2029 baseline (+'+basePct+'% from 2026 · '+Math.round(inflRate*100)+'%/yr)';};
   gi('m-special').textContent='$'+Math.round(spTot).toLocaleString();
-  var colors={flights:'#7D7ABC',hotel:'#6457A6',park:'#1ABFA4',dining:'#EF767A',special:'#D4A800',transport:'#B4B2A9',misc:'#888780'};
+  var colors={flights:'#023E8A',hotel:'#03045E',park:'#0077B6',dining:'#00B4D8',special:'#E8B84B',transport:'#48CAE4',misc:'#90E0EF'};
   gi('bar').innerHTML=Object.keys(cats).map(function(k){
     return'<div class="bs" style="background:'+colors[k]+';width:'+(total>0?(cats[k]/total*100).toFixed(1):0)+'%"></div>';
   }).join('');
@@ -362,12 +362,12 @@ function renderTimeline(){
   if(!timelineEverOpened){timelineEverOpened=true;var tbody=gi('booking-timeline-body');var ca=gi('booking-caret');if(tbody){tbody.style.display='block';if(ca)ca.style.transform='rotate(180deg)';}}
   var partyRow=hasParty?[partyLabel+' tickets go on sale','Party tickets release in May/June of the year before the event — months before your 60-day dining window. Some dates sell out within hours. Buy immediately when released.']:null;
   var secs=[
-    {label:'Book now — Hotel reservation',color:'#6457A6',date:null,rows:[
+    {label:'Book now — Hotel reservation',color:'#023E8A',date:null,rows:[
       ['Book your hotel immediately','Disney deluxe rooms sell up to 20 months in advance. Polynesian, Beach Club, and Grand Floridian fill fastest for December. 2029 dates expected to open around May/June 2028.'],
       ['Call (407) 939-1936 after booking','Link two-room reservations and add your connecting room request as a note. Repeat at check-in.'],
     ]},
-    {label:'~May/June '+pkgYear+' — Packages and party tickets',color:'#1ABFA4',date:new Date(pkgYear,4,1),rows:(partyRow?[['Vacation packages go on sale','Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.'],partyRow]:[['Vacation packages go on sale','Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.']])},
-    {label:'Your 60-day window — '+fmtDate(d60),color:'#EF767A',date:d60,rows:[
+    {label:'~May/June '+pkgYear+' — Packages and party tickets',color:'#0077B6',date:new Date(pkgYear,4,1),rows:(partyRow?[['Vacation packages go on sale','Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.'],partyRow]:[['Vacation packages go on sale','Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.']])},
+    {label:'Your 60-day window — '+fmtDate(d60),color:'#00B4D8',date:d60,rows:[
       ['Set an alarm: 5:45 AM ET on '+fmtShort(d60),'Reservations technically open at 6:00 AM but have been seen going live a few minutes early. Have My Disney Experience open, party size entered, and restaurant pre-selected before 6:00 AM.'],
       ['Resort guest advantage — book your entire stay','As a Disney resort guest you book all '+nights+' nights on this single date. Your last night ('+fmtShort(lastNight)+') is effectively available '+(nights+59)+' days in advance.'],
       ['Book in this exact priority order','1. Cinderella Royal Table (sells in seconds) 2. Bibbidi Bobbidi Boutique 3. GEO-82 (extremely limited, adults 21+) 4. Be Our Guest dinner 5. Akershus / Crystal Palace 6. Ohana 7. All other table service 8. Beak and Barrel lounge 9. Ferrytale cruise 10. Starlight Safari 11. Caring for Giants'],
@@ -375,16 +375,16 @@ function renderTimeline(){
       ['California Grill and Celebration at the Top','Both book via MDE at 60 days. Book California Grill right after character dining priorities above.'],
       ['Pontoon cruise, dessert parties, all special experiences','All book at 60 days via MDE or (407) 939-7529.'],
     ]},
-    {label:'30 days out — '+fmtShort(d30),color:'#D4A800',date:d30,rows:[
+    {label:'30 days out — '+fmtShort(d30),color:'#E8B84B',date:d30,rows:[
       ['Purchase Memory Maker','Can be bought any time before or during the trip but buying before arrival is slightly cheaper. Activates the moment you purchase.'],
       ['Confirm stroller delivery','If using Kingdom Strollers, confirm delivery date and hotel. Stroller should arrive at bell services before check-in.'],
       ['Measure your daughter','She needs 38 inches for Seven Dwarfs Mine Train, Big Thunder Mountain, and Slinky Dog Dash. Measure before you leave home.'],
     ]},
-    {label:'Day 7 — Lightning Lane — '+fmtDate(d7),color:'#7D7ABC',date:d7,rows:[
+    {label:'Day 7 — Lightning Lane — '+fmtDate(d7),color:'#48CAE4',date:d7,rows:[
       ['7:00 AM — Buy Lightning Lane Multi Pass','Resort guests can purchase LLMP 7 days before each park day. Set an alarm for each park morning.'],
       ['Complete online check-in','MDE app · Select arrival time window · Re-confirm connecting room request · Set up MagicMobile if not using MagicBands.'],
     ]},
-    {label:'1 to 3 days out — '+fmtShort(d2),color:'#888780',date:d2,rows:[
+    {label:'1 to 3 days out — '+fmtShort(d2),color:'#90E0EF',date:d2,rows:[
       ['Pack ponchos and layers','Orlando in early December is 60 to 70 degrees F with afternoon rain likely. Ponchos are $12 inside the parks and $2 on Amazon.'],
       ['Download everything to MDE','Park tickets, Lightning Lane, dining reservations — screenshot all confirmations in case you lose cell signal.'],
       ['Review your daily plan','Check park hours, parade and fireworks times, and any last-minute changes to your reservations.'],

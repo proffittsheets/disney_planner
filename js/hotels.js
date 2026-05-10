@@ -24,29 +24,29 @@ var hotels={
 };
 
 var hotelSvgs={
-wilderness:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#100838"/><polygon points="140,10 126,26 154,26" fill="white"/><polygon points="140,18 123,34 157,34" fill="white"/><polygon points="140,26 120,44 160,44" fill="white"/><rect x="137" y="44" width="6" height="9" rx="1" fill="white"/></svg>',
+wilderness:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#03045E"/><polygon points="140,10 126,26 154,26" fill="white"/><polygon points="140,18 123,34 157,34" fill="white"/><polygon points="140,26 120,44 160,44" fill="white"/><rect x="137" y="44" width="6" height="9" rx="1" fill="white"/></svg>',
 
-aklodge:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#1a0840"/><line x1="140" y1="48" x2="140" y2="24" stroke="white" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="140" cy="20" rx="24" ry="9" fill="white"/><line x1="108" y1="48" x2="108" y2="32" stroke="white" stroke-width="2" stroke-linecap="round"/><ellipse cx="108" cy="29" rx="14" ry="6" fill="white" opacity="0.7"/><line x1="172" y1="48" x2="172" y2="34" stroke="white" stroke-width="2" stroke-linecap="round"/><ellipse cx="172" cy="31" rx="14" ry="6" fill="white" opacity="0.7"/></svg>',
+aklodge:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#023E8A"/><line x1="140" y1="48" x2="140" y2="24" stroke="white" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="140" cy="20" rx="24" ry="9" fill="white"/><line x1="108" y1="48" x2="108" y2="32" stroke="white" stroke-width="2" stroke-linecap="round"/><ellipse cx="108" cy="29" rx="14" ry="6" fill="white" opacity="0.7"/><line x1="172" y1="48" x2="172" y2="34" stroke="white" stroke-width="2" stroke-linecap="round"/><ellipse cx="172" cy="31" rx="14" ry="6" fill="white" opacity="0.7"/></svg>',
 
-beachclub:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#0c1e48"/><circle cx="140" cy="17" r="6" fill="none" stroke="white" stroke-width="2.5"/><line x1="140" y1="23" x2="140" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="29" x2="153" y2="29" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M125,43 Q125,52 140,52 Q155,52 155,43" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="125" cy="43" r="3" fill="white"/><circle cx="155" cy="43" r="3" fill="white"/></svg>',
+beachclub:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#0077B6"/><circle cx="140" cy="17" r="6" fill="none" stroke="white" stroke-width="2.5"/><line x1="140" y1="23" x2="140" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="29" x2="153" y2="29" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M125,43 Q125,52 140,52 Q155,52 155,43" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="125" cy="43" r="3" fill="white"/><circle cx="155" cy="43" r="3" fill="white"/></svg>',
 
-contemporary:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#0e1060"/><polygon points="140,8 108,52 172,52" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/><line x1="116" y1="36" x2="164" y2="36" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="100" y1="36" x2="180" y2="36" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5,4"/></svg>',
+contemporary:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#03045E"/><polygon points="140,8 108,52 172,52" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/><line x1="116" y1="36" x2="164" y2="36" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="100" y1="36" x2="180" y2="36" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5,4"/></svg>',
 
-polynesian:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#280838"/><path d="M140,52 Q136,38 138,24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M138,24 Q123,16 116,8" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q133,12 134,4" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q146,13 152,6" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q149,20 157,16" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q126,22 119,19" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>',
+polynesian:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#0077B6"/><path d="M140,52 Q136,38 138,24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M138,24 Q123,16 116,8" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q133,12 134,4" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q146,13 152,6" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q149,20 157,16" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M138,24 Q126,22 119,19" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>',
 
-grandfloridian:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#1a0848"/><path d="M118,46 L118,28 L128,36 L140,14 L152,36 L162,28 L162,46 Z" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118" cy="28" r="3.5" fill="white"/><circle cx="140" cy="14" r="3.5" fill="white"/><circle cx="162" cy="28" r="3.5" fill="white"/><line x1="116" y1="46" x2="164" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>',
+grandfloridian:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#023E8A"/><path d="M118,46 L118,28 L128,36 L140,14 L152,36 L162,28 L162,46 Z" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118" cy="28" r="3.5" fill="white"/><circle cx="140" cy="14" r="3.5" fill="white"/><circle cx="162" cy="28" r="3.5" fill="white"/><line x1="116" y1="46" x2="164" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>',
 
-swan:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#100c40"/><path d="M60,22 Q73,14 86,22 Q99,30 112,22 Q125,14 138,22 Q151,30 164,22 Q177,14 190,22 Q203,30 216,22" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M60,36 Q73,28 86,36 Q99,44 112,36 Q125,28 138,36 Q151,44 164,36 Q177,28 190,36 Q203,44 216,36" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/></svg>',
+swan:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#0077B6"/><path d="M60,22 Q73,14 86,22 Q99,30 112,22 Q125,14 138,22 Q151,30 164,22 Q177,14 190,22 Q203,30 216,22" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M60,36 Q73,28 86,36 Q99,44 112,36 Q125,28 138,36 Q151,44 164,36 Q177,28 190,36 Q203,44 216,36" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/></svg>',
 
-waldorf:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#1e0838"/><circle cx="128" cy="24" r="13" fill="none" stroke="white" stroke-width="2.5"/><circle cx="128" cy="24" r="5" fill="white"/><line x1="137" y1="33" x2="160" y2="50" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="150" y1="44" x2="155" y2="39" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="155" y1="47" x2="160" y2="42" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+waldorf:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#03045E"/><circle cx="128" cy="24" r="13" fill="none" stroke="white" stroke-width="2.5"/><circle cx="128" cy="24" r="5" fill="white"/><line x1="137" y1="33" x2="160" y2="50" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="150" y1="44" x2="155" y2="39" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="155" y1="47" x2="160" y2="42" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
 
-fourseasons:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#0c1828"/><circle cx="140" cy="30" r="12" fill="white"/><line x1="140" y1="11" x2="140" y2="7" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="140" y1="49" x2="140" y2="53" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="121" y1="30" x2="117" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="159" y1="30" x2="163" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="17" x2="124" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="153" y1="17" x2="156" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="43" x2="124" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="153" y1="43" x2="156" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>'
+fourseasons:'<svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="60" fill="#0077B6"/><circle cx="140" cy="30" r="12" fill="white"/><line x1="140" y1="11" x2="140" y2="7" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="140" y1="49" x2="140" y2="53" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="121" y1="30" x2="117" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="159" y1="30" x2="163" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="17" x2="124" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="153" y1="17" x2="156" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="127" y1="43" x2="124" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="153" y1="43" x2="156" y2="46" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>'
 };
 
 var hotelDetails={
   wilderness:{
     img:'hotel-wilderness.webp',
-    color:'#6457A6',name:'Wilderness Lodge',
+    color:'#023E8A',name:'Wilderness Lodge',
     tagline:'Pacific Northwest lodge · Boat to MK · Waterfall pool · Cozy and immersive',
     overview:"Wilderness Lodge is themed after National Park lodges of the American Pacific Northwest. The lobby features a massive 82-foot stone fireplace and two totem poles, and a geyser outside erupts on a schedule. It sits on Bay Lake and a boat runs directly to Magic Kingdom.",
     connecting:'standard',
@@ -70,7 +70,7 @@ var hotelDetails={
   },
   aklodge:{
     img:'hotel-aklodge.webp',
-    color:'#C49200',name:'Animal Kingdom Lodge',
+    color:'#0077B6',name:'Animal Kingdom Lodge',
     tagline:'Best kid wow factor at WDW · Savanna views · African wildlife · Exceptional dining',
     overview:"Animal Kingdom Lodge sits on a private savanna home to over 30 species of African wildlife. Rooms with savanna views look directly onto the animals from your balcony at any hour. The lobby features hand-carved African furniture, bead chandeliers, and rotating art from African nations. Widely considered the most immersive resort at Walt Disney World.",
     connecting:'best',
@@ -94,7 +94,7 @@ var hotelDetails={
   },
   beachclub:{
     img:'hotel-beachclub.webp',
-    color:'#1ABFA4',name:'Beach Club Resort',
+    color:'#00B4D8',name:'Beach Club Resort',
     tagline:'Walk to EPCOT · Stormalong Bay pool · Best location for EPCOT + HS',
     overview:"Beach Club Resort is a New England coastal hotel on Crescent Lake between EPCOT and Hollywood Studios. You can walk to both parks in under 10 minutes. Famous for Stormalong Bay — a 3-acre pool with a waterslide through a shipwreck, lazy river, and sand bottom. The consensus top pick for mixed-age groups visiting EPCOT.",
     connecting:'best',
@@ -117,7 +117,7 @@ var hotelDetails={
   },
   contemporary:{
     img:'hotel-contemporary.webp',
-    color:'#1ABFA4',name:'Contemporary Resort',
+    color:'#00B4D8',name:'Contemporary Resort',
     tagline:'Walk to Magic Kingdom · Monorail through the lobby · California Grill',
     overview:"The Contemporary Resort is one of Walt Disney World's two original hotels, opening in 1971. The monorail passes directly through the A-frame tower at the fourth floor. A 10-minute walk from Magic Kingdom. The 15th-floor California Grill has the most famous fireworks view at WDW. Tower rooms have floor-to-ceiling windows with city-like views.",
     connecting:'standard',
@@ -140,7 +140,7 @@ var hotelDetails={
   },
   polynesian:{
     img:'hotel-polynesian.webp',
-    color:'#EF767A',name:'Polynesian Village Resort',
+    color:'#48CAE4',name:'Polynesian Village Resort',
     tagline:"Tropical theming · Monorail to MK · Beach fireworks · Trader Sam's",
     overview:"The Polynesian Village Resort is a South Pacific-themed resort on the monorail loop on Seven Seas Lagoon with a view of Cinderella Castle. The Great Ceremonial House lobby is filled with tropical plants, fountains, and tiki torches. The beach at night with the MK fireworks in the distance is one of the most memorable experiences at WDW.",
     connecting:'best',
@@ -163,7 +163,7 @@ var hotelDetails={
   },
   grandfloridian:{
     img:'hotel-grandfloridian.webp',
-    color:'#6457A6',name:'Grand Floridian Resort & Spa',
+    color:'#023E8A',name:'Grand Floridian Resort & Spa',
     tagline:"Disney's flagship · Michelin-starred dining · Walk to MK · Victoria & Albert's",
     overview:"The Grand Floridian is Walt Disney World's flagship resort — a Victorian-era hotel with red peaked roofs, white gingerbread facades, and a five-story atrium lobby with live piano and orchestra. A walking bridge connects directly to Magic Kingdom. Home to Victoria & Albert's, the only Michelin-starred Disney-owned restaurant in the world.",
     connecting:'best',
@@ -187,7 +187,7 @@ var hotelDetails={
   },
   swan:{
     img:'hotel-swan.webp',
-    color:'#7D7ABC',name:'Swan & Dolphin',
+    color:'#0077B6',name:'Swan & Dolphin',
     tagline:'Same EPCOT walk as Beach Club · Half the price · Marriott points · No Disney perks',
     overview:"The Swan and Dolphin are two connected hotels by architect Michael Graves, sitting on Crescent Lake with the same walkable access to EPCOT and Hollywood Studios as the Disney-owned EPCOT resorts — at roughly half the price. Guests earn Marriott Bonvoy points. The tradeoff: no Extended Evening Hours, no direct MDE room charging.",
     connecting:'best',
@@ -210,7 +210,7 @@ var hotelDetails={
     tips:['You get Disney bus access and early park entry just like Disney-owned hotels','No Extended Evening Hours is the main thing you give up vs Beach Club next door','Book on Marriott.com and use Bonvoy points — a major advantage over Disney resorts','The Swan Reserve is the newest and most luxurious building'],
   },
   waldorf:{
-    color:'#C49200',name:'Waldorf Astoria Orlando',
+    color:'#0077B6',name:'Waldorf Astoria Orlando',
     tagline:'Forbes 4-Star · 482-acre grounds · EPCOT fireworks views · Shuttle to parks',
     overview:"The Waldorf Astoria Orlando sits within Walt Disney World property on 482 acres of nature preserve. As an official Disney hotel, guests get 30-minute early park entry. Recently completed a full property-wide renovation. Bull & Bear is one of the best steakhouses in the Orlando area.",
     connecting:'standard',
@@ -231,7 +231,7 @@ var hotelDetails={
     tips:['Book a fireworks-view room and watch EPCOT Luminous from your balcony — one of the most underrated experiences near WDW','Hilton Honors points can make a night here surprisingly affordable','No Extended Evening Hours is the main Disney perk you miss vs Disney-owned hotels','The motorcoach is comfortable but adds 15–20 mins vs walking from Beach Club'],
   },
   fourseasons:{
-    color:'#EF767A',name:'Four Seasons Orlando',
+    color:'#48CAE4',name:'Four Seasons Orlando',
     tagline:'AAA Five Diamond · Michelin-starred Capa · Lazy river · Best luxury near WDW',
     overview:"The Four Seasons Orlando is the highest-rated hotel in the Orlando area — AAA Five Diamond, Forbes Four-Star hotel and Capa restaurant, and home to the only non-Disney Michelin-starred restaurant at WDW. The pool complex with lazy river and waterslides is exceptional, and the Kids for All Seasons programme is extensive.",
     connecting:'standard',

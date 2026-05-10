@@ -38,28 +38,28 @@ var eveningDNs={
     hotel:'Works from any hotel · Best used as an adult night at MK (TRON, Seven Dwarfs Mine Train, Space Mountain back-to-back with no waits) or HS (Rise of the Resistance, Slinky Dog Dash, Galaxy\'s Edge at night) while little one sleeps'},
 };
 var fi=[
-  {bk:'flights',  label:'Flights',                  note:'ATL→MCO, 4 passengers, round trip',        color:'#7D7ABC',off:1050,peak:1350,isFly:true},
-  {bk:'transport',label:'Airport transport',        note:'Mears Connect, round trip × 4 people',     color:'#B4B2A9',off:140, peak:140,isFly:true},
-  {bk:'transport',label:'Gas — Marietta to Orlando, return',note:'~440 miles each way × 2 = ~880 miles · est. 25 mpg · ~$3.30/gal projected 2029',color:'#7D7ABC',off:120,peak:120,isDrive:true},
-  {bk:'transport',label:'Florida Turnpike tolls, return',note:'Georgia state line to Orlando and back · SunPass/E-ZPass rates',color:'#B4B2A9',off:40, peak:40,isDrive:true},
-  {bk:'park',     label:'Park tickets',             note:'4-day base tickets × 4 people',            color:'#1ABFA4',off:2050,peak:2350},
-  {bk:'park',     label:'Lightning Lane Multi Pass',note:'4 park days × 4 people',                   color:'#1ABFA4',off:500, peak:650,sub:true},
-  {bk:'dining',   label:'General dining',           note:'5 days · quick service + table service',   color:'#EF767A',off:1200,peak:1500},
-  {bk:'dining',   label:"Cinderella's Royal Table", note:'3 adults + 1 child · incl. tax & gratuity',color:'#EF767A',off:300, peak:320,special:true},
+  {bk:'flights',  label:'Flights',                  note:'ATL→MCO, 4 passengers, round trip',        color:'#023E8A',off:1050,peak:1350,isFly:true},
+  {bk:'transport',label:'Airport transport',        note:'Mears Connect, round trip × 4 people',     color:'#48CAE4',off:140, peak:140,isFly:true},
+  {bk:'transport',label:'Gas — Marietta to Orlando, return',note:'~440 miles each way × 2 = ~880 miles · est. 25 mpg · ~$3.30/gal projected 2029',color:'#023E8A',off:120,peak:120,isDrive:true},
+  {bk:'transport',label:'Florida Turnpike tolls, return',note:'Georgia state line to Orlando and back · SunPass/E-ZPass rates',color:'#48CAE4',off:40, peak:40,isDrive:true},
+  {bk:'park',     label:'Park tickets',             note:'4-day base tickets × 4 people',            color:'#0077B6',off:2050,peak:2350},
+  {bk:'park',     label:'Lightning Lane Multi Pass',note:'4 park days × 4 people',                   color:'#0077B6',off:500, peak:650,sub:true},
+  {bk:'dining',   label:'General dining',           note:'5 days · quick service + table service',   color:'#00B4D8',off:1200,peak:1500},
+  {bk:'dining',   label:"Cinderella's Royal Table", note:'3 adults + 1 child · incl. tax & gratuity',color:'#00B4D8',off:300, peak:320,special:true},
 
-  {bk:'special',  label:'Bibbidi Bobbidi Boutique', note:'Kingdom Package · 1 child · princess gown, crown, wand, hair',color:'#D4A800',off:260,peak:260,special:true},
-  {bk:'special',  label:'Caring for Giants',        note:'Animal Kingdom · 60-min elephant experience · all 4 guests',color:'#D4A800',off:170,peak:170,special:true},
-  {bk:'misc',     label:'Travel insurance',          note:'Trip protection · covers cancellation, medical, trip interruption · ~4–5% of total trip cost · Essential for a $9k–12k trip with a toddler',color:'#888780',off:400,peak:500},
-  {bk:'misc',     label:'Memory Maker / PhotoPass',  note:'Unlimited digital downloads of all Disney photographer shots · Ride photos included · Covers your whole party for the entire trip · Worth every cent with an almost-4-year-old at her first trip',color:'#888780',off:230,peak:230,isMemMaker:true},
-  {bk:'misc',     label:'Stroller rental',           note:'Kingdom Strollers (third-party) · ~$65/day · Delivered to your hotel before arrival · Much better than Disney in-park rentals ($35/day, lost when you leave a park) · 4 park days',color:'#888780',off:260,peak:260,isStroller:true},
-  {bk:'misc',     label:'Souvenirs',                 note:'Budgeted generously!',                     color:'#888780',off:1650,peak:2400},
-  {bk:'misc',     label:'In-room babysitting',      note:"Kid's Nite Out · 1 evening · ~5 hrs",      color:'#888780',off:220, peak:220},
-  {bk:'misc',     label:'MagicBand+',               note:'4 bands × ~$45 avg · Lights up + vibrates during Happily Ever After, Luminous, Fantasmic! + show interactions · Optional — free Key to the World card works for park entry, Lightning Lane & room key',color:'#888780',off:210,peak:210,isBand:true},
+  {bk:'special',  label:'Bibbidi Bobbidi Boutique', note:'Kingdom Package · 1 child · princess gown, crown, wand, hair',color:'#E8B84B',off:260,peak:260,special:true},
+  {bk:'special',  label:'Caring for Giants',        note:'Animal Kingdom · 60-min elephant experience · all 4 guests',color:'#E8B84B',off:170,peak:170,special:true},
+  {bk:'misc',     label:'Travel insurance',          note:'Trip protection · covers cancellation, medical, trip interruption · ~4–5% of total trip cost · Essential for a $9k–12k trip with a toddler',color:'#90E0EF',off:400,peak:500},
+  {bk:'misc',     label:'Memory Maker / PhotoPass',  note:'Unlimited digital downloads of all Disney photographer shots · Ride photos included · Covers your whole party for the entire trip · Worth every cent with an almost-4-year-old at her first trip',color:'#90E0EF',off:230,peak:230,isMemMaker:true},
+  {bk:'misc',     label:'Stroller rental',           note:'Kingdom Strollers (third-party) · ~$65/day · Delivered to your hotel before arrival · Much better than Disney in-park rentals ($35/day, lost when you leave a park) · 4 park days',color:'#90E0EF',off:260,peak:260,isStroller:true},
+  {bk:'misc',     label:'Souvenirs',                 note:'Budgeted generously!',                     color:'#90E0EF',off:1650,peak:2400},
+  {bk:'misc',     label:'In-room babysitting',      note:"Kid's Nite Out · 1 evening · ~5 hrs",      color:'#90E0EF',off:220, peak:220},
+  {bk:'misc',     label:'MagicBand+',               note:'4 bands × ~$45 avg · Lights up + vibrates during Happily Ever After, Luminous, Fantasmic! + show interactions · Optional — free Key to the World card works for park entry, Lightning Lane & room key',color:'#90E0EF',off:210,peak:210,isBand:true},
 ];
 
 
 var resortRests=[
-  {area:'Magic Kingdom resorts',color:'#7D7ABC',hotels:[
+  {area:'Magic Kingdom resorts',color:'#023E8A',hotels:[
     {name:'Contemporary Resort',icon:'△',rests:[
       {n:'California Grill',t:'ts',p:'~$200–$260 (2 adults)',nt:'15th floor · Signature prix fixe + wine pairing · MK fireworks from the terrace · Already in your date night options',special:'Fireworks views from the 15th-floor observation deck — guests step outside mid-meal during the show'},
       {n:'Steakhouse 71',t:'ts',p:'~$140–$180',nt:"All-day American classics inspired by Walt's opening day · Breakfast is great value · More casual and family-friendly"},
@@ -82,7 +82,7 @@ var resortRests=[
       {n:'Geyser Point Bar & Grill',t:'qs',p:'~$80–$100',nt:'Outdoor waterfront bar overlooks Bay Lake · Casual burgers and cocktails · Great sunset spot'},
     ]},
   ]},
-  {area:'EPCOT & Hollywood Studios resorts',color:'#1ABFA4',hotels:[
+  {area:'EPCOT & Hollywood Studios resorts',color:'#0077B6',hotels:[
     {name:'Beach Club Resort',icon:'⚓',rests:[
       {n:'Cape May Café',t:'ts',p:'~$140–$180',nt:'Casual and family-friendly · Best pre-EPCOT morning option',special:'Admiral Donald Duck character breakfast — Donald, Goofy, and Minnie in nautical gear · Fun, relaxed, and much easier to book than MK character dining'},
       {n:'Beaches & Cream Soda Shop',t:'ts',p:'~$60–$80',nt:'Classic American soda fountain · No reservations',special:'Famous Kitchen Sink sundae — every flavour, every topping, the literal kitchen sink · Designed to feed 4 · An unmissable WDW tradition'},
@@ -104,7 +104,7 @@ var resortRests=[
       {n:'PB&G',t:'qs',p:'~$60–$75',nt:'Poolside bar and grill · Casual · Great after a morning at the Four Seasons lazy river'},
     ]},
   ]},
-  {area:'Animal Kingdom resort',color:'#6457A6',hotels:[
+  {area:'Animal Kingdom resort',color:'#023E8A',hotels:[
     {name:'Animal Kingdom Lodge',icon:'🌳',rests:[
       {n:'Jiko — The Cooking Place',t:'ts',p:'~$180–$240',nt:'African-inspired cuisine · One of the best resort restaurants at WDW',special:"One of the largest African wine collections outside the continent · Pairs perfectly with a Starlight Safari date night · Quiet and sophisticated"},
       {n:'Sanaa',t:'ts',p:'~$100–$130',nt:'Kidani Village · Indian-inspired',special:'Savanna views — giraffes and zebras visible from your table · Famous bread service with 9 accompaniments · A special meal at a very reasonable price'},
