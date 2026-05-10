@@ -29,7 +29,7 @@ This repo is public. Nothing in the committed files contains credentials, accoun
 
 | File/pattern | Why |
 |-------------|-----|
-| `backend.hcl` | Contains your state bucket name and region |
+| `backend.hcl` | Contains your state bucket name, region, and lock settings |
 | `*.tfvars` | Contains your site bucket name and other config |
 | `**/.terraform/` | Provider binaries downloaded on init |
 | `**/.terraform.lock.hcl` | Lock file generated on init |
@@ -39,7 +39,7 @@ This repo is public. Nothing in the committed files contains credentials, accoun
 
 ## Prerequisites
 
-- [Terraform](https://developer.hashicorp.com/terraform/install) >= 1.5
+- [Terraform](https://developer.hashicorp.com/terraform/install) >= 1.10
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) configured with credentials (`aws configure` or environment variables)
 - An AWS account with permissions to create S3, CloudFront, and IAM resources
 
@@ -49,7 +49,7 @@ Terraform uses the standard AWS credential chain — it picks up `~/.aws/credent
 
 ## One-time bootstrap
 
-Terraform stores its state remotely in S3 (with DynamoDB for state locking). This bucket must exist before you can run `terraform init`. Create it once manually:
+Terraform stores its state in S3, using S3's native conditional writes for locking (requires Terraform >= 1.10 — no DynamoDB table needed). The bucket must exist before you can run `terraform init`. Create it once manually:
 
 ```bash
 # Create the state bucket (pick any unique name)
@@ -61,14 +61,6 @@ aws s3api create-bucket \
 aws s3api put-bucket-versioning \
   --bucket your-tf-state-bucket \
   --versioning-configuration Status=Enabled
-
-# Create the DynamoDB lock table
-aws dynamodb create-table \
-  --table-name your-tf-state-lock \
-  --attribute-definitions AttributeName=LockID,AttributeType=S \
-  --key-schema AttributeName=LockID,KeyType=HASH \
-  --billing-mode PAY_PER_REQUEST \
-  --region us-east-1
 ```
 
 ---
@@ -78,7 +70,7 @@ aws dynamodb create-table \
 1. **Create your backend config** (gitignored):
    ```bash
    cp backend.hcl.example backend.hcl
-   # Edit backend.hcl with your state bucket name and lock table name
+   # Edit backend.hcl with your state bucket name
    ```
 
 2. **Create your variable values** (gitignored):
