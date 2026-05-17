@@ -44,7 +44,9 @@ var fi=[
   {bk:'transport',label:'Florida Turnpike tolls, return',note:'Georgia state line to Orlando and back · SunPass/E-ZPass rates',color:'#48CAE4',off:40, peak:40,isDrive:true},
   {bk:'park',     label:'Park tickets',             note:'4-day base tickets × 4 people',            color:'#0077B6',off:2050,peak:2350},
   {bk:'park',     label:'Lightning Lane Multi Pass',note:'4 park days × 4 people',                   color:'#0077B6',off:500, peak:650,sub:true},
-  {bk:'dining',   label:'General dining',           note:'5 days · quick service + table service',   color:'#00B4D8',off:1200,peak:1500},
+  {bk:'dining',   label:'Quick service dining',      note:'5 days · counter service · ~$15–20/person per meal',  color:'#48CAE4',off:900, peak:1100},
+  {bk:'dining',   label:'Table service dining',      note:'5 days · sit-down restaurants · excludes special/character dining', color:'#00B4D8',off:500, peak:650},
+  {bk:'dining',   label:'Snacks & drinks',           note:'5 days · Mickey bars, specialty drinks, popcorn, etc. · ~$40–60/day', color:'#90E0EF',off:200, peak:300},
 
   {bk:'special',  label:"Cinderella's Royal Table", note:'3 adults + 1 child · incl. tax & gratuity',color:'#E8B84B',off:300, peak:320,special:true},
   {bk:'special',  label:'Bibbidi Bobbidi Boutique', note:'Kingdom Package · 1 child · princess gown, crown, wand, hair',color:'#E8B84B',off:260,peak:260,special:true},

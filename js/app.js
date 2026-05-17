@@ -305,7 +305,7 @@ function buildHotelPage(key){
     +'<div class="sect">Connecting rooms'+connectBadge+'</div>'
     +'<div style="font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:.5rem">'+d.connectingNote+'</div>'
     +(hotelDetails[Object.keys(hotelDetails).find(function(k){return hotelDetails[k]===d;})]&&hotels.deluxe.concat(hotels.assoc).find(function(h){return hotelDetails[h.key]===d;})&&hotels.deluxe.concat(hotels.assoc).find(function(h){return hotelDetails[h.key]===d;}).eeh?'<div style="font-size:10px;background:var(--bgs);color:var(--ts);border-radius:var(--rm);padding:.4rem .65rem;margin-bottom:.5rem">✓ This hotel includes Extended Evening Hours — 2 extra hours in select parks after close on specific nights, with dramatically reduced crowds. Exclusively for Disney-owned deluxe resort guests.</div>':'<div style="font-size:10px;background:var(--bg2);color:var(--t3);border-radius:var(--rm);padding:.4rem .65rem;margin-bottom:.5rem">✗ This hotel does not include Extended Evening Hours (a perk exclusive to Disney-owned deluxe resorts). Guests of Swan &amp; Dolphin, Waldorf, and Four Seasons miss this benefit.</div>')
-    +'<div style="font-size:10px;background:var(--bgi);color:var(--ti);border-radius:var(--rm);padding:.4rem .65rem;margin-bottom:.75rem">Disney hotel reservations: <strong>(407) 939-1936</strong> · Book both rooms first, then call to link and request connecting · Ask again at check-in</div>'
+    +'<div style="font-size:10px;background:var(--bgi);color:var(--ti);border-radius:var(--rm);padding:.4rem .65rem;margin-bottom:.75rem">Disney hotel reservations: <strong>(407) 939-5277</strong> · Book both rooms first, then call to link and request connecting · Ask again at check-in</div>'
     +villaHtml
     +'<div class="dv"></div>'
     +'<div class="two-col">'
@@ -335,11 +335,27 @@ function closeHotel(){
   window.scrollTo(0,0);
 }
 
+function isPeakDate(d){
+  var m=d.getMonth()+1,day=d.getDate();
+  if(m===1&&day<=6) return true;           // New Year's week
+  if(m===3&&day>=12) return true;          // Spring break start
+  if(m===4&&day<=19) return true;          // Spring break end
+  if(m===6||m===7) return true;            // Summer
+  if(m===8&&day<=14) return true;          // Early August
+  if(m===11&&day>=21) return true;         // Thanksgiving week
+  if(m===12&&day>=19) return true;         // Christmas season
+  return false;
+}
 function setTripDate(v){
   tripDate=v?new Date(v+'T12:00:00'):null;
   if(tripDate){
     inflYears=Math.max(0,tripDate.getFullYear()-2026);
     tripMult=Math.pow(1+inflRate,inflYears)/Math.pow(1+inflRate,3);
+    var auto=isPeakDate(tripDate)?'peak':'off';
+    season=auto;
+    document.querySelectorAll('.tog').forEach(function(b){
+      b.classList.toggle('on',b.getAttribute('onclick').indexOf("'"+auto+"'")!==-1);
+    });
   } else {inflYears=3;tripMult=1.0;}
   render();
 }
@@ -371,7 +387,7 @@ function renderTimeline(){
   var secs=[
     {label:'Book now — Hotel reservation',color:'#023E8A',date:null,rows:[
       ['Book your hotel immediately','Disney deluxe rooms sell up to 20 months in advance. Polynesian, Beach Club, and Grand Floridian fill fastest for December. 2029 dates expected to open around May/June 2028.'],
-      ['Call (407) 939-1936 after booking','Link two-room reservations and add your connecting room request as a note. Repeat at check-in.'],
+      ['Call (407) 939-5277 after booking','Link two-room reservations and add your connecting room request as a note. Repeat at check-in.'],
     ]},
     {label:'~May/June '+pkgYear+' — Packages and party tickets',color:'#0077B6',date:new Date(pkgYear,4,1),rows:(partyRow?[['Vacation packages go on sale','Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.'],partyRow]:[['Vacation packages go on sale','Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.']])},
     {label:'Your 60-day window — '+fmtDate(d60),color:'#00B4D8',date:d60,rows:[

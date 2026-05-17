@@ -50,7 +50,7 @@ var hotelDetails={
     tagline:'Pacific Northwest lodge · Boat to MK · Waterfall pool · Cozy and immersive',
     overview:"Wilderness Lodge is themed after National Park lodges of the American Pacific Northwest. The lobby features a massive 82-foot stone fireplace and two totem poles, and a geyser outside erupts on a schedule. It sits on Bay Lake and a boat runs directly to Magic Kingdom.",
     connecting:'standard',
-    connectingNote:'Connecting rooms available and frequently requested at Wilderness Lodge. Call (407) 939-1936 after booking to link reservations. A single building with logical room numbering helps; requests are more often fulfilled here than at sprawling multi-building resorts.',
+    connectingNote:'Connecting rooms available and frequently requested at Wilderness Lodge. Call (407) 939-5277 after booking to link reservations. A single building with logical room numbering helps; requests are more often fulfilled here than at sprawling multi-building resorts.',
     villas:'Boulder Ridge Villas & Copper Creek Villas',
     villaNote:'Two DVC villa buildings attached — Boulder Ridge (older, cosy) and Copper Creek (newer). 1BR, 2BR, and Cascade Cabin options. A 1BR villa gives grandma a private bedroom, full kitchen, and washer/dryer.',
     rooms:[
@@ -74,7 +74,7 @@ var hotelDetails={
     tagline:'Best kid wow factor at WDW · Savanna views · African wildlife · Exceptional dining',
     overview:"Animal Kingdom Lodge sits on a private savanna home to over 30 species of African wildlife. Rooms with savanna views look directly onto the animals from your balcony at any hour. The lobby features hand-carved African furniture, bead chandeliers, and rotating art from African nations. Widely considered the most immersive resort at Walt Disney World.",
     connecting:'best',
-    connectingNote:'One of the better hotels for connecting rooms because savanna-view rooms come in natural pairs along the same corridor. Call (407) 939-1936 and specify savanna view connecting rooms. This request is well-understood by cast members here.',
+    connectingNote:'One of the better hotels for connecting rooms because savanna-view rooms come in natural pairs along the same corridor. Call (407) 939-5277 and specify savanna view connecting rooms. This request is well-understood by cast members here.',
     villas:'Animal Kingdom Lodge Villas (Kidani Village)',
     villaNote:'Kidani Village is the DVC villa building, a short walk from the main lodge. It has its own savanna, pool, and Sanaa restaurant. A 1BR villa gives grandma a private bedroom, full kitchen, and savanna views.',
     rooms:[
@@ -98,7 +98,7 @@ var hotelDetails={
     tagline:'Walk to EPCOT · Stormalong Bay pool · Best location for EPCOT + HS',
     overview:"Beach Club Resort is a New England coastal hotel on Crescent Lake between EPCOT and Hollywood Studios. You can walk to both parks in under 10 minutes. Famous for Stormalong Bay — a 3-acre pool with a waterslide through a shipwreck, lazy river, and sand bottom. The consensus top pick for mixed-age groups visiting EPCOT.",
     connecting:'best',
-    connectingNote:'Beach Club is frequently recommended for multigenerational trips. Cast members are very familiar with connecting room requests here. Call (407) 939-1936 to link reservations. The single main building layout makes fulfilling requests more reliable.',
+    connectingNote:'Beach Club is frequently recommended for multigenerational trips. Cast members are very familiar with connecting room requests here. Call (407) 939-5277 to link reservations. The single main building layout makes fulfilling requests more reliable.',
     villas:'Beach Club Villas',
     villaNote:'Beach Club Villas are attached and share all amenities including Stormalong Bay. A 1BR gives grandma a private bedroom, full kitchen, and washer/dryer right next to the pool.',
     rooms:[
@@ -121,7 +121,7 @@ var hotelDetails={
     tagline:'Walk to Magic Kingdom · Monorail through the lobby · California Grill',
     overview:"The Contemporary Resort is one of Walt Disney World's two original hotels, opening in 1971. The monorail passes directly through the A-frame tower at the fourth floor. A 10-minute walk from Magic Kingdom. The 15th-floor California Grill has the most famous fireworks view at WDW. Tower rooms have floor-to-ceiling windows with city-like views.",
     connecting:'standard',
-    connectingNote:'Connecting rooms available at the Contemporary. The tower layout helps. Call (407) 939-1936 to link reservations. Garden Wing rooms (the separate lower building) tend to have better connecting room availability than the tower.',
+    connectingNote:'Connecting rooms available at the Contemporary. The tower layout helps. Call (407) 939-5277 to link reservations. Garden Wing rooms (the separate lower building) tend to have better connecting room availability than the tower.',
     villas:'Bay Lake Tower (DVC)',
     villaNote:'Bay Lake Tower is attached via a sky bridge and has its own rooftop lounge with one of the best MK fireworks views on property. 1BR, 2BR, and 3BR Grand Villa available.',
     rooms:[
@@ -144,7 +144,7 @@ var hotelDetails={
     tagline:"Tropical theming · Monorail to MK · Beach fireworks · Trader Sam's",
     overview:"The Polynesian Village Resort is a South Pacific-themed resort on the monorail loop on Seven Seas Lagoon with a view of Cinderella Castle. The Great Ceremonial House lobby is filled with tropical plants, fountains, and tiki torches. The beach at night with the MK fireworks in the distance is one of the most memorable experiences at WDW.",
     connecting:'best',
-    connectingNote:"The Polynesian is a good bet for connecting rooms but rooms are spread across multiple longhouse buildings. Call (407) 939-1936 and specifically request connecting rooms in the same building — this specification matters because you cannot get connecting rooms across buildings.",
+    connectingNote:"The Polynesian is a good bet for connecting rooms but rooms are spread across multiple longhouse buildings. Call (407) 939-5277 and specifically request connecting rooms in the same building — this specification matters because you cannot get connecting rooms across buildings.",
     villas:'Polynesian Villas & Bungalows (DVC)',
     villaNote:'Studio and 1BR units in the main resort area. The over-water Bungalows (floating on Seven Seas Lagoon) are among the most extraordinary accommodations at WDW. Studio villas are a practical option if a second room is what you need.',
     rooms:[
@@ -167,7 +167,7 @@ var hotelDetails={
     tagline:"Disney's flagship · Michelin-starred dining · Walk to MK · Victoria & Albert's",
     overview:"The Grand Floridian is Walt Disney World's flagship resort — a Victorian-era hotel with red peaked roofs, white gingerbread facades, and a five-story atrium lobby with live piano and orchestra. A walking bridge connects directly to Magic Kingdom. Home to Victoria & Albert's, the only Michelin-starred Disney-owned restaurant in the world.",
     connecting:'best',
-    connectingNote:"Grand Floridian connecting rooms are available in both the main building and lodge buildings (Conch Key, Boca Chica, etc.). The main building has the most reliable inventory. Call (407) 939-1936 and specify main building connecting rooms.",
+    connectingNote:"Grand Floridian connecting rooms are available in both the main building and lodge buildings (Conch Key, Boca Chica, etc.). The main building has the most reliable inventory. Call (407) 939-5277 and specify main building connecting rooms.",
     villas:'Grand Floridian Villas (DVC)',
     villaNote:'The Grand Floridian Villas are in the main building, sharing all amenities. A 1BR villa includes Jacuzzi tub and some of the most beautiful rooms at WDW. Also the only way to get a washer/dryer at the Grand Floridian.',
     rooms:[
