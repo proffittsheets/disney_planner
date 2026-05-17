@@ -73,6 +73,11 @@ function renderBudget(){
   gi('m-pp').textContent='$'+Math.round(total/4).toLocaleString();
   gi('m-hotel').textContent='$'+Math.round(cats.hotel).toLocaleString();
   gi('m-hotel-lbl').textContent='hotel ('+nights+' night'+(nights===1?'':'s')+')';
+  gi('sb-total').textContent='$'+Math.round(total).toLocaleString();
+  gi('sb-pp').textContent='$'+Math.round(total/4).toLocaleString();
+  gi('sb-hotel').textContent='$'+Math.round(cats.hotel).toLocaleString();
+  gi('sb-hotel-lbl').textContent='hotel ('+nights+' night'+(nights===1?'':'s')+')';
+  gi('sb-special').textContent='$'+Math.round(spTot).toLocaleString();
   var inflEl=gi('m-infl-note');
   if(inflEl){var pct=Math.round((Math.pow(1+inflRate,inflYears)-1)*100);var basePct=Math.round((Math.pow(1+inflRate,3)-1)*100);inflEl.textContent=tripDate?'Prices adjusted for '+tripDate.getFullYear()+' (+'+pct+'% from 2026 · '+Math.round(inflRate*100)+'%/yr)':'2029 baseline (+'+basePct+'% from 2026 · '+Math.round(inflRate*100)+'%/yr)';};
   gi('m-special').textContent='$'+Math.round(spTot).toLocaleString();
@@ -201,6 +206,7 @@ function openPark(id){
   gi('content-'+id).innerHTML=buildParkPage(p);
   document.querySelectorAll('.page').forEach(function(pg){pg.classList.remove('active')});
   gi('pg-'+id).classList.add('active');
+  var bar=gi('sticky-bar');if(bar)bar.classList.remove('visible');
   window.scrollTo(0,0);
 }
 function closePark(){
@@ -319,6 +325,7 @@ function openHotel(key){
   document.querySelectorAll('.page').forEach(function(pg){pg.classList.remove('active')});
   var pg=document.getElementById('pg-hotel-'+key);
   if(pg) pg.classList.add('active');
+  var bar=gi('sticky-bar');if(bar)bar.classList.remove('visible');
   window.scrollTo(0,0);
 }
 
@@ -422,3 +429,7 @@ document.addEventListener('click',function(e){
   if(e.target&&e.target.id==='btn-fly'){setTravel('fly');}
   if(e.target&&e.target.id==='btn-drive'){setTravel('drive');}
 });
+new IntersectionObserver(function(entries){
+  var bar=gi('sticky-bar');
+  if(bar)bar.classList.toggle('visible',!entries[0].isIntersecting&&gi('pg-main').classList.contains('active'));
+},{threshold:0}).observe(document.querySelector('.mg'));

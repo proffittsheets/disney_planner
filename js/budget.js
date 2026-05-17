@@ -45,8 +45,8 @@ var fi=[
   {bk:'park',     label:'Park tickets',             note:'4-day base tickets × 4 people',            color:'#0077B6',off:2050,peak:2350},
   {bk:'park',     label:'Lightning Lane Multi Pass',note:'4 park days × 4 people',                   color:'#0077B6',off:500, peak:650,sub:true},
   {bk:'dining',   label:'General dining',           note:'5 days · quick service + table service',   color:'#00B4D8',off:1200,peak:1500},
-  {bk:'dining',   label:"Cinderella's Royal Table", note:'3 adults + 1 child · incl. tax & gratuity',color:'#00B4D8',off:300, peak:320,special:true},
 
+  {bk:'special',  label:"Cinderella's Royal Table", note:'3 adults + 1 child · incl. tax & gratuity',color:'#E8B84B',off:300, peak:320,special:true},
   {bk:'special',  label:'Bibbidi Bobbidi Boutique', note:'Kingdom Package · 1 child · princess gown, crown, wand, hair',color:'#E8B84B',off:260,peak:260,special:true},
   {bk:'special',  label:'Caring for Giants',        note:'Animal Kingdom · 60-min elephant experience · all 4 guests',color:'#E8B84B',off:170,peak:170,special:true},
   {bk:'misc',     label:'Travel insurance',          note:'Trip protection · covers cancellation, medical, trip interruption · ~4–5% of total trip cost · Essential for a $9k–12k trip with a toddler',color:'#90E0EF',off:400,peak:500},
