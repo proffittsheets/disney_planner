@@ -4,7 +4,7 @@ An interactive single-page trip planner for a Disney World 2029 trip — 2 adult
 
 ## What it does
 
-- **Budget calculator** — estimates total trip cost with adjustable nights, inflation rate, and peak/off-peak season toggle; breaks down flights, hotel, park tickets, dining, special experiences, and misc
+- **Budget calculator** — estimates total trip cost with adjustable nights, inflation rate, and peak/off-peak season (auto-detected from your trip date, or manually overridden); breaks down flights, hotel, park tickets, dining, special experiences, and misc
 - **Hotel picker** — compare Disney deluxe resorts and partner hotels side-by-side with transport options, prices, and club level upgrades; click through to full detail pages with room types, suites, connecting room info, and insider tips
 - **Park day plans** — per-park guides covering rides the child can do, day/night itinerary, must-try snacks, restaurants, and shops; includes upcoming attractions (Tropical Americas, Monstropolis, Villains Land)
 - **Special experiences** — fireworks dinner options (pontoon cruise, dessert parties, California Grill, etc.) and evening add-ons (Pandora at night, Starlight Safari, Disney After Hours) with costs factored into the budget
