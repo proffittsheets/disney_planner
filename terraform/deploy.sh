@@ -11,6 +11,9 @@ aws s3 sync "$SITE_ROOT" "s3://$BUCKET" \
   --exclude "terraform/*" \
   --exclude ".gitignore" \
   --exclude ".DS_Store" \
+  --exclude "AGENTS.md" \
+  --exclude "README.md" \
+  --exclude "LICENSE" \
   --delete
 
 echo "Invalidating CloudFront cache ..."
