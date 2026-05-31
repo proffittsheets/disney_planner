@@ -1,8 +1,8 @@
 var fireworksDNs={
-  none:{l:'None',off:0,peak:0,note:'No fireworks experience selected',hotel:''},
   pontoon:{l:'Private Pontoon Cruise',off:550,peak:600,
     note:'Private boat for up to 10 guests · Captain provided · Snacks and soft drinks included · Watch Happily Ever After from Seven Seas Lagoon · Can be decorated for special occasions · Book via My Disney Experience or (407) 939-7529 · 60-day booking window',
-    hotel:'Departs from: Contemporary (Boat Nook), Polynesian (Seven Seas Marina), Grand Floridian (Captain\'s Shipyard), Wilderness Lodge (Teton), Fort Wilderness · EPCOT version also available'},
+    hotel:'Departs from: Contemporary (Boat Nook), Polynesian (Seven Seas Marina), Grand Floridian (Captain\'s Shipyard), Wilderness Lodge (Teton), Fort Wilderness · EPCOT version also available',
+    warn:"Castle not visible from the water — the pontoon watches from Seven Seas Lagoon, which has great fireworks but no Cinderella Castle backdrop. The dessert party and beach viewing areas have significantly better castle views."},
   dessert:{l:'MK Fireworks Dessert Party',off:220,peak:260,
     note:'Tomorrowland Terrace · Unlimited dessert buffet + beer/wine for adults · Reserved viewing area at Plaza Garden · Post-Party recommended — claim your spot early, watch fireworks, eat desserts while Main Street clears · Pre-Party and Seats & Sweets (seated, slightly off-center) also available · ~$99/adult + $59/child projected to 2029',
     hotel:'In-park experience — works from any hotel · Best from nearby monorail resorts for easy exit after'},

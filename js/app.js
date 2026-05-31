@@ -1,4 +1,4 @@
-var sel='beachclub',activeFireworks='pontoon',activeEvening='pandora',season='off',nights=5,wantBands=true,clubLevel=false,wantMemMaker=true,wantStroller=false,tripDate=null,travelMode='fly',tripMult=1.0,inflYears=3,inflRate=0.05,timelineEverOpened=false;
+var sel='beachclub',activeFireworks=['pontoon'],activeEvening='pandora',season='off',nights=5,wantBands=true,clubLevel=false,wantMemMaker=true,wantStroller=false,tripDate=null,travelMode='fly',tripMult=1.0,inflYears=3,inflRate=0.05,timelineEverOpened=false;
 function gi(id){return document.getElementById(id)}
 function fmt(n){if(n===0)return'Free';return'$'+Math.round(n).toLocaleString()}
 function p(n){return Math.round(n*tripMult);}
@@ -6,8 +6,8 @@ function allH(){return hotels.deluxe.concat(hotels.assoc)}
 function getH(){return allH().filter(function(h){return h.key===sel})[0]}
 function buildItems(){
   var h=getH(),items=fi.slice();
-  var fw=fireworksDNs[activeFireworks],ev=eveningDNs[activeEvening];
-  if(activeFireworks!=='none') items.push({bk:'special',label:fw.l,note:fw.note,hotelNote:fw.hotel,color:'#E8B84B',off:fw.off,peak:fw.peak,special:true,adults:true,isFW:true,free:fw.free});
+  var ev=eveningDNs[activeEvening];
+  activeFireworks.forEach(function(k){var fw=fireworksDNs[k];items.push({bk:'special',label:fw.l,note:fw.note,hotelNote:fw.hotel,color:'#E8B84B',off:fw.off,peak:fw.peak,special:true,adults:true,isFW:true,free:fw.free});});
   if(activeEvening!=='none') items.push({bk:'special',label:ev.l,note:ev.note,hotelNote:ev.hotel,color:'#00B4D8',off:ev.off,peak:ev.peak,special:true,adults:true,isEV:true,free:ev.free});
   var hRate=Math.round(p(h[season])/5);
   var clubExtra=clubLevel&&h.club?Math.round(p(h.club[season==='off'?'offExtra':'peakExtra'])):0;
@@ -96,10 +96,11 @@ function renderBudget(){
   gi('lis').innerHTML=secs.map(function(sec){
     var picker='';
     if(sec.isDN){
-      var fwBtns=Object.keys(fireworksDNs).map(function(k){var v=fireworksDNs[k];return'<button class="ob '+(activeFireworks===k?'on':'')+'" onclick="selFW(\''+k+'\')">'+v.l+'</button>';}).join('');
+      var fwBtns=Object.keys(fireworksDNs).map(function(k){var v=fireworksDNs[k];return'<button class="ob '+(activeFireworks.indexOf(k)!==-1?'on':'')+'" onclick="selFW(\''+k+'\')">'+v.l+'</button>';}).join('');
+      var fwWarns=activeFireworks.map(function(k){return fireworksDNs[k].warn?'<div style="font-size:10px;color:var(--tw);background:var(--bgw);border-radius:var(--rm);padding:.3rem .6rem;margin-top:4px">⚠ '+fireworksDNs[k].warn+'</div>':'';}).join('');
       var evBtns=Object.keys(eveningDNs).map(function(k){var v=eveningDNs[k];return'<button class="ob '+(activeEvening===k?'on':'')+'" onclick="selEV(\''+k+'\')">'+v.l+(v.free?' (free)':'')+'</button>';}).join('');
       picker='<div style="padding:6px 0 4px">'
-        +'<div style="margin-bottom:6px"><span class="slb">Fireworks experience — pick one:</span><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:3px">'+fwBtns+'</div></div>'
+        +'<div style="margin-bottom:6px"><span class="slb">Fireworks experiences — pick up to two:</span><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:3px">'+fwBtns+'</div>'+fwWarns+'</div>'
         +'<div><span class="slb">Evening experience — pick one:</span><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:3px">'+evBtns+'</div></div>'
         +'</div>';
     }
@@ -337,25 +338,27 @@ function closeHotel(){
 
 function isPeakDate(d){
   var m=d.getMonth()+1,day=d.getDate();
-  if(m===1&&day<=6) return true;           // New Year's week
-  if(m===3&&day>=12) return true;          // Spring break start
-  if(m===4&&day<=19) return true;          // Spring break end
-  if(m===6||m===7) return true;            // Summer
-  if(m===8&&day<=14) return true;          // Early August
-  if(m===11&&day>=21) return true;         // Thanksgiving week
-  if(m===12&&day>=19) return true;         // Christmas season
+  if(m===1&&day<=6) return true;
+  if(m===3&&day>=12) return true;
+  if(m===4&&day<=19) return true;
+  if(m===6||m===7) return true;
+  if(m===8&&day<=14) return true;
+  if(m===11&&day>=21) return true;
+  if(m===12&&day>=19) return true;
   return false;
+}
+function syncSeasonButtons(){
+  document.querySelectorAll('.tog').forEach(function(b){
+    b.classList.toggle('on',b.getAttribute('onclick').indexOf("'"+season+"'")!==-1);
+  });
 }
 function setTripDate(v){
   tripDate=v?new Date(v+'T12:00:00'):null;
   if(tripDate){
     inflYears=Math.max(0,tripDate.getFullYear()-2026);
     tripMult=Math.pow(1+inflRate,inflYears)/Math.pow(1+inflRate,3);
-    var auto=isPeakDate(tripDate)?'peak':'off';
-    season=auto;
-    document.querySelectorAll('.tog').forEach(function(b){
-      b.classList.toggle('on',b.getAttribute('onclick').indexOf("'"+auto+"'")!==-1);
-    });
+    season=isPeakDate(tripDate)?'peak':'off';
+    syncSeasonButtons();
   } else {inflYears=3;tripMult=1.0;}
   render();
 }
@@ -378,8 +381,8 @@ function renderTimeline(){
   var ci=tripDate;
   var d60=addDays(ci,-60),d7=addDays(ci,-7),d30=addDays(ci,-30),d2=addDays(ci,-2);
   var pkgYear=ci.getFullYear()-1;
-  var hasParty=activeFireworks==='mnsshp'||activeFireworks==='mvmcp';
-  var partyLabel=activeFireworks==='mnsshp'?"Mickey Not-So-Scary Halloween Party":activeFireworks==='mvmcp'?"Mickey Very Merry Christmas Party":'Seasonal party';
+  var hasParty=activeFireworks.some(function(k){return k==='mnsshp'||k==='mvmcp';});
+  var partyLabel=activeFireworks.filter(function(k){return k==='mnsshp'||k==='mvmcp';}).map(function(k){return k==='mnsshp'?"Mickey's Not-So-Scary Halloween Party":"Mickey's Very Merry Christmas Party";}).join(' + ');
   var lastNight=addDays(ci,nights-1);
   if(su)su.innerHTML='<span style="font-weight:500;color:var(--ts)">'+fmtShort(ci)+'</span> check-in &nbsp;&bull;&nbsp; '+nights+' nights &nbsp;&bull;&nbsp; '+fmtShort(addDays(ci,nights))+' check-out';
   if(!timelineEverOpened){timelineEverOpened=true;var tbody=gi('booking-timeline-body');var ca=gi('booking-caret');if(tbody){tbody.style.display='block';if(ca)ca.style.transform='rotate(180deg)';}}
@@ -432,12 +435,16 @@ function renderTimeline(){
 function render(){renderHotels();renderBudget();renderParkNav();renderResortRests();renderTimeline();}
 function setClub(v){clubLevel=v;render();}
 function selH(k){sel=k;clubLevel=false;render();}
-function selFW(k){activeFireworks=k;render();}
+function selFW(k){
+  var i=activeFireworks.indexOf(k);
+  if(i!==-1){activeFireworks.splice(i,1);}
+  else{if(activeFireworks.length>=2)activeFireworks.shift();activeFireworks.push(k);}
+  render();
+}
 function selEV(k){activeEvening=k;render();}
-function setSeason(s,btn){
+function setSeason(s){
   season=s;
-  document.querySelectorAll('.tog').forEach(function(b){b.classList.remove('on')});
-  btn.classList.add('on');
+  syncSeasonButtons();
   render();
 }
 render();

@@ -22,7 +22,7 @@ terraform/                  — AWS infrastructure: S3 + CloudFront; see terrafo
 
 **No modules, no imports.** All JS files are loaded as plain `<script>` tags. Variables in `hotels.js`, `parks.js`, and `budget.js` are globals that `app.js` reads directly.
 
-**State lives in `app.js` top-level vars:** `sel` (selected hotel key), `season`, `nights`, `clubLevel`, `travelMode`, `activeFireworks`, `activeEvening`, `wantMemMaker`, `wantStroller`, `wantBands`, `tripDate`, `inflRate`, `inflYears`, `tripMult`.
+**State lives in `app.js` top-level vars:** `sel` (selected hotel key), `season`, `nights`, `clubLevel`, `travelMode`, `activeFireworks` (array, up to 2 keys), `activeEvening`, `wantMemMaker`, `wantStroller`, `wantBands`, `tripDate`, `inflRate`, `inflYears`, `tripMult`.
 
 **Rendering is always a full re-render.** The single `render()` function calls all five sub-renders (`renderHotels`, `renderBudget`, `renderParkNav`, `renderResortRests`, `renderTimeline`). There is no diffing or partial update.
 
@@ -38,6 +38,8 @@ terraform/                  — AWS infrastructure: S3 + CloudFront; see terrafo
 
 - Hotel keys (e.g. `'beachclub'`, `'grandfloridian'`) are the join key between `hotels.deluxe`/`hotels.assoc`, `hotelSvgs`, and `hotelDetails`.
 - Budget line items (`fi` array in `budget.js`) each have: `bk` (category bucket), `label`, `note`, `color`, `off` (off-peak price), `peak`, and optional boolean flags (`isFly`, `isDrive`, `isMemMaker`, `isStroller`, `isBand`).
+- Fireworks options (`fireworksDNs` in `budget.js`) support an optional `warn` string — displayed as a yellow warning card in the picker when that option is selected.
+- `activeFireworks` is an array (not a string). Use `.indexOf(k) !== -1` to check selection and `selFW(k)` to toggle. Max 2 selections; picking a third replaces the oldest.
 - Park objects (in `parks.js`) each have: `id`, `name`, `tag`, `hbg`, `htxt`, `img`, `age`, `pills`, `rAll` (rides), `snacks`, `rests`, `shops`, `day`, `night`, `coming` (optional), `festivals` (EPCOT only), `maps` (optional).
 
 ## Running locally
@@ -70,3 +72,5 @@ Never commit `backend.hcl`, `*.tfvars`, `.terraform/`, or `*.tfstate*` — these
 - **Club level:** Some hotels have a `club` sub-object with `offExtra`/`peakExtra` per-night prices and `perks` text. The `clubLevel` global toggles it.
 - **Inflation model:** Prices are stored in approximate 2026 dollars. `tripMult = (1+inflRate)^inflYears / (1+inflRate)^3` adjusts them. When `tripDate` is null, `inflYears` defaults to 3 (2029 baseline).
 - **Booking timeline:** Calculated entirely from `tripDate` in `renderTimeline()`. Key windows: 60-day dining, 7-day Lightning Lane Multi Pass, packages in May/June of the year before travel.
+- **Peak auto-detection:** `setTripDate()` calls `isPeakDate()` and sets `season` automatically. `syncSeasonButtons()` syncs the Off-peak/Peak toggle UI to match `season`. Manual overrides still work.
+- **Dining split:** General dining is broken into three `bk:'dining'` line items — Quick service, Table service, and Snacks & drinks — all rolled up under "Food & dining" in the budget breakdown.
