@@ -1,10 +1,10 @@
-var sel='beachclub',activeFireworks=['pontoon'],activeEvening='pandora',season='off',nights=5,wantBands=true,clubLevel=false,wantMemMaker=true,wantStroller=false,tripDate=null,travelMode='fly',tripMult=1.0,inflYears=3,inflRate=0.05,timelineEverOpened=false;
+var sel='beachclub',activeFireworks=['pontoon'],activeEvening='pandora',season='off',nights=5,wantBands=true,clubLevel=false,wantMemMaker=true,wantStroller=false,tripDate=null,travelMode='fly',tripMult=1.0,inflYears=3,inflRate=0.05,timelineEverOpened=false,activeDeal=null,kidsEatFree=false;
 function gi(id){return document.getElementById(id)}
 function fmt(n){if(n===0)return'Free';return'$'+Math.round(n).toLocaleString()}
 function p(n){return Math.round(n*tripMult);}
 function allH(){return hotels.deluxe.concat(hotels.assoc)}
 function getH(){return allH().filter(function(h){return h.key===sel})[0]}
-function buildItems(){
+function buildItemsRaw(){
   var h=getH(),items=fi.slice();
   var ev=eveningDNs[activeEvening];
   activeFireworks.forEach(function(k){var fw=fireworksDNs[k];items.push({bk:'special',label:fw.l,note:fw.note,hotelNote:fw.hotel,color:'#E8B84B',off:fw.off,peak:fw.peak,special:true,adults:true,isFW:true,free:fw.free});});
@@ -12,6 +12,8 @@ function buildItems(){
   var hRate=Math.round(p(h[season])/5);
   var clubExtra=clubLevel&&h.club?Math.round(p(h.club[season==='off'?'offExtra':'peakExtra'])):0;
   items.push({bk:'hotel',label:h.name+(clubLevel&&h.club?' — '+h.club.name:''),note:h.note+' · '+nights+' night'+(nights===1?'':'s')+(clubLevel&&h.club?' · '+h.club.perks:''),color:'#023E8A',off:(hRate+clubExtra)*nights,peak:(hRate+clubExtra)*nights,isHotel:true});
+  var babyNights=activeFireworks.length+(activeEvening!=='none'?1:0);
+  if(babyNights>0) items.push({bk:'misc',label:'In-room babysitting',note:"Kid's Nite Out · "+babyNights+" evening"+(babyNights>1?'s':'')+" · ~5 hrs each",color:'#90E0EF',off:babyNights*220,peak:babyNights*220});
   return items.filter(function(i){
     if(i.isFly&&travelMode==='drive') return false;
     if(i.isDrive&&travelMode==='fly') return false;
@@ -20,6 +22,19 @@ function buildItems(){
     if(i.isBand&&!wantBands) return false;
     return true;
   });
+}
+function buildItems(){
+  return buildItemsRaw().map(function(i){
+    if(activeDeal==='room'&&i.bk==='hotel') return Object.assign({},i,{off:Math.round(i.off*0.75),peak:Math.round(i.peak*0.75)});
+    if(activeDeal==='dining'&&i.bk==='dining'&&i.label!=='Snacks & drinks') return Object.assign({},i,{off:0,peak:0});
+    if(kidsEatFree&&activeDeal!=='dining'&&i.bk==='dining') return Object.assign({},i,{off:Math.round(i.off*0.80),peak:Math.round(i.peak*0.80)});
+    return i;
+  });
+}
+function dealSavings(){
+  if(!activeDeal&&!kidsEatFree) return 0;
+  var s=season,raw=buildItemsRaw(),adj=buildItems();
+  return raw.reduce(function(sum,item,idx){return sum+p(item[s])-p(adj[idx][s]);},0);
 }
 function calcCats(){
   var s=season,cats={flights:0,hotel:0,park:0,dining:0,special:0,transport:0,misc:0};
@@ -93,10 +108,29 @@ function renderBudget(){
     {h:'Special experiences',items:buildItems().filter(function(i){return i.special}),isDN:true},
     {h:'Everything else', items:buildItems().filter(function(i){return i.bk==='misc'}),isMisc:true},
   ];
-  gi('lis').innerHTML=secs.map(function(sec){
+  var sav=dealSavings();
+  var savHtml=(activeDeal||kidsEatFree)&&sav>0?'<div style="font-size:11px;color:var(--ts);background:var(--bgs);border-radius:var(--rm);padding:.3rem .6rem;margin-top:5px">Estimated savings with this deal scenario: <strong>'+fmt(sav)+'</strong></div>':'';
+  var kefDisabled=activeDeal==='dining';
+  var dealsHtml='<div class="sl" style="padding-top:8px">Disney deals</div>'
+    +'<div style="padding:4px 0 6px">'
+    +'<div style="margin-bottom:5px"><span class="slb">Deal scenario — pick one:</span>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:3px">'
+    +'<button class="ob '+(activeDeal===null?'on':'')+'" onclick="setDeal(null)">No deal</button>'
+    +'<button class="ob '+(activeDeal==='room'?'on':'')+'" onclick="setDeal(\'room\')">Room discount (25% off hotel)</button>'
+    +'<button class="ob '+(activeDeal==='dining'?'on':'')+'" onclick="setDeal(\'dining\')">Free dining</button>'
+    +'</div></div>'
+    +'<div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px">'
+    +'<button class="ob '+(kidsEatFree&&!kefDisabled?'on':'')+'" onclick="toggleKEF()"'+(kefDisabled?' style="opacity:.4;pointer-events:none"':'')+'>Kids eat free</button>'
+    +'<span style="font-size:10px;color:var(--t3)">Free dining plan for child ages 3–9 · stackable with room discount'+(kefDisabled?' · superseded by free dining':'')+'</span>'
+    +'</div>'
+    +savHtml
+    +'<div style="font-size:10px;color:var(--t3);margin-top:6px">Deals typically announced 4–6 months before travel · these are scenarios, not guarantees · free dining requires rack-rate room + Park Hopper tickets</div>'
+    +'</div>';
+  gi('lis').innerHTML=dealsHtml+secs.map(function(sec){
     var picker='';
     if(sec.isDN){
-      var fwBtns=Object.keys(fireworksDNs).map(function(k){var v=fireworksDNs[k];return'<button class="ob '+(activeFireworks.indexOf(k)!==-1?'on':'')+'" onclick="selFW(\''+k+'\')">'+v.l+'</button>';}).join('');
+      var fwBtns='<button class="ob '+(activeFireworks.length===0?'on':'')+'" onclick="clearFW()">None</button>'
+        +Object.keys(fireworksDNs).map(function(k){var v=fireworksDNs[k];return'<button class="ob '+(activeFireworks.indexOf(k)!==-1?'on':'')+'" onclick="selFW(\''+k+'\')">'+v.l+'</button>';}).join('');
       var fwWarns=activeFireworks.map(function(k){return fireworksDNs[k].warn?'<div style="font-size:10px;color:var(--tw);background:var(--bgw);border-radius:var(--rm);padding:.3rem .6rem;margin-top:4px">⚠ '+fireworksDNs[k].warn+'</div>':'';}).join('');
       var evBtns=Object.keys(eveningDNs).map(function(k){var v=eveningDNs[k];return'<button class="ob '+(activeEvening===k?'on':'')+'" onclick="selEV(\''+k+'\')">'+v.l+(v.free?' (free)':'')+'</button>';}).join('');
       picker='<div style="padding:6px 0 4px">'
@@ -442,6 +476,9 @@ function selFW(k){
   render();
 }
 function selEV(k){activeEvening=k;render();}
+function clearFW(){activeFireworks=[];render();}
+function setDeal(d){activeDeal=d;render();}
+function toggleKEF(){if(activeDeal==='dining')return;kidsEatFree=!kidsEatFree;render();}
 function setSeason(s){
   season=s;
   syncSeasonButtons();

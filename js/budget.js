@@ -55,7 +55,6 @@ var fi=[
   {bk:'misc',     label:'Memory Maker / PhotoPass',  note:'Unlimited digital downloads of all Disney photographer shots · Ride photos included · Covers your whole party for the entire trip · Worth every cent with an almost-4-year-old at her first trip',color:'#90E0EF',off:230,peak:230,isMemMaker:true},
   {bk:'misc',     label:'Stroller rental',           note:'Kingdom Strollers (third-party) · ~$65/day · Delivered to your hotel before arrival · Much better than Disney in-park rentals ($35/day, lost when you leave a park) · 4 park days',color:'#90E0EF',off:260,peak:260,isStroller:true},
   {bk:'misc',     label:'Souvenirs',                 note:'Budgeted generously!',                     color:'#90E0EF',off:1650,peak:2400},
-  {bk:'misc',     label:'In-room babysitting',      note:"Kid's Nite Out · 1 evening · ~5 hrs",      color:'#90E0EF',off:220, peak:220},
   {bk:'misc',     label:'MagicBand+',               note:'4 bands × ~$45 avg · Lights up + vibrates during Happily Ever After, Luminous, Fantasmic! + show interactions · Optional — free Key to the World card works for park entry, Lightning Lane & room key',color:'#90E0EF',off:210,peak:210,isBand:true},
 ];
 
