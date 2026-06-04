@@ -37,14 +37,6 @@ var eveningDNs={
     note:'Separate-ticket event · 10pm–1am (enter from 7pm) · Very limited capacity — near-empty parks · Major rides with minimal or no waits · Included popcorn, ice cream novelties, and bottled beverages throughout · Available at MK ($175–199/ticket in 2026), Hollywood Studios ($155–189), and EPCOT ($155–179) · Select nights only — check Disney website for 2029 dates · ~$200/adult projected to 2029',
     hotel:'Works from any hotel · Best used as an adult night at MK (TRON, Seven Dwarfs Mine Train, Space Mountain back-to-back with no waits) or HS (Rise of the Resistance, Slinky Dog Dash, Galaxy\'s Edge at night) while little one sleeps'},
 };
-var daytimeDNs={
-  crt:{l:"Cinderella's Royal Table",off:300,peak:320,
-    note:'Magic Kingdom · Character dining inside the castle · 3 adults + 1 child · incl. tax & gratuity · Breakfast, lunch, or dinner · Sells out fast — book at exactly 60 days'},
-  bbb:{l:'Bibbidi Bobbidi Boutique',off:260,peak:260,
-    note:'Magic Kingdom or Disney Springs · Kingdom Package · 1 child · princess gown, crown, wand, sash & hair styling · One of the most magical moments of the trip for a 4-year-old · Book at 60 days'},
-  cfg:{l:'Caring for Giants',off:170,peak:170,
-    note:'Animal Kingdom · 60-min elephant experience · all 4 guests · Walk alongside the herd, learn from the keepers, feed the elephants · One of the most unique WDW experiences available · Book at 60 days'},
-};
 var fi=[
   {bk:'flights',  label:'Flights',                  note:'ATL→MCO, 4 passengers, round trip',        color:'#023E8A',off:1050,peak:1350,isFly:true},
   {bk:'transport',label:'Airport transport',        note:'Mears Connect, round trip × 4 people',     color:'#48CAE4',off:140, peak:140,isFly:true},
@@ -56,6 +48,9 @@ var fi=[
   {bk:'dining',   label:'Table service dining',      note:'5 days · sit-down restaurants · excludes special/character dining', color:'#00B4D8',off:500, peak:650},
   {bk:'dining',   label:'Snacks & drinks',           note:'5 days · Mickey bars, specialty drinks, popcorn, etc. · ~$40–60/day', color:'#90E0EF',off:200, peak:300},
 
+  {bk:'special',  label:"Cinderella's Royal Table", note:'3 adults + 1 child · incl. tax & gratuity',color:'#E8B84B',off:300, peak:320,special:true},
+  {bk:'special',  label:'Bibbidi Bobbidi Boutique', note:'Kingdom Package · 1 child · princess gown, crown, wand, hair',color:'#E8B84B',off:260,peak:260,special:true},
+  {bk:'special',  label:'Caring for Giants',        note:'Animal Kingdom · 60-min elephant experience · all 4 guests',color:'#E8B84B',off:170,peak:170,special:true},
   {bk:'misc',     label:'Travel insurance',          note:'Trip protection · covers cancellation, medical, trip interruption · ~4–5% of total trip cost · Essential for a $9k–12k trip with a toddler',color:'#90E0EF',off:400,peak:500},
   {bk:'misc',     label:'Memory Maker / PhotoPass',  note:'Unlimited digital downloads of all Disney photographer shots · Ride photos included · Covers your whole party for the entire trip · Worth every cent with an almost-4-year-old at her first trip',color:'#90E0EF',off:230,peak:230,isMemMaker:true},
   {bk:'misc',     label:'Stroller rental',           note:'Kingdom Strollers (third-party) · ~$65/day · Delivered to your hotel before arrival · Much better than Disney in-park rentals ($35/day, lost when you leave a park) · 4 park days',color:'#90E0EF',off:260,peak:260,isStroller:true},
