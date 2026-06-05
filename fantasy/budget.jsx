@@ -34,7 +34,7 @@
         i.hotelNote ? h('div', { className: 'fy-tip' }, '✦ Hotel tip: ' + i.hotelNote) : null,
         i.warn ? h('div', { className: 'fy-warn' }, '⚠ ' + i.warn) : null
       ),
-      h('div', { className: 'fy-li-val' + (i.free ? ' free' : '') }, fmt(E.p(i[st.season], st.tripMult)))
+      h('div', { className: 'fy-li-val' + (i.free ? ' free' : '') }, fmt(E.pItem(i, st.season, st.tripMult)))
     );
   }
 
@@ -133,7 +133,7 @@
         if (sec.key === 'travel') picker = h(TravelPicker, { planner: pl });
         if (sec.key === 'special') picker = h(SpecialPicker, { planner: pl });
         if (sec.key === 'misc') picker = h(MiscPicker, { planner: pl });
-        var subtotal = sec.items.length > 1 ? Math.round(sec.items.reduce(function (acc, it) { return acc + E.p(it[st.season], st.tripMult); }, 0)) : null;
+        var subtotal = sec.items.length > 1 ? Math.round(sec.items.reduce(function (acc, it) { return acc + E.pItem(it, st.season, st.tripMult); }, 0)) : null;
         return h('div', { key: sec.key },
           h('div', { className: 'fy-sl' }, h('span', { className: 'spark' }, '✦'), sec.h),
           picker,

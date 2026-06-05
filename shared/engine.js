@@ -193,7 +193,7 @@ window.PlannerEngine = (function () {
   }
 
   return {
-    fmt: fmt, money: money, p: p, computeTripMult: computeTripMult,
+    fmt: fmt, money: money, p: p, pItem: pItem, computeTripMult: computeTripMult,
     defaultState: defaultState, allH: allH, getH: getH,
     buildItems: buildItems, buildItemsRaw: buildItemsRaw, dealSavings: dealSavings,
     calcCats: calcCats, totals: totals, sections: sections, CATS: CATS,
