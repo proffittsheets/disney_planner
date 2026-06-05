@@ -12,6 +12,7 @@ window.PlannerEngine = (function () {
     return Math.pow(1 + inflRate, inflYears);
   }
   function p(n, tripMult) { return Math.round(n * tripMult); }
+  function pItem(item, season, tripMult) { return item.noInfl ? item[season] : p(item[season], tripMult); }
   function allH() { return hotels.deluxe.concat(hotels.assoc); }
   function getH(sel) { return allH().filter(function (h) { return h.key === sel; })[0]; }
 
@@ -74,12 +75,12 @@ window.PlannerEngine = (function () {
   function dealSavings(s) {
     if (!s.activeDeal && !s.kidsEatFree) return 0;
     var season = s.season, raw = buildItemsRaw(s), adj = buildItems(s);
-    return raw.reduce(function (sum, item, idx) { return sum + p(item[season], s.tripMult) - p(adj[idx][season], s.tripMult); }, 0);
+    return raw.reduce(function (sum, item, idx) { return sum + pItem(item, season, s.tripMult) - pItem(adj[idx], season, s.tripMult); }, 0);
   }
 
   function calcCats(s) {
     var season = s.season, cats = { flights: 0, hotel: 0, park: 0, dining: 0, special: 0, transport: 0, misc: 0 };
-    buildItems(s).forEach(function (i) { cats[i.bk] += p(i[season], s.tripMult); });
+    buildItems(s).forEach(function (i) { cats[i.bk] += pItem(i, season, s.tripMult); });
     return cats;
   }
 
@@ -87,7 +88,7 @@ window.PlannerEngine = (function () {
     var cats = calcCats(s);
     var total = Object.values(cats).reduce(function (a, b) { return a + b; }, 0);
     var season = s.season;
-    var spTot = buildItems(s).filter(function (i) { return i.special; }).reduce(function (a, i) { return a + p(i[season], s.tripMult); }, 0);
+    var spTot = buildItems(s).filter(function (i) { return i.special; }).reduce(function (a, i) { return a + pItem(i, season, s.tripMult); }, 0);
     return { cats: cats, total: total, perPerson: Math.round(total / 4), hotel: cats.hotel, special: spTot };
   }
 

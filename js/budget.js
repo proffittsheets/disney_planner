@@ -48,8 +48,8 @@ var daytimeDNs={
 var fi=[
   {bk:'flights',  label:'Flights',                  note:'ATL→MCO, 4 passengers, round trip',        color:'#023E8A',off:1050,peak:1350,isFly:true},
   {bk:'transport',label:'Airport transport',        note:'Mears Connect, round trip × 4 people',     color:'#48CAE4',off:140, peak:140,isFly:true},
-  {bk:'transport',label:'Gas — Marietta to Orlando, return',note:'~440 miles each way × 2 = ~880 miles · est. 25 mpg · ~$3.20/gal projected 2027',color:'#023E8A',off:120,peak:120,isDrive:true},
-  {bk:'transport',label:'Florida Turnpike tolls, return',note:'Georgia state line to Orlando and back · SunPass/E-ZPass rates',color:'#48CAE4',off:40, peak:40,isDrive:true},
+  {bk:'transport',label:'Gas — Marietta to Orlando, return',note:'~440 miles each way × 2 = ~880 miles · est. 25 mpg · ~$3.20/gal projected 2027',color:'#023E8A',off:120,peak:120,isDrive:true,noInfl:true},
+  {bk:'transport',label:'Florida Turnpike tolls, return',note:'Georgia state line to Orlando and back · SunPass/E-ZPass rates',color:'#48CAE4',off:40, peak:40,isDrive:true,noInfl:true},
   {bk:'park',     label:'Park tickets',             note:'4-day base tickets × 4 people',            color:'#0077B6',off:2050,peak:2350},
   {bk:'park',     label:'Lightning Lane Multi Pass',note:'4 park days × 4 people',                   color:'#0077B6',off:500, peak:650,sub:true},
   {bk:'dining',   label:'Quick service dining',      note:'5 days · counter service · ~$15–20/person per meal',  color:'#48CAE4',off:900, peak:1100},
@@ -59,7 +59,7 @@ var fi=[
   {bk:'misc',     label:'Travel insurance',          note:'Trip protection · covers cancellation, medical, trip interruption · ~4–5% of total trip cost · Essential for a $9k–12k trip with a toddler',color:'#90E0EF',off:400,peak:500},
   {bk:'misc',     label:'Memory Maker / PhotoPass',  note:'Unlimited digital downloads of all Disney photographer shots · Ride photos included · Covers your whole party for the entire trip · Worth every cent with an almost-4-year-old at her first trip',color:'#90E0EF',off:230,peak:230,isMemMaker:true},
   {bk:'misc',     label:'Stroller rental',           note:'Kingdom Strollers (third-party) · ~$65/day · Delivered to your hotel before arrival · Much better than Disney in-park rentals ($35/day, lost when you leave a park) · 4 park days',color:'#90E0EF',off:260,peak:260,isStroller:true},
-  {bk:'misc',     label:'Souvenirs',                 note:'Budgeted generously!',                     color:'#90E0EF',off:1650,peak:1650},
+  {bk:'misc',     label:'Souvenirs',                 note:'Budgeted generously!',                     color:'#90E0EF',off:1650,peak:1650,noInfl:true},
   {bk:'misc',     label:'MagicBand+',               note:'4 bands × ~$45 avg · Lights up + vibrates during Happily Ever After, Luminous, Fantasmic! + show interactions · Optional — free Key to the World card works for park entry, Lightning Lane & room key',color:'#90E0EF',off:210,peak:210,isBand:true},
 ];
 
