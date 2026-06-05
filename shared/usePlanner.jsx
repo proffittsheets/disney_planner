@@ -18,7 +18,9 @@
         var saved = JSON.parse(localStorage.getItem(storeKey) || 'null');
         if (saved) {
           Object.assign(base, saved);
-          base.tripDate = saved.tripDate ? new Date(saved.tripDate) : null;
+          var td = saved.tripDate ? new Date(saved.tripDate) : null;
+          base.tripDate = (td && !isNaN(td.getTime()) && td.getFullYear() >= 2025) ? td : null;
+          if (!base.tripDate) { base.inflYears = E.defaultState().inflYears; base.tripMult = E.computeTripMult(base.inflRate, base.inflYears); }
         }
       } catch (e) {}
       return base;
@@ -76,13 +78,14 @@
       setInflRate: function (v) {
         setState(function (s) {
           var rate = parseFloat(v) / 100;
-          var tm = s.tripDate ? E.computeTripMult(rate, s.inflYears) : s.tripMult;
+          var tm = E.computeTripMult(rate, s.inflYears);
           return Object.assign({}, s, { inflRate: rate, tripMult: tm });
         });
       },
       setTripDate: function (v) {
         setState(function (s) {
           var d = v ? new Date(v + 'T12:00:00') : null;
+          if (d && (isNaN(d.getTime()) || d.getFullYear() < 2025 || d.getFullYear() > 2040)) d = null;
           if (d) {
             var inflYears = Math.max(0, d.getFullYear() - 2026);
             return Object.assign({}, s, {
@@ -91,7 +94,8 @@
               season: E.isPeakDate(d) ? 'peak' : 'off',
             });
           }
-          return Object.assign({}, s, { tripDate: null, inflYears: 3, tripMult: 1.0 });
+          var defYears = E.defaultState().inflYears;
+          return Object.assign({}, s, { tripDate: null, inflYears: defYears, tripMult: E.computeTripMult(s.inflRate, defYears) });
         });
       },
     };

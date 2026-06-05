@@ -7,7 +7,7 @@
   var useState = React.useState, useEffect = React.useEffect, useRef = React.useRef;
 
   function App() {
-    var pl = window.usePlanner({ storeKey: 'fy-planner' });
+    var pl = window.usePlanner({ storeKey: 'fy-planner-v2' });
     var _mode = useState(function () { try { return localStorage.getItem('fy-mode') || 'night'; } catch (e) { return 'night'; } });
     var mode = _mode[0], setMode = _mode[1];
     var modeRef = useRef(mode); modeRef.current = mode;
@@ -79,7 +79,7 @@
     return h('div', { className: 'fy-topbar' },
       h('div', { className: 'fy-brand', style: { cursor: 'pointer' }, onClick: props.onHome },
         h('div', { className: 'fy-brand-mark' }, '✦'),
-        h('div', null, h('div', { className: 'fy-brand-name' }, 'Wishful'), h('div', { className: 'fy-brand-sub' }, 'Disney World 2029 · Trip Planner'))
+        h('div', null, h('div', { className: 'fy-brand-name' }, 'Wishful'), h('div', { className: 'fy-brand-sub' }, 'Disney World 2027 · Trip Planner'))
       ),
       h('div', { className: 'fy-topnav' },
 h('button', {
@@ -123,7 +123,7 @@ h('button', {
     return h('div', { className: 'fy-hero' },
       h('canvas', { ref: canRef, style: { width: '100%', height: '100%' } }),
       h('div', { className: 'fy-hero-content' },
-        h('div', { className: 'fy-hero-kicker' }, 'Once upon a 2029'),
+        h('div', { className: 'fy-hero-kicker' }, 'Once upon a 2027'),
         h('h1', null, 'Disney World', h('br'), 'Trip Planner'),
         h('div', { className: 'fy-hero-sub' }, '2 adults · 1 child (almost 4) · 1 grandparent · 4 park days · flying ATL→MCO. Every wish, every dollar, mapped to the night.'),
         h('div', { className: 'fy-hero-meta' }, props.note)
@@ -158,7 +158,7 @@ h('button', {
   }
 
   function Footer() {
-    return h('div', { className: 'fy-footer' }, h('span', { className: 'fy-script' }, '✦ WISHFUL ✦'), h('div', { style: { marginTop: 6 } }, 'Prices projected to 2029 · estimates only · the magic is real'));
+    return h('div', { className: 'fy-footer' }, h('span', { className: 'fy-script' }, '✦ WISHFUL ✦'), h('div', { style: { marginTop: 6 } }, 'Prices projected to 2027 · estimates only · the magic is real'));
   }
 
   var root = ReactDOM.createRoot(document.getElementById('fy-root'));

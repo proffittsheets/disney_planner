@@ -19,7 +19,7 @@ window.PlannerEngine = (function () {
   function defaultState() {
     return {
       sel: 'beachclub',
-      activeFireworks: ['pontoon'],
+      activeFireworks: ['dessert'],
       activeEvening: 'pandora',
       season: 'off',
       nights: 5,
@@ -30,11 +30,11 @@ window.PlannerEngine = (function () {
       tripDate: null,        // Date or null
       travelMode: 'drive',
       inflRate: 0.05,
-      inflYears: 3,
-      tripMult: 1.0,
+      inflYears: 1,
+      tripMult: computeTripMult(0.05, 1),
       activeDeal: null,
       kidsEatFree: false,
-      activeDaytime: ['crt', 'bbb', 'cfg'],
+      activeDaytime: ['crt', 'bbb'],
     };
   }
 
@@ -47,9 +47,9 @@ window.PlannerEngine = (function () {
     });
     if (s.activeEvening !== 'none') items.push({ bk: 'special', label: ev.l, note: ev.note, hotelNote: ev.hotel, color: '#00B4D8', off: ev.off, peak: ev.peak, special: true, adults: true, isEV: true, free: ev.free });
     (s.activeDaytime || []).forEach(function (k) { var dt = daytimeDNs[k]; items.push({ bk: 'special', label: dt.l, note: dt.note, color: '#E8B84B', off: dt.off, peak: dt.peak, special: true }); });
-    var hRate = Math.round(p(h[s.season], tm) / 5);
-    var clubExtra = s.clubLevel && h.club ? Math.round(p(h.club[s.season === 'off' ? 'offExtra' : 'peakExtra'], tm)) : 0;
-    items.push({ bk: 'hotel', label: h.name + (s.clubLevel && h.club ? ' — ' + h.club.name : ''), note: h.note + ' · ' + s.nights + ' night' + (s.nights === 1 ? '' : 's') + (s.clubLevel && h.club ? ' · ' + h.club.perks : ''), color: '#023E8A', off: (hRate + clubExtra) * s.nights, peak: (hRate + clubExtra) * s.nights, isHotel: true });
+    var hRateRaw = h[s.season] / 5;
+    var clubExtraRaw = s.clubLevel && h.club ? h.club[s.season === 'off' ? 'offExtra' : 'peakExtra'] : 0;
+    items.push({ bk: 'hotel', label: h.name + (s.clubLevel && h.club ? ' — ' + h.club.name : ''), note: h.note + ' · ' + s.nights + ' night' + (s.nights === 1 ? '' : 's') + (s.clubLevel && h.club ? ' · ' + h.club.perks : ''), color: '#023E8A', off: (hRateRaw + clubExtraRaw) * s.nights, peak: (hRateRaw + clubExtraRaw) * s.nights, isHotel: true });
     var babyNights = s.activeFireworks.length + (s.activeEvening !== 'none' ? 1 : 0);
     if (babyNights > 0) items.push({ bk: 'misc', label: 'In-room babysitting', note: "Kid's Nite Out · " + babyNights + ' evening' + (babyNights > 1 ? 's' : '') + ' · ~5 hrs each', color: '#90E0EF', off: babyNights * 220, peak: babyNights * 220 });
     return items.filter(function (i) {
@@ -152,7 +152,7 @@ window.PlannerEngine = (function () {
     var summary = fmtShort(ci) + ' check-in · ' + s.nights + ' nights · ' + fmtShort(addDays(ci, s.nights)) + ' check-out';
     var secs = [
       { label: 'Book now — Hotel reservation', color: '#023E8A', date: null, rows: [
-        ['Book your hotel immediately', 'Disney deluxe rooms sell up to 20 months in advance. Polynesian, Beach Club, and Grand Floridian fill fastest for December. 2029 dates expected to open around May/June 2028.'],
+        ['Book your hotel immediately', 'Disney deluxe rooms sell up to 20 months in advance. Polynesian, Beach Club, and Grand Floridian fill fastest for December. ' + ci.getFullYear() + ' dates expected to open around May/June ' + (ci.getFullYear() - 1) + '.'],
         ['Call (407) 939-5277 after booking', 'Link two-room reservations and add your connecting room request as a note. Repeat at check-in.'],
       ] },
       { label: '~May/June ' + pkgYear + ' — Packages and party tickets', color: '#0077B6', date: new Date(pkgYear, 4, 1), rows: (partyRow ? [['Vacation packages go on sale', 'Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.'], partyRow] : [['Vacation packages go on sale', 'Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.']]) },
@@ -184,10 +184,10 @@ window.PlannerEngine = (function () {
 
   function inflationNote(s) {
     var pct = Math.round((Math.pow(1 + s.inflRate, s.inflYears) - 1) * 100);
-    var basePct = Math.round((Math.pow(1 + s.inflRate, 3) - 1) * 100);
+    var targetYear = 2026 + s.inflYears;
     return s.tripDate
       ? 'Prices adjusted for ' + s.tripDate.getFullYear() + ' (+' + pct + '% from 2026 · ' + Math.round(s.inflRate * 100) + '%/yr)'
-      : '2029 baseline (+' + basePct + '% from 2026 · ' + Math.round(s.inflRate * 100) + '%/yr)';
+      : targetYear + ' baseline (+' + pct + '% from 2026 · ' + Math.round(s.inflRate * 100) + '%/yr)';
   }
 
   return {
