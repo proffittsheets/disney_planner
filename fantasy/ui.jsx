@@ -24,7 +24,7 @@
       { l: 'Estimated total', v: t.total, hero: true, foot: note },
       { l: 'Per person', v: t.perPerson, foot: 'party of 4' },
       { l: 'Hotel · ' + st.nights + ' night' + (st.nights === 1 ? '' : 's'), v: t.hotel, foot: props.planner.d.hotel.name },
-      { l: 'Special events', v: t.special, foot: st.activeFireworks.length + ' fireworks · ' + (st.activeEvening !== 'none' ? '1 evening' : 'no evening') },
+      { l: 'Special events', v: t.special, foot: (function () { var p = []; var dt = (st.activeDaytime || []).length; if (dt > 0) p.push(dt + ' daytime'); p.push(st.activeFireworks.length + ' fireworks'); p.push(st.activeEvening !== 'none' ? '1 evening' : 'no evening'); return p.join(' · '); })() },
     ];
     return h('div', { className: 'fy-metrics' }, cards.map(function (c, i) {
       return h('div', { key: i, className: 'fy-metric' + (c.hero ? ' hero-metric' : '') },

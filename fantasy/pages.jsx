@@ -53,7 +53,7 @@
       })),
       h('div', { className: 'fy-divider' }),
       h('div', { className: 'fy-subsec' }, 'Food'),
-      h('div', { className: 'fy-hint', style: { marginBottom: 8 } }, 'Estimated for family of 4 · 2029 projected from 2026.'),
+      h('div', { className: 'fy-hint', style: { marginBottom: 8 } }, 'Estimated for family of 4 · 2027 projected from 2026.'),
       h('div', { className: 'fy-twocol' },
         h('div', null, h('div', { className: 'fy-microlabel', style: { marginBottom: 8 } }, 'Must-try snacks'), h('div', { className: 'fy-card', style: { padding: '6px 18px' } }, p.snacks.map(function (s, i) {
           return h('div', { key: i, className: 'fy-tl-row' }, h('b', null, s.n + ' '), h('span', { style: { color: 'var(--fy-gold)', fontWeight: 700, fontSize: 'calc(12px * var(--fz))' } }, s.p), s.w ? h('p', { style: { color: 'var(--fy-cyan)' } }, s.w) : null, h('p', null, s.nt));
@@ -93,12 +93,12 @@
       h('div', { className: 'fy-twocol' },
         h('div', null,
           h('div', { className: 'fy-subsec', style: { marginTop: 0 } }, 'Room types — Dec 2025 rates'),
-          h('div', { className: 'fy-hint', style: { marginBottom: 8 } }, 'Dec 1–14 rack rates · 2029 est. at ~7%/yr inflation.'),
+          h('div', { className: 'fy-hint', style: { marginBottom: 8 } }, 'Dec 1–14 rack rates · 2027 est. at ~5%/yr inflation.'),
           h('div', { className: 'fy-card', style: { padding: '4px 16px' } }, d.rooms.map(function (r, i) { return h('div', { key: i, className: 'fy-tl-row', style: { fontSize: 'calc(12.5px * var(--fz))', color: 'var(--fy-ink2)', lineHeight: 1.5 } }, r); })),
           d.suites && d.suites.length ? h('div', null, h('div', { className: 'fy-subsec' }, 'Suites & large-group options'), d.suites.map(function (s, i) {
             return h('div', { key: i, className: 'fy-card', style: { padding: '12px 16px', marginBottom: 8 } },
               h('div', { style: { display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: 6 } }, h('b', { style: { fontSize: 'calc(14px * var(--fz))' } }, s.n), h('span', { className: 'fy-tag sp' }, 'Sleeps ' + s.sleeps)),
-              h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 12, margin: '5px 0' } }, h('span', { style: { fontSize: 'calc(12px * var(--fz))', color: 'var(--fy-gold)', fontWeight: 700 } }, 'Dec 2025: ' + s.dec25), h('span', { style: { fontSize: 'calc(12px * var(--fz))', color: 'var(--fy-ink3)' } }, '2029 est: ' + s.dec29)),
+              h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 12, margin: '5px 0' } }, h('span', { style: { fontSize: 'calc(12px * var(--fz))', color: 'var(--fy-gold)', fontWeight: 700 } }, 'Dec 2025: ' + s.dec25), h('span', { style: { fontSize: 'calc(12px * var(--fz))', color: 'var(--fy-ink3)' } }, '2027 est: ' + s.dec27)),
               h('div', { style: { fontSize: 'calc(12.5px * var(--fz))', color: 'var(--fy-ink2)', lineHeight: 1.5 } }, s.note));
           })) : null
         ),

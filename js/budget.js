@@ -4,10 +4,10 @@ var fireworksDNs={
     hotel:'Departs from: Contemporary (Boat Nook), Polynesian (Seven Seas Marina), Grand Floridian (Captain\'s Shipyard), Wilderness Lodge (Teton), Fort Wilderness · EPCOT version also available',
     warn:"Castle not visible from the water — the pontoon watches from Seven Seas Lagoon, which has great fireworks but no Cinderella Castle backdrop. The dessert party and beach viewing areas have significantly better castle views."},
   dessert:{l:'MK Fireworks Dessert Party',off:220,peak:260,
-    note:'Tomorrowland Terrace · Unlimited dessert buffet + beer/wine for adults · Reserved viewing area at Plaza Garden · Post-Party recommended — claim your spot early, watch fireworks, eat desserts while Main Street clears · Pre-Party and Seats & Sweets (seated, slightly off-center) also available · ~$99/adult + $59/child projected to 2029',
+    note:'Tomorrowland Terrace · Unlimited dessert buffet + beer/wine for adults · Reserved viewing area at Plaza Garden · Post-Party recommended — claim your spot early, watch fireworks, eat desserts while Main Street clears · Pre-Party and Seats & Sweets (seated, slightly off-center) also available · ~$99/adult + $59/child projected to 2027',
     hotel:'In-park experience — works from any hotel · Best from nearby monorail resorts for easy exit after'},
   ferrytale:{l:'Ferrytale Fireworks Dessert Cruise',off:295,peak:330,
-    note:'Watch Happily Ever After from the iconic Magic Kingdom ferryboat on Seven Seas Lagoon · Desserts, drinks, glow-in-the-dark Hidden Mickey scavenger hunt, Mickey Vision fireworks lenses · Select Wednesday and Saturday evenings only · Check-in at Ticket and Transportation Center · ~$130/adult projected to 2029',
+    note:'Watch Happily Ever After from the iconic Magic Kingdom ferryboat on Seven Seas Lagoon · Desserts, drinks, glow-in-the-dark Hidden Mickey scavenger hunt, Mickey Vision fireworks lenses · Select Wednesday and Saturday evenings only · Check-in at Ticket and Transportation Center · ~$130/adult projected to 2027',
     hotel:'Departs from the TTC ferry dock — easy from any monorail resort (Polynesian, Contemporary, Grand Floridian) or the TTC parking lot'},
   celebration:{l:'Celebration at the Top',off:230,peak:260,
     note:'California Grill 15th floor · Small plates, sushi, desserts, cocktails + wine · Step onto the private outdoor viewing deck for MK fireworks · Adults-focused · Smart casual dress code · Not offered every night — check Disney website · Different from the California Grill dinner reservation',
@@ -19,10 +19,10 @@ var fireworksDNs={
     note:'Contemporary 15th floor · 3-course prix fixe + wine pairing · MK fireworks visible from your table or the private outdoor terrace · A full dinner rather than the Celebration at the Top cocktail event · Book at 60 days',
     hotel:'Best from: Contemporary (elevator up — zero logistics) · Polynesian and Grand Floridian easy via monorail'},
   mnsshp:{l:"Mickey's Not-So-Scary Halloween Party",off:420,peak:420,
-    note:'Magic Kingdom · Aug–Oct select nights · 7pm–midnight · Includes: Disney\'s Not-So-Spooky Spectacular fireworks hosted by Jack Skellington, Boo-to-You Halloween Parade (headless horseman!), Hocus Pocus Villain Spelltacular stage show, trick-or-treating, exclusive character meets in Halloween costumes · ~$200/adult projected to 2029 · Dates sell out — book as soon as released, some dates sell out before Halloween',
+    note:'Magic Kingdom · Aug–Oct select nights · 7pm–midnight · Includes: Disney\'s Not-So-Spooky Spectacular fireworks hosted by Jack Skellington, Boo-to-You Halloween Parade (headless horseman!), Hocus Pocus Villain Spelltacular stage show, trick-or-treating, exclusive character meets in Halloween costumes · ~$200/adult projected to 2027 · Dates sell out — book as soon as released, some dates sell out before Halloween',
     hotel:'Replaces a park day · Enter from 4pm with party ticket — no separate park admission needed · Great for the whole group including grandma and your daughter · Trick-or-treating is a highlight for almost-4'},
   mvmcp:{l:"Mickey's Very Merry Christmas Party",off:430,peak:430,
-    note:'Magic Kingdom · Nov–Dec 21 select nights · 7pm–midnight · Includes: Minnie\'s Wonderful Christmastime Fireworks, Mickey\'s Once Upon a Christmastime Parade, Mickey\'s Most Merriest Celebration castle show, free hot cocoa and cookies throughout the park, festive overlays on Space Mountain and more · ~$205/adult projected to 2029 · Sells out — every date sold out in 2025',
+    note:'Magic Kingdom · Nov–Dec 21 select nights · 7pm–midnight · Includes: Minnie\'s Wonderful Christmastime Fireworks, Mickey\'s Once Upon a Christmastime Parade, Mickey\'s Most Merriest Celebration castle show, free hot cocoa and cookies throughout the park, festive overlays on Space Mountain and more · ~$205/adult projected to 2027 · Sells out — every date sold out in 2025',
     hotel:'Replaces a park day · Enter from 4pm · The most magical time of year at Magic Kingdom · Free hot cocoa and cookies are everywhere · Your daughter will love the Christmas parade · Snow falls on Main Street'},
 };
 var eveningDNs={
@@ -34,7 +34,7 @@ var eveningDNs={
     note:'Animal Kingdom Lodge · 1-hour open-air nighttime safari through the resort savanna · Night vision goggles provided · 30+ species including zebras, giraffes, flamingos, and wildebeest · Runs at 8:30pm and 10pm nightly · Available to all guests · Book via My Disney Experience app',
     hotel:'Best from: Animal Kingdom Lodge (walk from your room to Kidani Village porte-cochère) · Pair with Jiko or Sanaa dinner for a full evening at AKL without leaving the resort · Works from any hotel via Uber/Lyft'},
   afterhours:{l:'Disney After Hours',off:420,peak:420,
-    note:'Separate-ticket event · 10pm–1am (enter from 7pm) · Very limited capacity — near-empty parks · Major rides with minimal or no waits · Included popcorn, ice cream novelties, and bottled beverages throughout · Available at MK ($175–199/ticket in 2026), Hollywood Studios ($155–189), and EPCOT ($155–179) · Select nights only — check Disney website for 2029 dates · ~$200/adult projected to 2029',
+    note:'Separate-ticket event · 10pm–1am (enter from 7pm) · Very limited capacity — near-empty parks · Major rides with minimal or no waits · Included popcorn, ice cream novelties, and bottled beverages throughout · Available at MK ($175–199/ticket in 2026), Hollywood Studios ($155–189), and EPCOT ($155–179) · Select nights only — check Disney website for 2027 dates · ~$200/adult projected to 2027',
     hotel:'Works from any hotel · Best used as an adult night at MK (TRON, Seven Dwarfs Mine Train, Space Mountain back-to-back with no waits) or HS (Rise of the Resistance, Slinky Dog Dash, Galaxy\'s Edge at night) while little one sleeps'},
 };
 var daytimeDNs={
@@ -48,7 +48,7 @@ var daytimeDNs={
 var fi=[
   {bk:'flights',  label:'Flights',                  note:'ATL→MCO, 4 passengers, round trip',        color:'#023E8A',off:1050,peak:1350,isFly:true},
   {bk:'transport',label:'Airport transport',        note:'Mears Connect, round trip × 4 people',     color:'#48CAE4',off:140, peak:140,isFly:true},
-  {bk:'transport',label:'Gas — Marietta to Orlando, return',note:'~440 miles each way × 2 = ~880 miles · est. 25 mpg · ~$3.30/gal projected 2029',color:'#023E8A',off:120,peak:120,isDrive:true},
+  {bk:'transport',label:'Gas — Marietta to Orlando, return',note:'~440 miles each way × 2 = ~880 miles · est. 25 mpg · ~$3.20/gal projected 2027',color:'#023E8A',off:120,peak:120,isDrive:true},
   {bk:'transport',label:'Florida Turnpike tolls, return',note:'Georgia state line to Orlando and back · SunPass/E-ZPass rates',color:'#48CAE4',off:40, peak:40,isDrive:true},
   {bk:'park',     label:'Park tickets',             note:'4-day base tickets × 4 people',            color:'#0077B6',off:2050,peak:2350},
   {bk:'park',     label:'Lightning Lane Multi Pass',note:'4 park days × 4 people',                   color:'#0077B6',off:500, peak:650,sub:true},
