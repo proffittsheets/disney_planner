@@ -58,7 +58,7 @@ var fi=[
 
   {bk:'misc',     label:'Travel insurance',          note:'Trip protection · covers cancellation, medical, trip interruption · ~4–5% of total trip cost · Essential for a $9k–12k trip with a toddler',color:'#90E0EF',off:400,peak:500},
   {bk:'misc',     label:'Memory Maker / PhotoPass',  note:'Unlimited digital downloads of all Disney photographer shots · Ride photos included · Covers your whole party for the entire trip · Worth every cent with an almost-4-year-old at her first trip',color:'#90E0EF',off:230,peak:230,isMemMaker:true},
-  {bk:'misc',     label:'Stroller rental',           note:'Kingdom Strollers (third-party) · ~$65/day · Delivered to your hotel before arrival · Much better than Disney in-park rentals ($35/day, lost when you leave a park) · 4 park days',color:'#90E0EF',off:260,peak:260,isStroller:true},
+  {bk:'misc',     label:'Stroller rental',           note:'Kingdom Strollers · Flat-rate by trip length: 1–3 nts $70 · 4–7 nts $90 · 8–10 nts $110 · 11–14 nts $130 · Delivered to hotel · Far better than Disney in-park rentals ($35/day, lost when you leave)',color:'#90E0EF',off:90,peak:90,isStroller:true},
   {bk:'misc',     label:'Souvenirs',                 note:'Budgeted generously!',                     color:'#90E0EF',off:1650,peak:1650,noInfl:true},
   {bk:'misc',     label:'MagicBand+',               note:'4 bands × ~$45 avg · Lights up + vibrates during Happily Ever After, Luminous, Fantasmic! + show interactions · Optional — free Key to the World card works for park entry, Lightning Lane & room key',color:'#90E0EF',off:210,peak:210,isBand:true},
 ];

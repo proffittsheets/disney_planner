@@ -39,8 +39,21 @@ window.PlannerEngine = (function () {
     };
   }
 
+  function strollerPrice(nights) {
+    if (nights <= 3)  return 70;
+    if (nights <= 7)  return 90;
+    if (nights <= 10) return 110;
+    if (nights <= 14) return 130;
+    if (nights <= 18) return 150;
+    return 170;
+  }
+
   function buildItemsRaw(s) {
-    var h = getH(s.sel), items = fi.slice(), tm = s.tripMult;
+    var h = getH(s.sel), items = fi.slice().map(function(i) {
+      if (!i.isStroller) return i;
+      var price = strollerPrice(s.nights);
+      return Object.assign({}, i, { off: price, peak: price });
+    }), tm = s.tripMult;
     var ev = eveningDNs[s.activeEvening];
     s.activeFireworks.forEach(function (k) {
       var fw = fireworksDNs[k];
@@ -193,7 +206,7 @@ window.PlannerEngine = (function () {
   }
 
   return {
-    fmt: fmt, money: money, p: p, pItem: pItem, computeTripMult: computeTripMult,
+    fmt: fmt, money: money, p: p, pItem: pItem, computeTripMult: computeTripMult, strollerPrice: strollerPrice,
     defaultState: defaultState, allH: allH, getH: getH,
     buildItems: buildItems, buildItemsRaw: buildItemsRaw, dealSavings: dealSavings,
     calcCats: calcCats, totals: totals, sections: sections, CATS: CATS,
