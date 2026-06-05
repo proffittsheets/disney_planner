@@ -9,7 +9,7 @@ window.PlannerEngine = (function () {
   function fmt(n) { if (n === 0) return 'Free'; return '$' + Math.round(n).toLocaleString(); }
   function money(n) { return '$' + Math.round(n).toLocaleString(); }
   function computeTripMult(inflRate, inflYears) {
-    return Math.pow(1 + inflRate, inflYears) / Math.pow(1 + inflRate, 3);
+    return Math.pow(1 + inflRate, inflYears);
   }
   function p(n, tripMult) { return Math.round(n * tripMult); }
   function allH() { return hotels.deluxe.concat(hotels.assoc); }
@@ -183,11 +183,12 @@ window.PlannerEngine = (function () {
   }
 
   function inflationNote(s) {
-    var pct = Math.round((Math.pow(1 + s.inflRate, s.inflYears) - 1) * 100);
+    var ratePct = Math.round(s.inflRate * 100);
+    var pct = Math.round((Math.pow(1 + ratePct / 100, s.inflYears) - 1) * 100);
     var targetYear = 2026 + s.inflYears;
     return s.tripDate
-      ? 'Prices adjusted for ' + s.tripDate.getFullYear() + ' (+' + pct + '% from 2026 · ' + Math.round(s.inflRate * 100) + '%/yr)'
-      : targetYear + ' baseline (+' + pct + '% from 2026 · ' + Math.round(s.inflRate * 100) + '%/yr)';
+      ? 'Prices adjusted for ' + s.tripDate.getFullYear() + ' (+' + pct + '% from 2026 · ' + ratePct + '%/yr)'
+      : targetYear + ' baseline (+' + pct + '% from 2026 · ' + ratePct + '%/yr)';
   }
 
   return {

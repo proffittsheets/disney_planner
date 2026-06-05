@@ -20,7 +20,8 @@
           Object.assign(base, saved);
           var td = saved.tripDate ? new Date(saved.tripDate) : null;
           base.tripDate = (td && !isNaN(td.getTime()) && td.getFullYear() >= 2025) ? td : null;
-          if (!base.tripDate) { base.inflYears = E.defaultState().inflYears; base.tripMult = E.computeTripMult(base.inflRate, base.inflYears); }
+          if (!base.tripDate) { base.inflYears = E.defaultState().inflYears; }
+          base.tripMult = E.computeTripMult(base.inflRate, base.inflYears);
         }
       } catch (e) {}
       return base;

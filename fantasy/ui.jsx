@@ -51,7 +51,7 @@
         ),
         h('div', { className: 'fy-rowwrap' },
           h('span', { className: 'fy-microlabel' }, 'Inflation'),
-          h('input', { type: 'range', className: 'fy-range', min: 1, max: 10, step: 0.5, value: st.inflRate * 100, onChange: function (e) { a.setInflRate(e.target.value); } }),
+          h('input', { type: 'range', className: 'fy-range', min: 1, max: 10, step: 1, value: Math.round(st.inflRate * 100), onChange: function (e) { a.setInflRate(e.target.value); } }),
           h('span', { style: { fontWeight: 800, fontSize: 'calc(13px * var(--fz))', color: 'var(--fy-gold)' } }, Math.round(st.inflRate * 100) + '%/yr')
         )
       ),

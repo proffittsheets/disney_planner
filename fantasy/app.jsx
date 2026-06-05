@@ -7,7 +7,7 @@
   var useState = React.useState, useEffect = React.useEffect, useRef = React.useRef;
 
   function App() {
-    var pl = window.usePlanner({ storeKey: 'fy-planner-v2' });
+    var pl = window.usePlanner({ storeKey: 'fy-planner-v3' });
     var _mode = useState(function () { try { return localStorage.getItem('fy-mode') || 'night'; } catch (e) { return 'night'; } });
     var mode = _mode[0], setMode = _mode[1];
     var modeRef = useRef(mode); modeRef.current = mode;
