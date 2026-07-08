@@ -57,14 +57,14 @@ window.PlannerEngine = (function () {
     var ev = eveningDNs[s.activeEvening];
     s.activeFireworks.forEach(function (k) {
       var fw = fireworksDNs[k];
-      items.push({ bk: 'special', label: fw.l, note: fw.note, hotelNote: fw.hotel, color: '#E8B84B', off: fw.off, peak: fw.peak, special: true, adults: true, isFW: true, free: fw.free, warn: fw.warn });
+      items.push({ bk: 'special', label: fw.l, note: fw.note, hotelNote: fw.hotel, color: '#E8B84B', off: fw.off, peak: fw.peak, special: true, adults: !fw.family, isFW: true, free: fw.free, warn: fw.warn });
     });
     if (s.activeEvening !== 'none') items.push({ bk: 'special', label: ev.l, note: ev.note, hotelNote: ev.hotel, color: '#00B4D8', off: ev.off, peak: ev.peak, special: true, adults: true, isEV: true, free: ev.free });
     (s.activeDaytime || []).forEach(function (k) { var dt = daytimeDNs[k]; items.push({ bk: 'special', label: dt.l, note: dt.note, color: '#E8B84B', off: dt.off, peak: dt.peak, special: true }); });
     var hRateRaw = h[s.season] / 5;
     var clubExtraRaw = s.clubLevel && h.club ? h.club[s.season === 'off' ? 'offExtra' : 'peakExtra'] : 0;
     items.push({ bk: 'hotel', label: h.name + (s.clubLevel && h.club ? ' — ' + h.club.name : ''), note: h.note + ' · ' + s.nights + ' night' + (s.nights === 1 ? '' : 's') + (s.clubLevel && h.club ? ' · ' + h.club.perks : ''), color: '#023E8A', off: (hRateRaw + clubExtraRaw) * s.nights, peak: (hRateRaw + clubExtraRaw) * s.nights, isHotel: true });
-    var babyNights = s.activeFireworks.length + (s.activeEvening !== 'none' ? 1 : 0);
+    var babyNights = s.activeFireworks.filter(function (k) { return !fireworksDNs[k].family; }).length + (s.activeEvening !== 'none' ? 1 : 0);
     if (babyNights > 0) items.push({ bk: 'misc', label: 'In-room babysitting', note: "Kid's Nite Out · " + babyNights + ' evening' + (babyNights > 1 ? 's' : '') + ' · ~5 hrs each', color: '#90E0EF', off: babyNights * 220, peak: babyNights * 220 });
     return items.filter(function (i) {
       if (i.isFly && s.travelMode === 'drive') return false;

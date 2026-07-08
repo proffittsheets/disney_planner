@@ -85,7 +85,7 @@
     var _open = React.useState(false); var open = _open[0], setOpen = _open[1];
     React.useEffect(function () { if (st.tripDate) setOpen(true); }, [st.tripDate ? st.tripDate.getTime() : 0]);
     var tl = pl.d.timeline;
-    var dateStr = st.tripDate ? st.tripDate.toISOString().slice(0, 10) : '';
+    var dateStr = st.tripDate ? (st.tripDate.getFullYear() + '-' + String(st.tripDate.getMonth() + 1).padStart(2, '0') + '-' + String(st.tripDate.getDate()).padStart(2, '0')) : '';
     return h('div', { className: 'fy-card', style: { padding: 0, overflow: 'hidden' } },
       h('div', { style: { padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 } },
         h('div', { className: 'fy-rowwrap', style: { gap: 14, flex: 1 } },
@@ -140,7 +140,7 @@
   }
   function ClubToggle(props) {
     var pl = props.planner, st = pl.state, htl = props.h;
-    var extra = htl.club[st.season === 'off' ? 'offExtra' : 'peakExtra'];
+    var extra = E.p(htl.club[st.season === 'off' ? 'offExtra' : 'peakExtra'], st.tripMult);
     return h('div', { style: { marginTop: 4, paddingTop: 10, borderTop: '1px solid var(--fy-stroke)' } },
       h('div', { className: 'fy-microlabel', style: { marginBottom: 6 } }, 'Room tier'),
       h('div', { style: { display: 'flex', flexDirection: 'column', gap: 6 } },

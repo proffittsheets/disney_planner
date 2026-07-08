@@ -125,7 +125,7 @@ h('button', {
       h('div', { className: 'fy-hero-content' },
         h('div', { className: 'fy-hero-kicker' }, 'Once upon a 2027'),
         h('h1', null, 'Disney World', h('br'), 'Trip Planner'),
-        h('div', { className: 'fy-hero-sub' }, '2 adults · 1 child (almost 4) · 1 grandparent · 4 park days · flying ATL→MCO. Every wish, every dollar, mapped to the night.'),
+        h('div', { className: 'fy-hero-sub' }, '2 adults · 1 child (almost 4) · 1 grandparent · 4 park days · ' + (props.travel === 'drive' ? 'driving Marietta→Orlando' : 'flying ATL→MCO') + '. Every wish, every dollar, mapped to the night.'),
         h('div', { className: 'fy-hero-meta' }, props.note)
       )
     );
@@ -135,7 +135,7 @@ h('button', {
     var pl = props.planner;
     return h('div', null,
       h('div', { className: 'fy-wrap', style: { paddingTop: 4 } },
-        h(HeroScene, { mode: props.mode, note: pl.d.inflationNote }),
+        h(HeroScene, { mode: props.mode, note: pl.d.inflationNote, travel: pl.state.travelMode }),
         h('div', { className: 'fy-rise' },
           h(window.FY_Metrics, { planner: pl }),
           h('div', { style: { height: 14 } }),
@@ -158,7 +158,11 @@ h('button', {
   }
 
   function Footer() {
-    return h('div', { className: 'fy-footer' }, h('span', { className: 'fy-script' }, '✦ WISHFUL ✦'), h('div', { style: { marginTop: 6 } }, 'Prices projected to 2027 · estimates only · the magic is real'));
+    return h('div', { className: 'fy-footer' },
+      h('span', { className: 'fy-script' }, '✦ WISHFUL ✦'),
+      h('div', { style: { marginTop: 6 } }, 'Prices projected to 2027 · estimates only · the magic is real'),
+      h('div', { style: { marginTop: 6 } }, '© ' + new Date().getFullYear() + ' Molly Sheets · Made by ', h('a', { className: 'fy-a', href: 'https://mollysheets.com', target: '_blank', rel: 'noopener' }, 'Molly Sheets'))
+    );
   }
 
   var root = ReactDOM.createRoot(document.getElementById('fy-root'));

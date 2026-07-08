@@ -115,9 +115,9 @@
       );
     }
     return h('div', { style: { padding: '4px 0 4px' } },
-      row('Memory Maker', st.wantMemMaker, a.toggleMemMaker, '~$230 · unlimited PhotoPass downloads + ride photos'),
+      row('Memory Maker', st.wantMemMaker, a.toggleMemMaker, '$185 pre-arrival · unlimited PhotoPass downloads + ride photos'),
       row('Stroller rental', st.wantStroller, a.toggleStroller, '$' + E.strollerPrice(st.nights) + ' for ' + st.nights + ' night' + (st.nights === 1 ? '' : 's') + ' · Kingdom Strollers · flat-rate, delivered to hotel'),
-      row('MagicBand+', st.wantBands, a.toggleBands, '~$210 · lights up during Happily Ever After, Luminous & Fantasmic!')
+      row('MagicBand+', st.wantBands, a.toggleBands, '~$180 · lights up during Happily Ever After, Luminous & Fantasmic!')
     );
   }
 

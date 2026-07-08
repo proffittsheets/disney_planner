@@ -18,6 +18,7 @@
         var saved = JSON.parse(localStorage.getItem(storeKey) || 'null');
         if (saved) {
           Object.assign(base, saved);
+          base.nights = Math.min(7, Math.max(1, parseInt(base.nights, 10) || 5));
           var td = saved.tripDate ? new Date(saved.tripDate) : null;
           base.tripDate = (td && !isNaN(td.getTime()) && td.getFullYear() >= 2025) ? td : null;
           if (!base.tripDate) { base.inflYears = E.defaultState().inflYears; }
