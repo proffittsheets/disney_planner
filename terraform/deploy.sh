@@ -14,16 +14,34 @@ if [ -z "$BUCKET" ] || [ -z "$DISTRIBUTION" ]; then
 fi
 SITE_ROOT=".."
 
-echo "Syncing to s3://$BUCKET ..."
+COMMON_EXCLUDES=(
+  --exclude ".git/*"
+  --exclude ".claude/*"
+  --exclude "terraform/*"
+  --exclude ".gitignore"
+  --exclude ".DS_Store"
+  --exclude "AGENTS.md"
+  --exclude "README.md"
+  --exclude "LICENSE"
+)
+
+# Images and other assets: cache for a year (rarely change)
+echo "Syncing assets to s3://$BUCKET (long cache) ..."
 aws s3 sync "$SITE_ROOT" "s3://$BUCKET" \
-  --exclude ".git/*" \
-  --exclude "terraform/*" \
-  --exclude ".gitignore" \
-  --exclude ".DS_Store" \
-  --exclude "AGENTS.md" \
-  --exclude "README.md" \
-  --exclude "LICENSE" \
+  "${COMMON_EXCLUDES[@]}" \
+  --exclude "*.html" --exclude "*.js" --exclude "*.jsx" --exclude "*.css" \
+  --cache-control "public, max-age=31536000" \
   --delete
+
+# Code: always re-upload with no-cache so browsers revalidate every load
+echo "Uploading code to s3://$BUCKET (no-cache) ..."
+aws s3 cp "$SITE_ROOT" "s3://$BUCKET" --recursive \
+  "${COMMON_EXCLUDES[@]}" \
+  --exclude "*" --include "*.html" --include "*.js" --include "*.jsx" --include "*.css" \
+  --cache-control "no-cache"
+
+# Remove files deployed before they were excluded (idempotent)
+aws s3 rm "s3://$BUCKET/.claude" --recursive --quiet 2>/dev/null || true
 
 echo "Invalidating CloudFront cache ..."
 aws cloudfront create-invalidation \
