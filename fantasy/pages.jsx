@@ -92,8 +92,8 @@
       h('div', { className: 'fy-divider' }),
       h('div', { className: 'fy-twocol' },
         h('div', null,
-          h('div', { className: 'fy-subsec', style: { marginTop: 0 } }, 'Room types — Dec 2025 rates'),
-          h('div', { className: 'fy-hint', style: { marginBottom: 8 } }, 'Dec 1–14 rack rates · 2027 est. at ~5%/yr inflation.'),
+          h('div', { className: 'fy-subsec', style: { marginTop: 0 } }, 'Room types & rack rates'),
+          h('div', { className: 'fy-hint', style: { marginBottom: 8 } }, 'Reference snapshot researched from Dec 1–14, 2025 rack rates (a value season) — it doesn\'t change with your trip date. 2027 est. adds ~5%/yr inflation. Peak weeks (spring break, summer, Thanksgiving, Christmas) can run 20–40% higher; October is usually close to these ranges.'),
           h('div', { className: 'fy-card', style: { padding: '4px 16px' } }, d.rooms.map(function (r, i) { return h('div', { key: i, className: 'fy-tl-row', style: { fontSize: 'calc(12.5px * var(--fz))', color: 'var(--fy-ink2)', lineHeight: 1.5 } }, r); })),
           d.suites && d.suites.length ? h('div', null, h('div', { className: 'fy-subsec' }, 'Suites & large-group options'), d.suites.map(function (s, i) {
             return h('div', { key: i, className: 'fy-card', style: { padding: '12px 16px', marginBottom: 8 } },
