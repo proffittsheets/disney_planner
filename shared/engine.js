@@ -162,14 +162,16 @@ window.PlannerEngine = (function () {
     var hasParty = s.activeFireworks.some(function (k) { return k === 'mnsshp' || k === 'mvmcp'; });
     var partyLabel = s.activeFireworks.filter(function (k) { return k === 'mnsshp' || k === 'mvmcp'; }).map(function (k) { return k === 'mnsshp' ? "Mickey's Not-So-Scary Halloween Party" : "Mickey's Very Merry Christmas Party"; }).join(' + ');
     var lastNight = addDays(ci, s.nights - 1);
-    var partyRow = hasParty ? [partyLabel + ' tickets go on sale', 'Party tickets release in May/June of the year before the event — months before your 60-day dining window. Some dates sell out within hours. Buy immediately when released.'] : null;
+    var partySec = hasParty ? { label: '~Spring ' + ci.getFullYear() + ' — Party tickets on sale', color: '#E8B84B', date: new Date(ci.getFullYear(), 4, 1), rows: [
+      [partyLabel + ' tickets go on sale', 'Party tickets go on sale in spring of the event year (' + ci.getFullYear() + ') — Halloween party tickets typically late April–May, Christmas party tickets in June. Still months before your 60-day dining window. Some dates sell out within hours — buy immediately when released.'],
+    ] } : null;
     var summary = fmtShort(ci) + ' check-in · ' + s.nights + ' nights · ' + fmtShort(addDays(ci, s.nights)) + ' check-out';
     var secs = [
       { label: 'Book now — Hotel reservation', color: '#023E8A', date: null, rows: [
         ['Book your hotel immediately', 'Disney deluxe rooms sell up to 20 months in advance. Polynesian, Beach Club, and Grand Floridian fill fastest for December. ' + ci.getFullYear() + ' dates expected to open around May/June ' + (ci.getFullYear() - 1) + '.'],
         ['Call (407) 939-5277 after booking', 'Link two-room reservations and add your connecting room request as a note. Repeat at check-in.'],
       ] },
-      { label: '~May/June ' + pkgYear + ' — Packages and party tickets', color: '#0077B6', date: new Date(pkgYear, 4, 1), rows: (partyRow ? [['Vacation packages go on sale', 'Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.'], partyRow] : [['Vacation packages go on sale', 'Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.']]) },
+      { label: '~May/June ' + pkgYear + ' — Vacation packages on sale', color: '#0077B6', date: new Date(pkgYear, 4, 1), rows: [['Vacation packages go on sale', 'Disney releases the following year packages in May/June. Booking early locks in current pricing and any launch promotions.']] },
       { label: 'Your 60-day window — ' + fmtDate(d60), color: '#00B4D8', date: d60, rows: [
         ['Set an alarm: 5:45 AM ET on ' + fmtShort(d60), 'Reservations technically open at 6:00 AM but have been seen going live a few minutes early. Have My Disney Experience open, party size entered, and restaurant pre-selected before 6:00 AM.'],
         ['Resort guest advantage — book your entire stay', 'As a Disney resort guest you book all ' + s.nights + ' nights on this single date. Your last night (' + fmtShort(lastNight) + ') is effectively available ' + (s.nights + 59) + ' days in advance.'],
@@ -179,20 +181,21 @@ window.PlannerEngine = (function () {
         ['Pontoon cruise, dessert parties, all special experiences', 'All book at 60 days via MDE or (407) 939-7529.'],
       ] },
       { label: '30 days out — ' + fmtShort(d30), color: '#E8B84B', date: d30, rows: [
-        ['Purchase Memory Maker', 'Can be bought any time before or during the trip but buying before arrival is slightly cheaper. Activates the moment you purchase.'],
+        ['Purchase Memory Maker', 'Buy at least 3 days before arrival for the $185 advance price — it has a 3-day waiting period before it activates. Bought during the trip it costs $210.'],
         ['Confirm stroller delivery', 'If using Kingdom Strollers, confirm delivery date and hotel. Stroller should arrive at bell services before check-in.'],
         ['Measure your daughter', 'She needs 38 inches for Seven Dwarfs Mine Train, Big Thunder Mountain, and Slinky Dog Dash. Measure before you leave home.'],
       ] },
       { label: 'Day 7 — Lightning Lane — ' + fmtDate(d7), color: '#48CAE4', date: d7, rows: [
-        ['7:00 AM — Buy Lightning Lane Multi Pass', 'Resort guests can purchase LLMP 7 days before each park day. Set an alarm for each park morning.'],
+        ['7:00 AM ET — Buy Lightning Lane Multi Pass for the whole stay', 'Resort guests can buy LLMP for their entire stay in one purchase starting 7 days before check-in — it covers every park day, so you only need this one alarm. (Off-site guests have to buy day-by-day at 3 days out.)'],
         ['Complete online check-in', 'MDE app · Select arrival time window · Re-confirm connecting room request · Set up MagicMobile if not using MagicBands.'],
       ] },
       { label: '1 to 3 days out — ' + fmtShort(d2), color: '#90E0EF', date: d2, rows: [
-        ['Pack ponchos and layers', 'Orlando in early December is 60 to 70 degrees F with afternoon rain likely. Ponchos are $12 inside the parks and $2 on Amazon.'],
+        ['Pack ponchos' + (ci.getMonth() >= 10 || ci.getMonth() <= 1 ? ' and layers' : ''), (ci.getMonth() >= 10 || ci.getMonth() <= 1 ? 'Orlando in winter is 60 to 70 degrees F days with chilly evenings — pack layers. Afternoon rain is still possible.' : 'Orlando afternoon rain is likely in any season — check the forecast the week before.') + ' Ponchos are $12 inside the parks and $2 on Amazon.'],
         ['Download everything to MDE', 'Park tickets, Lightning Lane, dining reservations — screenshot all confirmations in case you lose cell signal.'],
         ['Review your daily plan', 'Check park hours, parade and fireworks times, and any last-minute changes to your reservations.'],
       ] },
     ];
+    if (partySec) secs.splice(2, 0, partySec);
     return { summary: summary, sections: secs };
   }
 

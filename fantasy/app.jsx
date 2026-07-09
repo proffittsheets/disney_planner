@@ -161,7 +161,7 @@ h('button', {
     return h('div', { className: 'fy-footer' },
       h('span', { className: 'fy-script' }, '✦ WISHFUL ✦'),
       h('div', { style: { marginTop: 6 } }, 'Prices projected to 2027 · estimates only · the magic is real'),
-      h('div', { style: { marginTop: 6 } }, '© ' + new Date().getFullYear() + ' Molly Sheets · Made by ', h('a', { className: 'fy-a', href: 'https://mollysheets.com', target: '_blank', rel: 'noopener' }, 'Molly Sheets'))
+      h('div', { style: { marginTop: 6 } }, '© ' + new Date().getFullYear() + ' Molly Sheets · Made by ', h('a', { className: 'fy-a', href: 'https://mollysheets.com', target: '_blank', rel: 'noopener' }, 'Molly Sheets'), ' · ', h('a', { className: 'fy-a', href: 'https://github.com/proffittsheets/disney_planner', target: '_blank', rel: 'noopener' }, 'View source ↗'))
     );
   }
 
