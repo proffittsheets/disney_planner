@@ -160,9 +160,9 @@ h('button', {
   function Footer() {
     return h('div', { className: 'fy-footer' },
       h('span', { className: 'fy-script' }, '✦ WISHFUL ✦'),
-      h('div', { style: { marginTop: 6 } }, 'Prices projected to 2027 · estimates only · the magic is real'),
-      h('div', { style: { marginTop: 6 } }, '© ' + new Date().getFullYear() + ' Molly Sheets · Made by ', h('a', { className: 'fy-a', href: 'https://mollysheets.com', target: '_blank', rel: 'noopener' }, 'Molly Sheets'), ' · ', h('a', { className: 'fy-a', href: 'https://github.com/proffittsheets/disney_planner', target: '_blank', rel: 'noopener' }, 'View source ↗')),
-      h('div', { style: { marginTop: 10, fontSize: 'calc(11px * var(--fz))', color: 'var(--fy-ink3)', maxWidth: 640, margin: '10px auto 0', lineHeight: 1.6 } }, 'An unofficial fan project — not affiliated with, endorsed by, or sponsored by The Walt Disney Company. Disney park, attraction, hotel, and character names are trademarks of their respective owners. All prices are unofficial estimates for personal trip planning.')
+      h('div', { style: { marginTop: 10 } }, 'Prices projected to 2027 · estimates only · the magic is real'),
+      h('div', { style: { marginTop: 8 } }, '© ' + new Date().getFullYear() + ' Molly Sheets · Made by ', h('a', { className: 'fy-a', href: 'https://mollysheets.com', target: '_blank', rel: 'noopener', style: { whiteSpace: 'nowrap' } }, 'Molly Sheets'), ' · ', h('a', { className: 'fy-a', href: 'https://github.com/proffittsheets/disney_planner', target: '_blank', rel: 'noopener', style: { whiteSpace: 'nowrap' } }, 'View source ↗')),
+      h('div', { style: { fontSize: 'calc(11px * var(--fz))', color: 'var(--fy-ink3)', maxWidth: 560, margin: '18px auto 0', lineHeight: 1.7 } }, 'An unofficial fan project — not affiliated with, endorsed by, or sponsored by The Walt Disney Company. Disney park, attraction, hotel, and character names are trademarks of their respective owners. All prices are unofficial estimates for personal trip planning.')
     );
   }
 
