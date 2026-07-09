@@ -87,9 +87,9 @@ h('button', {
           onClick: function () { props.setBigText(!props.bigText); },
           'aria-pressed': props.bigText ? 'true' : 'false',
           title: props.bigText ? 'Switch to standard text size' : 'Switch to larger text for easier reading'
-        }, h('span', { className: 'fy-mode-aa' }, 'A', h('b', null, 'A')), 'Larger text'),
-        h('button', { className: 'fy-mode', onClick: function () { props.setMode(props.mode === 'night' ? 'dawn' : 'night'); } },
-          props.mode === 'night' ? '☾ Starlight' : '☀ Daydream')
+        }, h('span', { className: 'fy-mode-aa' }, 'A', h('b', null, 'A')), h('span', { className: 'fy-mode-label' }, 'Larger text')),
+        h('button', { className: 'fy-mode', onClick: function () { props.setMode(props.mode === 'night' ? 'dawn' : 'night'); }, title: props.mode === 'night' ? 'Switch to the light Daydream theme' : 'Switch to the dark Starlight theme' },
+          props.mode === 'night' ? '☾' : '☀', h('span', { className: 'fy-mode-label' }, props.mode === 'night' ? 'Starlight' : 'Daydream'))
       )
     );
   }
@@ -161,7 +161,8 @@ h('button', {
     return h('div', { className: 'fy-footer' },
       h('span', { className: 'fy-script' }, '✦ WISHFUL ✦'),
       h('div', { style: { marginTop: 6 } }, 'Prices projected to 2027 · estimates only · the magic is real'),
-      h('div', { style: { marginTop: 6 } }, '© ' + new Date().getFullYear() + ' Molly Sheets · Made by ', h('a', { className: 'fy-a', href: 'https://mollysheets.com', target: '_blank', rel: 'noopener' }, 'Molly Sheets'), ' · ', h('a', { className: 'fy-a', href: 'https://github.com/proffittsheets/disney_planner', target: '_blank', rel: 'noopener' }, 'View source ↗'))
+      h('div', { style: { marginTop: 6 } }, '© ' + new Date().getFullYear() + ' Molly Sheets · Made by ', h('a', { className: 'fy-a', href: 'https://mollysheets.com', target: '_blank', rel: 'noopener' }, 'Molly Sheets'), ' · ', h('a', { className: 'fy-a', href: 'https://github.com/proffittsheets/disney_planner', target: '_blank', rel: 'noopener' }, 'View source ↗')),
+      h('div', { style: { marginTop: 10, fontSize: 'calc(11px * var(--fz))', color: 'var(--fy-ink3)', maxWidth: 640, margin: '10px auto 0', lineHeight: 1.6 } }, 'An unofficial fan project — not affiliated with, endorsed by, or sponsored by The Walt Disney Company. Disney park, attraction, hotel, and character names are trademarks of their respective owners. All prices are unofficial estimates for personal trip planning.')
     );
   }
 
