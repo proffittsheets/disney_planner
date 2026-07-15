@@ -1,6 +1,8 @@
 # Disney World Trip Planner
 
-An interactive single-page trip planner for a Disney World 2029 trip — 2 adults, 1 child (almost 4), and 1 grandparent flying from Atlanta. Built to cut through the analysis paralysis of planning a Disney trip with a toddler.
+An interactive single-page trip planner for a Disney World 2027 trip — 2 adults, 1 child (almost 4), and 1 grandparent flying from Atlanta. Built to cut through the analysis paralysis of planning a Disney trip with a toddler.
+
+**Preview of this site (my version):** [https://d1kjxsfczqqea8.cloudfront.net](https://d1kjxsfczqqea8.cloudfront.net) — fork this repo to plan your own trip.
 
 ## What it does
 
@@ -31,7 +33,7 @@ Open `index.html` directly in a browser — no build step or server required.
 
 ## Hosting
 
-The site is hosted as a static site on AWS S3 behind CloudFront. Infrastructure is managed with Terraform. See [terraform/README.md](terraform/README.md) for setup and deployment instructions.
+The site is hosted as a static site on AWS S3 behind CloudFront (a preview of my version is at [https://d1kjxsfczqqea8.cloudfront.net](https://d1kjxsfczqqea8.cloudfront.net)). Infrastructure is managed with Terraform — if you fork this repo, `terraform apply` gives you your own URL. See [terraform/README.md](terraform/README.md) for setup and deployment instructions.
 
 ## Image credits
 

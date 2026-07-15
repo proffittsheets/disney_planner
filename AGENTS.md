@@ -2,7 +2,7 @@
 
 ## Project overview
 
-A zero-dependency, single-page static web app for planning a Disney World trip — 2 adults, 1 child (almost 4), 1 grandparent, flying from Atlanta, targeting 2029. The app runs directly from `index.html` with no build step, no npm, no framework.
+A zero-dependency, single-page static web app for planning a Disney World trip — 2 adults, 1 child (almost 4), 1 grandparent, flying from Atlanta, targeting 2027. The app runs directly from `index.html` with no build step, no npm, no framework.
 
 ## File structure
 
@@ -70,7 +70,7 @@ Never commit `backend.hcl`, `*.tfvars`, `.terraform/`, or `*.tfstate*` — these
 
 - **Extended Evening Hours (EEH):** Only Disney-owned deluxe resorts qualify. Swan/Dolphin, Waldorf, and Four Seasons do not. The `eeh` boolean on hotel objects controls this.
 - **Club level:** Some hotels have a `club` sub-object with `offExtra`/`peakExtra` per-night prices and `perks` text. The `clubLevel` global toggles it.
-- **Inflation model:** Prices are stored in approximate 2026 dollars. `tripMult = (1+inflRate)^inflYears / (1+inflRate)^3` adjusts them. When `tripDate` is null, `inflYears` defaults to 3 (2029 baseline).
+- **Inflation model:** Prices are stored in approximate 2026 dollars. `tripMult = (1+inflRate)^inflYears` adjusts them. When `tripDate` is null, `inflYears` defaults to 1 (2027 baseline).
 - **Booking timeline:** Calculated entirely from `tripDate` in `renderTimeline()`. Key windows: 60-day dining, 7-day Lightning Lane Multi Pass, packages in May/June of the year before travel.
 - **Peak auto-detection:** `setTripDate()` calls `isPeakDate()` and sets `season` automatically. `syncSeasonButtons()` syncs the Off-peak/Peak toggle UI to match `season`. Manual overrides still work.
 - **Dining split:** General dining is broken into three `bk:'dining'` line items — Quick service, Table service, and Snacks & drinks — all rolled up under "Food & dining" in the budget breakdown.
